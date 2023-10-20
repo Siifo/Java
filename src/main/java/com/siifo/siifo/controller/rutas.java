@@ -14,12 +14,46 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.siifo.siifo.model.producto;
 
 @Controller
-public class invetarioDashboard {
+public class rutas {
+
+	//landing site
 	@GetMapping("/")
 	public String index() {
 		return "index";
 	}
+
+	@RequestMapping("/login")
+	public String login() {
+		return "login";
+	}
+
+	@RequestMapping("/contacto")
+	public String contacto() {
+		return "contacto";
+	}
 	
+	//catagories site
+	@RequestMapping("/sonido")
+	public String sonido() {
+		return "sonido";
+	}
+
+	@RequestMapping("/banquetes")
+	public String banquetes() {
+		return "banquetes";
+	}
+
+	@RequestMapping("/recreacion")
+	public String recreacion() {
+		return "recreacion";
+	}
+
+	@RequestMapping("/colegios")
+	public String colegios() {
+		return "colegios";
+	}
+	
+	//rol site
 	@RequestMapping("/admin")
 	public String admin() {
 		return "administrador";
@@ -30,7 +64,4 @@ public class invetarioDashboard {
 		System.out.println(Producto.toString());
 		return "index";
 	}
-	
-	
-	
 }
