@@ -96,6 +96,27 @@ public class rutas {
 		return "saltarines";
 	}
 
+	//sub-categories-colegios
+	@RequestMapping("/colegios/chaquetas_prom")
+	public String chaquetasProm() {
+		return "chaquetas_prom";
+	}
+
+	@RequestMapping("/colegios/jean_day")
+	public String jeanDay() {
+		return "jean_day";
+	}
+
+	@RequestMapping("/colegios/dia_del_nino")
+	public String diaDelNino() {
+		return "dia_del_nino";
+	}
+
+	@RequestMapping("/colegios/fiestas_prom")
+	public String fiestas_prom() {
+		return "fiestas_prom";
+	}
+
 	
 	//rol site
 	@RequestMapping("/admin")
