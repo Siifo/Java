@@ -6,7 +6,7 @@ package com.siifo.siifo.model;
 
 public class producto {
 
-
+	
 	private String nombreProducto;
 	private int cantidadProducto;
 	private int precioProducto;
