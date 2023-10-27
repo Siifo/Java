@@ -49,10 +49,10 @@ public class producto {
 	public void setCantidadProducto(int cantidad) {
 		this.cantidad = cantidad;
 	}
-	public int getPrecioProducto() {
+	public int getPrecio() {
 		return precio;
 	}
-	public void setPrecioProducto(int precio) {
+	public void setPrecio(int precio) {
 		this.precio= precio;
 	}
 	public String getCategoria() {

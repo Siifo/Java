@@ -3,6 +3,8 @@ package com.siifo.siifo.controller;
 
 
 
+
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.siifo.siifo.interfaceService.IproductoService;
@@ -28,14 +31,15 @@ public class invetarioDashboard {
 		return "index";
 	}
 	
-	@GetMapping("/admin")
-	public String admin(Model model) {
-		model.addAttribute("producto", new producto());
+	@RequestMapping("/admin")
+	public String admin() {
+
 		return "administrador";
 	}
 	
 	@PostMapping("/register")
-	public String registroProducto(@Valid producto p, Model model) {
+	public String registroProducto(@Valid @RequestBody producto p, Model model) {
+		model.addAttribute("producto", new producto());
 		service.equals(p);
 		return "redirect:/administrador";
 	}

@@ -13,7 +13,7 @@ public class productoService implements IproductoService{
 	private Iproducto data;
 	
 	@Override
-	public int save(producto p) {
+	public int register(producto p) {
 		int res=0;
 		producto product=data.save(p);
 		if (!product.equals(null)) {

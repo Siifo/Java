@@ -16,29 +16,24 @@ registrarProducto.addEventListener("click", function mostrarFormulario() {
     <div class="col-12 col-sm-7 col-md-6 m-auto">
       <div class="card border-0 shadow">
         <div class="card-body">
-          <form th:action="@{/register}" th:object=${producto} method="POST">
+          <form th:action="@{/register}" method="post">
             <h2 class="text-center mb-5">Registrar Producto</h2>
             <label for="nombreProducto">Nombre de tu producto</label>
-            <input th:field="*{nombreProducto}" type="text" name="nombreProducto" id="nombreProducto" class="form-control my-4 py-2" placeholder="Reflectores" required/>
+            <input th:value="{producto.nombreProducto}" type="text" name="nombreProducto" id="nombreProducto" class="form-control my-4 py-2" placeholder="Reflectores" required/>
             <label for="cantidadProducto">Cantidad</label>
-            <input th:field="*{cantidad}" type="number" name="cantidadProducto" id="cantidadProducto" class="form-control my-4 py-2" placeholder="20" required />
+            <input th:value="{producto.cantidad}" type="number" name="cantidadProducto" id="cantidadProducto" class="form-control my-4 py-2" placeholder="20" required />
             <label for="precioProducto">Precio Compra</label>
-            <input th:field="*{precio}" type="number" name="precioProducto" id="precioProducto" class="form-control my-4 py-2" placeholder="000075" required/>
+            <input th:value="{producto.precio}" type="number" name="precioProducto" id="precioProducto" class="form-control my-4 py-2" placeholder="000075" required/>
             <label for="categoria">Selecciona la categoria</label>
-            <select th:field="*{categoria}" id="categoria" name="categoria" required>
-              <option value="" disabled >seleccione</option>
-              <option value="Luces">Luces</option>
-              <option value="Sonido">Sonido</option>
-              <option value="decoracion">Decoraci&oacute;n</option>
-              <option value="otro">otro</option>
-            </select>
+			<input th:value="{producto.categoria}" id="categoria" name="categoria" class="form-control my-4 py-2" placeholder="Luces" required/>
+
             <br>  
             <br>  
             <label for="fecha">fecha</label>
-            <input th:field="*{fecha}" type="date" name="fecha" id="fecha" class="form-control my-4 py-2" placeholder="" />
+            <input th:value="{producto.fecha}" type="date" name="fecha" id="fecha" class="form-control my-4 py-2" placeholder="" />
             
 			<div class="text-center mt-3">
-              <button type="submit" class="btn btn-primary" value="Guardar">Registrar</button>
+              <button type="submit" class="btn btn-primary" value="register">Registrar</button>
             </div>
           </form>
         </div>
@@ -47,10 +42,6 @@ registrarProducto.addEventListener("click", function mostrarFormulario() {
   </div>
 </div>
 `;
-
-  getElementById('registrar').addEventListener('click', () => {
-      alert('Registro exitoso')
-  });
 
 });
 
