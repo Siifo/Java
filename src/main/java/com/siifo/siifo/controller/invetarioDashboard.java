@@ -13,10 +13,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.siifo.siifo.interfaceService.IproductoService;
+
 import com.siifo.siifo.model.producto;
 
 @Controller
@@ -36,12 +37,23 @@ public class invetarioDashboard {
 
 		return "administrador";
 	}
+	@GetMapping("/register")
+	public String cargarForm(Model model) {
+		model.addAttribute("producto", new producto());
+		return null;
+	}
 	
 	@PostMapping("/register")
-	public String registroProducto(@Valid @RequestBody producto p, Model model) {
-		model.addAttribute("producto", new producto());
-		service.equals(p);
-		return "redirect:/administrador";
+	public String registroProducto(@Valid producto p, Model model) {
+		try { 
+			service.register(p);
+			System.out.println("Suppon que registró el prodcuto : " + p.toString());
+			return "redirect:/administrador";
+		} catch(Exception e) {
+			e.printStackTrace();
+			return "redirect:/index";
+		}
+		
 	}
 
 	

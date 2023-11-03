@@ -21,9 +21,9 @@ registrarProducto.addEventListener("click", function mostrarFormulario() {
             <label for="nombreProducto">Nombre de tu producto</label>
             <input th:value="{producto.nombreProducto}" type="text" name="nombreProducto" id="nombreProducto" class="form-control my-4 py-2" placeholder="Reflectores" required/>
             <label for="cantidadProducto">Cantidad</label>
-            <input th:value="{producto.cantidad}" type="number" name="cantidadProducto" id="cantidadProducto" class="form-control my-4 py-2" placeholder="20" required />
+            <input th:value="{producto.cantidad}" type="number" name="cantidad" id="cantidad" class="form-control my-4 py-2" placeholder="20" required />
             <label for="precioProducto">Precio Compra</label>
-            <input th:value="{producto.precio}" type="number" name="precioProducto" id="precioProducto" class="form-control my-4 py-2" placeholder="000075" required/>
+            <input th:value="{producto.precio}" type="number" name="precio" id="precio" class="form-control my-4 py-2" placeholder="000075" required/>
             <label for="categoria">Selecciona la categoria</label>
 			<input th:value="{producto.categoria}" id="categoria" name="categoria" class="form-control my-4 py-2" placeholder="Luces" required/>
 
@@ -44,7 +44,6 @@ registrarProducto.addEventListener("click", function mostrarFormulario() {
 `;
 
 });
-
 
 //---------------------------------------consultar producto--------------------------------------------------------------------------------------------
 consultarProducto.addEventListener("click", function mostrarFormulario() {
