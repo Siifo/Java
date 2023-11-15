@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=, initial-scale=1.0" />
@@ -559,13 +559,56 @@
     
       <section id="form"></section>
 
+      <script>
+        $(document).ready(function(){
+          load_data();
+          function load_data() {
+            $.ajax({
+              url:"http://localhost:3000/crud/action",
+              method:"GET",
+              data: {action: 'fetch'},
+              dataType: "JSON", 
+              success: function(data) {
+                let html = '';
+
+                if(data.data.length > 0){
+                  for(let count = 0; count < data.data.length; count++){
+                    html += `
+                      <tr>
+                        <td>`+data.data[count].nombreProducto+`</td>
+                        <td>`+data.data[count].cantidad+`</td
+                        <td>`+data.data[count].precioCompra+`</td  
+                        <td>`+data.data[count].fechaEntrega+`</td
+                        <td>`+data.data[count].provedor+`</td
+                      </tr>
+
+                    `;
+                  }
+                }
+                $('#form')
+              }
+            });
+          }
+        })
+      </script>
     </section>
 
     <!-- modulos -->
-    <script src="../public/jsDashboard/app.js"></script>
-    <script src="../public/jsDashboard/inventario.js"></script>
+    <script src="/resources/jsDashboard/app.js"></script>
+    <script src="/resources/jsDashboard/inventario.js"></script>
     <!-- -->
-    
+    <script >
+      const results = JSON.parse(document.querySelector("body").dataset.results);
+      for (const result of results){
+          const li = document.createElement("li");
+          li.innerHTML = `
+          
+          <h1> nombre Producto: ${result.nombreProducto} </h1>
+
+          `;
+          document.getElementById('buscarConsultaPro').appendChild(li)
+      }
+  </script>
     <script src="../public/jsDashboard/app.js"></script>
     <script src="../public/jsDashboard/logistica.js"></script>
     <script src="../public/jsDashboard/inventario.js"></script>

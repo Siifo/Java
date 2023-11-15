@@ -16,24 +16,22 @@ registrarProducto.addEventListener("click", function mostrarFormulario() {
     <div class="col-12 col-sm-7 col-md-6 m-auto">
       <div class="card border-0 shadow">
         <div class="card-body">
-          <form th:action="@{/register}" method="post">
+          <form action="register" method="POST">
             <h2 class="text-center mb-5">Registrar Producto</h2>
-            <label for="nombreProducto">Nombre de tu producto</label>
-            <input th:value="{producto.nombreProducto}" type="text" name="nombreProducto" id="nombreProducto" class="form-control my-4 py-2" placeholder="Reflectores" required/>
-            <label for="cantidadProducto">Cantidad</label>
-            <input th:value="{producto.cantidad}" type="number" name="cantidad" id="cantidad" class="form-control my-4 py-2" placeholder="20" required />
+            <label for="nombreProductos">Nombre de tu producto</label>
+            <input type="text" name="nombreProductos" id="nombreProductos" class="form-control my-4 py-2" placeholder="Reflectores" required/>
+            <label for="cantidad">Cantidad</label>
+            <input type="number" name="cantidad" id="cantidad" class="form-control my-4 py-2" placeholder="20" required />
             <label for="precioProducto">Precio Compra</label>
-            <input th:value="{producto.precio}" type="number" name="precio" id="precio" class="form-control my-4 py-2" placeholder="000075" required/>
-            <label for="categoria">Selecciona la categoria</label>
-			<input th:value="{producto.categoria}" id="categoria" name="categoria" class="form-control my-4 py-2" placeholder="Luces" required/>
-
-            <br>  
-            <br>  
+            <input type="number" name="precioCompra" id="precioCompra" class="form-control my-4 py-2" placeholder="000075" required/> 
             <label for="fecha">fecha</label>
-            <input th:value="{producto.fecha}" type="date" name="fecha" id="fecha" class="form-control my-4 py-2" placeholder="" />
-            
+            <input type="date" name="fechaEntrega" id="fechaEntrega" class="form-control my-4 py-2" placeholder="" />
+            <label for="estado">Estado</label>
+            <input type="text" name="estado" id="estado" class="form-control my-4 py-2" placeholder="lol" required />
+            <br>  
+            <br> 
 			<div class="text-center mt-3">
-              <button type="submit" class="btn btn-primary" value="register">Registrar</button>
+              <button type="submit" class="btn btn-primary">Registrar</button>
             </div>
           </form>
         </div>
@@ -43,7 +41,12 @@ registrarProducto.addEventListener("click", function mostrarFormulario() {
 </div>
 `;
 
+  getElementById('registrar').addEventListener('click', () => {
+      alert('Registro exitoso')
+  });
+
 });
+
 
 //---------------------------------------consultar producto--------------------------------------------------------------------------------------------
 consultarProducto.addEventListener("click", function mostrarFormulario() {
