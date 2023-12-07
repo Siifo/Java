@@ -27,5 +27,4 @@ public class Producto {
     private Date fechaEntrega;
     @Column(name = "estado", nullable = true, columnDefinition = "VARCHAR(250)")
     private String estado;
-
 }
