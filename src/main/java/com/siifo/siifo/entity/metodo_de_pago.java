@@ -11,7 +11,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "metodoDePago")
-public class metodo_de_pago {
+public class Metodo_de_pago {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idmetodoDePago;

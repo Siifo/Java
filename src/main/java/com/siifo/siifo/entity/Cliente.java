@@ -13,7 +13,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "cliente")
-public class Clientes {
+public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCliente;  
@@ -38,8 +38,5 @@ public class Clientes {
 
     @Column(name = "correoCliente", nullable = true, columnDefinition = "VARCHAR(200)")
     private String correoCliente;
-
-    @Column(name = "contraseñaCliente", nullable = true, columnDefinition = "VARCHAR(200)")
-    private String contraseñaCliente;
 
 }
