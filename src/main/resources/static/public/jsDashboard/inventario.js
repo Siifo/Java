@@ -59,7 +59,7 @@ consultarProducto.addEventListener("click", function mostrarFormulario() {
     <div class="col-12 col-sm-7 col-md-6 m-auto">
       <div class="card border-0 shadow">
         <div class="card-body">
-          <form action="buscar" method="GET">
+          <form action="buscar/{idProducto}" method="GET">
             <h2 class="text-center mb-5">Consultar Producto</h2>
             <!--Registrar activo-->
             <label for="idProducto">ID Producto</label>

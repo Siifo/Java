@@ -18,7 +18,11 @@ import com.siifo.siifo.service.ProductoService;
 @RestController
 @RequestMapping(path = "/api/admin")
 public class ProductoControler {
-    
+    @GetMapping("/demo")
+    public String demo(){
+        return "Holwiws";
+    }
+
     @Autowired
     private ProductoService productoService;
 
