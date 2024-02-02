@@ -9,13 +9,15 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "vivienda")
-public class Vivienda {
+@Table(name = "usuario")
+public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idVivienda;
-    private String nombreCasa;
-    private int precio;
-   
+    private Long idUsuario;
+    private String primerNombre;
+    private String segundoNombre;
+    private String apellidos;
+    private String direccion;
+    private int telefono;
+    private String profesion;
 }
-

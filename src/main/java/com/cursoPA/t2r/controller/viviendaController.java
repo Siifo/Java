@@ -19,7 +19,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.cursoPA.t2r.entity.Vivienda;
 import com.cursoPA.t2r.service.viviendaService;
 
-
+/**
+ * 
+ * Gestionamos la peticiones al servidor.
+ * nos enfocaremos en guardar los datos de una sola persona 
+ * y mostrarlos en una tabla para posteriormente monitorear o modificar estos datos. 
+ * 
+ */
 
 
 @Controller
@@ -27,6 +33,13 @@ public class viviendaController {
     @Autowired
     private viviendaService ViviendaService;
 
+    //ruta para el formulario
+
+    //captura de datos y vista de los mismos
+    
+    //editar
+
+    //eliminar
 
     @GetMapping("/demo")
     public String pruepaPost(){
