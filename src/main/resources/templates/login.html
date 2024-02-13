@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,15 +30,18 @@
       <i class="uil uil-times form_close"></i>
       <!-- Login From -->
       <div class="form login_form">
-        <form action="login" method="post">
+        <form action="admin" method="post" th:object="${credencial}">
           <h2>Iniciar sesion</h2>
 
           <div class="input_box">
-            <input type="email" placeholder="correo" name="correo" id="correo" required />
+            <!-- <input type="email" placeholder="correo" name="correo" id="correo" required /> -->
+            <input type="email" placeholder="correo" name="correo" id="correo" required th:field="*{correo}"/>
+
             <i class="bi bi-envelope email"></i>
           </div>
           <div class="input_box">
-            <input type="password" placeholder="contraseña" name="pass" id="pass" required />
+            <!-- <input type="password" placeholder="contraseña" name="pass" id="pass" required /> -->
+            <input type="password" placeholder="contraseña" name="pass" id="pass" required th:field="*{pass}"/>
             <i class="bi bi-person-circle password"></i>
             <i class="bi bi-eye pw_hide"></i>
           </div>

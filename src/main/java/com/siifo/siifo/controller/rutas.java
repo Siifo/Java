@@ -31,15 +31,15 @@ public class rutas {
     private ProductoService productoService;
 
 	//landing site
-	@GetMapping("/")
-	public String index() {
-		return "index";
-	}
+	// @GetMapping("/")
+	// public String index() {
+	// 	return "index";
+	// }
 
-	@RequestMapping("/login")
-	public String login() {
-		return "login";
-	}
+	// @RequestMapping("/login")
+	// public String login() {
+	// 	return "login";
+	// }
 
 	@RequestMapping("/contacto")
 	public String contacto() {
@@ -130,6 +130,7 @@ public class rutas {
 	}
 
 	
+
 	//rol site
 	@RequestMapping("/admin")
 	public String admin(ModelMap model) {
