@@ -12,34 +12,32 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cursoPA.t2r.entity.Vivienda;
-import com.cursoPA.t2r.service.viviendaService;
 
 
 
 @RestController
 @RequestMapping(path = "api/v1")
 public class controllerGeneral {
-    @Autowired
-    private viviendaService ViviendaService;
+    // @Autowired
+    // private viviendaService ViviendaService;
 
-	@GetMapping
-    public List<Vivienda> getAll(){
-        return ViviendaService.getViviendaList();
-    }
+	// @GetMapping
+    // public List<Vivienda> getAll(){
+    //     return ViviendaService.getViviendaList();
+    // }
 
-    @GetMapping("/{viviendaId}")
-    public Optional<Vivienda> getById(@PathVariable("viviendaId") Long viviendaId){
-        return ViviendaService.getVivienda(viviendaId);
-    }
+    // @GetMapping("/{viviendaId}")
+    // public Optional<Vivienda> getById(@PathVariable("viviendaId") Long viviendaId){
+    //     return ViviendaService.getVivienda(viviendaId);
+    // }
 
-    @PostMapping
-    public void saveUpdate(@RequestBody Vivienda producto){
-        ViviendaService.saveOrUpdate(producto);
-    }
+    // @PostMapping
+    // public void saveUpdate(@RequestBody Vivienda producto){
+    //     ViviendaService.saveOrUpdate(producto);
+    // }
     
-    @DeleteMapping("/{viviendaId}")
-    public void delete(@PathVariable("viviendaId") Long viviendaId){
-        ViviendaService.delete(viviendaId);
-    }
+    // @DeleteMapping("/{viviendaId}")
+    // public void delete(@PathVariable("viviendaId") Long viviendaId){
+    //     ViviendaService.delete(viviendaId);
+    // }
 }

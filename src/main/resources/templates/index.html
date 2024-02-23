@@ -1,84 +1,69 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calculator</title>
-  <link href="./style.css" type="text/css" rel="stylesheet">
-</head>
-<body>
-
-  <h1>Data calculator</h1>
-
-  <!--form for employes-->
-  <h3>Tus datos de registro seras mostrados posteriromente</h3>
-
-  <form action="save" method="post">
-
-    <input type="hidden" name="idUsuario" id="idUsuario" th:field="${usuario.idUsuario}">
-    <label for="primerNombre">Primer nombre</label>
-    <input type="text" id="primerNombre" name="primerNombre" placeholder="Alesito el mas capito" required th:field="${usuario.primerNombre}">
-    <hr>
-    <label for="segundoNombre">Segundo nombre</label>
-    <input type="text" id="segundoNombre" name="segundoNombre" placeholder="puede ir vacio" th:field="${usuario.segundoNombre}">
-    <hr>
-    <label for="apellidos">Apeliidos</label>
-    <input type="text" id="apellidos" name="apellidos" placeholder="Castaño" required th:field="${usuario.apellidos}">
-    <hr>
-    <label for="direccion">Direccion</label>
-    <input type="text" id="direccion" name="direccion" placeholder="crr 00 #00" th:field="${usuario.direccion}">
-    <hr>
-    <label for="telefono">Telefono</label>
-    <input type="number" id="telefono" name="telefono" placeholder="305784949" th:field="${usuario.telefono}">
-    <hr>
-    <label for="profesion">Tu cargo</label>
-    <input type="text" id="profesion" name="profesion" placeholder="Data enginer" th:field="${usuario.profesion}">
-    <hr>
-    <button type="submit">Guardar</button>
-  </form>
-
-  <h2 class="info">Nunca compartiremos tus datos... creo</h2>
-
-  <!-- form for divisa -->
-  <!-- <form action="save/divisa" method="post">
-    <label for="horasPorMes">Numero de horas</label>
-    <input id="horasPorMes" name="horasPorMes" placeholder="datos sin numeros">
-    <label for="horaValor">Valor de cada hora</label>
-    <input id="horaValor" name="horaValor" placeholder="datos sin numeros">
-    <button type="submit">Guardar</button>
-  </form> -->
-
-
-  <!-- Brushes Section -->
-
-  <!-- <div class="item">
-    <h2 id="brush">Brushes</h2>
-    <img src="https://s3.amazonaws.com/codecademy-content/courses/freelance-1/unit-2/hacksaw.jpeg"/>
-    <h3>Hacksaw Brushes</h3>
-    <p>Made of the highest quality oak, Hacksaw brushes are 
-      known for their weight and ability to hold paint in large amounts. 
-      Available in different sizes. <span class="price">Starting at $3.00 / brush.</span></p>
-  </div> -->
-
-  <!-- Frames Section -->
-
-  <!-- <div class="item">
-    <h2 id="frame">Frames</h2>
-    <img src="https://s3.amazonaws.com/codecademy-content/courses/freelance-1/unit-2/frames.jpeg"/>
-    <h3>Art Frames (assorted)</h3>
-    <p>Assorted frames made of different material, including MDF, birchwood, and PDE. Select frames can be sanded and painted according to your needs. <span class="price">Starting at $2.00 / frame.</span></p>
-  </div> -->
-
-  <!-- Paint Section -->
-
-  <!-- <div class="item">
-    <h2 id="paint">Paint</h2>
-    <img src="https://s3.amazonaws.com/codecademy-content/courses/freelance-1/unit-2/finnish.jpeg"/>
-    <h3>Clean Finnish Paint</h3>
-    <p>Imported paint from Finland. Over 256 colors available in-store, varying in quantity (1 oz. to 8 oz.). 
-      Clean Finnish paint microbinds to canvas, increasing the finish and longevity of any artwork. 
-      <span class="price">Starting at $5.00 / tube.</span>
-  </div> -->
-
-</body>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>reto Nexos</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Bootstrap Icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
+        <!-- SimpleLightbox plugin CSS-->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="./css/styles.css" rel="stylesheet" />
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="#page-top">Alexander :D</a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto my-2 my-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="#about">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#services">Servicios</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contact">Contacto</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Masthead-->
+        <header class="masthead"> <!--cabezera-->
+            <div class="container px-4 px-lg-5 h-100">
+                <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
+                    <div class="col-lg-8 align-self-end">
+                        <h1 class="text-white font-weight-bold">Nexos</h1>
+                        <hr class="divider" />
+                    </div>
+                    <div class="col-lg-8 align-self-baseline">
+                        <p class="text-white-75 mb-5">¡Toca cualquier boton!</p>
+                        <a class="btn btn-primary btn-xl" href="#">Empleados</a>
+                        <a class="btn btn-primary btn-xl" href="#">Departamento</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Footer-->
+        <footer class="bg-light py-5">
+            <div class="container px-4 px-lg-5"><div class="small text-center text-muted">Copyright &copy; 2023 - Sacado de bustra ajaja</div></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- SimpleLightbox plugin JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="./js/scripts.js"></script>
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <!-- * *                               SB Forms JS                               * *-->
+        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    </body>
 </html>

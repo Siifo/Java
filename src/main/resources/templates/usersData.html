@@ -10,6 +10,7 @@
     
     <h1>tus datos son: </h1>
 
+    <a class="btn btn-info" th:href="@{/nomina}">Calcula tu sueldo</a>
     <table class="table table-dark">
         <thead>
           <tr>
@@ -35,8 +36,8 @@
             <td th:text="${usuarios.direccion}"></td>
             <td th:text="${usuarios.profesion}"></td>
             <td>
-                <a class="btn btn-success" href="/editUser/${usuarios.idUsuario}">Editar</a> <!--nos redirijimos a otro formulario con los datos de una fila-->
-                <button class="btn btn-danger">Eliminar</button>
+                <a class="btn btn-success" th:href="@{/editUser/{idUsuario}(idUsuario=${usuarios.idUsuario})}">Editar</a> <!--nos redirijimos a otro formulario con los datos de una fila-->
+                <a class="btn btn-danger" th:href="@{/deleteUser/{idUsuario}(idUsuario=${usuarios.idUsuario})}">Eliminar</a>
             </td>
             
             

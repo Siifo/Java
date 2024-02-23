@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Empleados</title>
+</head>
+<body>
+    
+    <h1>tus datos son: </h1>
+
+    <a class="btn btn-info" th:href="@{/departamento}">Mirar departamentos</a>
+    <table class="table table-dark">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Tipo Doc</th>
+            <th scope="col">Numero Doc</th>
+            <th scope="col">nombres</th>
+            <th scope="col">Apellidos</th>
+            <th scope="col">Ciudad</th>
+            <th scope="col">Direccion</th>
+            <th scope="col">Correo</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">fecha Creacion</th>
+            <th scope="col">fecha modificacion</th>
+            <th scope="col">departamento</th>
+            
+            <th scope="col" style="text-align: center;">Acciones</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="empleados:${empleado}">
+
+            <th id="idEmpleado" name="idEmpleado" scope="row" th:text="${empleados.idEmpleado}"></th>
+            <td th:text="${empleados.documento_tipo}"></td>
+            <td th:text="${empleados.documento_numero}"></td>
+            <td th:text="${empleados.nombres}"></td>
+            <td th:text="${empleados.apellidos}"></td>
+            <td th:text="${empleados.ciudad}"></td>
+            <td th:text="${empleados.direccion}"></td>
+            <td th:text="${empleados.correo_electronico}"></td>
+            <td th:text="${empleados.telefono}"></td>
+            <td th:text="${empleados.fecha_hora_crea}"></td>
+            <td th:text="${empleados.fecha_hora_modifica}"></td>
+            <td th:text="${empleados.departamento_id.departamento_nombre}"></td>
+            
+            <td>
+                <a class="btn btn-success" th:href="@{/editEmpleado/{idEmpleado}(idEmpleado=${empleados.idEmpleado})}">Editar</a> <!--nos redirijimos a otro formulario con los datos de una fila-->
+                <a class="btn btn-danger" th:href="@{/deleteEmpleado/{idEmpleado}(idEmpleado=${empleados.idEmpleado})}">Eliminar</a>
+            </td>
+            
+            
+          </tr>
+        </tbody>
+      </table>
+
+</body>
+</html>
