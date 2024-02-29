@@ -13,6 +13,10 @@ import com.cursoPA.t2r.repository.empleadoRepository;
 public class empleadoService {
     @Autowired
     empleadoRepository EmpleadoRepository;
+    
+    public Empleado findByCorreo(String correo, String ciudad){
+        return EmpleadoRepository.findByCorreo_electronico(correo, ciudad);
+    }
 
     public List<Empleado> getEmpleadoList(){
         return EmpleadoRepository.findAll();

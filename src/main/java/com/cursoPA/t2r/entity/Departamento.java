@@ -20,7 +20,7 @@ public class Departamento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private int departamento_codigo2;
+    private int departamento_codigo;
     private String departamento_nombre;
     private Date fecha_hora_crea_dep; //(Solo visual)
     private Date fecha_hora_modifica_dep; //(Solo visual)

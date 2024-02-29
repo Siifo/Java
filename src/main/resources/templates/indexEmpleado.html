@@ -12,8 +12,8 @@
 
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-            <img src="Android" alt="" width="30" height="24" class="d-inline-block align-text-top">
+        <a class="navbar-brand" th:href="@{/}">
+            <img src="./public/assets/img/atrasSimbolo.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
             Empleados
         </a>
         <form class="d-flex">
@@ -27,7 +27,7 @@
         Falta algo
     </div> --> 
 
-    <form action="registroEmpleado" method="post">
+    <form action="registroEmpleado" method="post" class="container mt-4">
         <div class="form-group">
           <label for="exampleInputEmail1">Tipo Documento</label>
           <select name="documento_tipo">
@@ -67,7 +67,7 @@
 
         <div class="form-group">
             <label for="exampleInputEmail1">Telefono</label>
-            <input type="number" class="form-control" id="telefono" name="telefono" aria-describedby="emailHelp" placeholder="4234234">
+            <input type="text" class="form-control" id="telefono" name="telefono" aria-describedby="emailHelp" placeholder="4234234">
         </div>
 
         <div class="form-group">
@@ -77,11 +77,15 @@
 
         <div class="form-group">
             <label for="exampleInputEmail1">Departamento</label>
-            <select name="departamento_id" id="departamento_id">
+            <select th:field="*{empleado.departamento_id}" name="departamento_id">
+                <option th:each="departamentos : ${departamento}" th:value="${departamentos.id}" th:text="${departamentos.departamento_nombre}"></option>
+            </select>
+
+            <!-- <select name="departamento_id" id="departamento_id">
                 <option value="1">Industrial</option>
                 <option value="2">Transaccional</option>
                 <option value="3">Foraneo</option>
-            </select>
+            </select> -->
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>

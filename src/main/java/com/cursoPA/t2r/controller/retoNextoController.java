@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 
+import com.cursoPA.t2r.entity.Departamento;
 import com.cursoPA.t2r.entity.Empleado;
 import com.cursoPA.t2r.service.departamentoService;
 import com.cursoPA.t2r.service.empleadoService;
@@ -21,96 +22,94 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
 /**
  * 1. hacer entidades, revisar anotaciones(de muchos a uno 'empleados')
  * 2. actualizar la fecha de modificacion (trigers se puede)
  * 
  * 3. mostrar tabla o vista de los datos (con modificaion)
- * 4. 
+ * 4.
  */
 @Controller
-public class retoNextoController {  
-    //departamento
+public class retoNextoController {
+    // departamento
     @Autowired
     private departamentoService DepartamentoService;
-    //Empleado
+    // Empleado
     @Autowired
     private empleadoService EmpleadoService;
 
-    //hompage
+    // hompage
     @GetMapping("/")
-    public String homepage(){
+    public String homepage() {
         return "index";
     }
 
-    //rutas del departamento
+    // rutas del departamento
     @GetMapping("/departamento")
     public String index() {
-        return "indexDepa";
+        return "indexDepartamento";
     }
 
-    //rutas del empleado
+    // rutas del empleado
     @GetMapping("/empleado")
     public String indexEmpleado(ModelMap model) {
         model.addAttribute("empleado", new Empleado());
+        List<Departamento> departamento = DepartamentoService.getDepaList();
+        System.out.println("a ver" + departamento);
+        model.addAttribute("departamento", departamento);
         return "indexEmpleado";
     }
-    //registrar datos en empleado
+
+    // registrar datos en empleado
     @PostMapping("/registroEmpleado")
-    public String registroEmpleado(@ModelAttribute("empleado")Empleado empleado){
-        EmpleadoService.saveOrUpdate(empleado);                            //guardamos en la DB si estan todos los datos
+    public String registroEmpleado(@ModelAttribute("empleado") Empleado empleado) {
+        EmpleadoService.saveOrUpdate(empleado); // guardamos en la DB si estan todos los datos
         System.out.println("Se registro correctamente" + empleado);
-        return "redirect:/consultarEmpleado"; 
+        return "redirect:/consultarEmpleado";
     }
-    //redireccion para cargar los datos insertados
-    @RequestMapping(value="/consultarEmpleado", method = RequestMethod.GET)
-    public String consultarEmpleado(ModelMap model){
+                
+    // redireccion para cargar los datos insertados
+    @RequestMapping(value = "/consultarEmpleado", method = RequestMethod.GET)
+    public String consultarEmpleado(ModelMap model) {
         List<Empleado> empleado = EmpleadoService.getEmpleadoList();
         model.addAttribute("empleado", empleado);
         return "consultaEmple";
     }
-    //editar datos
+
+    // editar datos
     @GetMapping("/editEmpleado/{idEmpleado}")
-    public String editarEmpleado(@PathVariable Long idEmpleado, ModelMap model){
-        //le pasamos el objeto a editar(para que sepa donde guardarlo)
-        model.addAttribute("empleado", new Empleado());    //enviamos la entidad por defecto a la ruta
+    public String editarEmpleado(@PathVariable Long idEmpleado, ModelMap model) {
+        // le pasamos el objeto a editar(para que sepa donde guardarlo)
+        model.addAttribute("empleado", new Empleado()); // enviamos la entidad por defecto a la ruta
         Optional<Empleado> empleado = EmpleadoService.getEmpleado(idEmpleado);
         model.addAttribute("empleado", empleado.orElse(null));
+        //cargamos los datos del entity de departamento
+        List<Departamento> departamento = DepartamentoService.getDepaList();
+        model.addAttribute("departamento",departamento);
+        //salidas
         System.out.println("se cargo el objeto: " + empleado);
         return "editEmpleado";
     }
 
-    //guardar cambios
+    // guardar cambios
     @PostMapping("/editEmpleado/cambios")
-    public String postMethodEdit(@ModelAttribute("empleado")Empleado empleado) {       //identificamos la entidad del objeto al actualizar
-        EmpleadoService.saveOrUpdate(empleado);                                       //guardamos en la DB si estan todos los datos
+    public String postMethodEdit(@ModelAttribute("empleado") Empleado empleado) { // identificamos la entidad del objeto
+                                                                                  // al actualizar
+        EmpleadoService.saveOrUpdate(empleado); // guardamos en la DB si estan todos los datos
         System.out.println("Se actualizo correctamente" + empleado.getIdEmpleado().toString());
         return "redirect:/consultarEmpleado";
     }
 
-    //delete empleado
+    // delete empleado
     @RequestMapping("/deleteEmpleado/{idEmpleado}")
     public String deleteUser(@PathVariable Long idEmpleado, ModelMap model) {
         EmpleadoService.delete(idEmpleado);
         System.out.println("se elimino el id: " + idEmpleado);
         return "redirect:/consultarEmpleado";
+        
     }
-    
 
-
-
-
-
-
-
-
-
-
-
-
-
-    //ruta para el formulario de ususarioController
+    // ruta para el formulario de ususarioController
     @GetMapping("/editUser/{idUsuario}")
     public String enrutar() {
         return "redirect:/api/user/editUser/{idUsuario}";
@@ -120,12 +119,10 @@ public class retoNextoController {
     public String postMethodName() {
         return "redirect:/api/user/deleteUser/{idUsuario}";
     }
-    
+
     @GetMapping("/nomina")
     public String nomindaReturn() {
         return "redirect:/api/user/nomina";
     }
-    
 
-
-} 
+}

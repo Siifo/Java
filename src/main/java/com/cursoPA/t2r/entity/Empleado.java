@@ -40,7 +40,7 @@ public class Empleado {
     private String direccion;
     //quiero encriptarlo de prueba
     private String correo_electronico;
-    private int telefono;
+    private String telefono;
     
     //
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
