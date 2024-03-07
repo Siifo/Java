@@ -109,20 +109,4 @@ public class retoNextoController {
         
     }
 
-    // ruta para el formulario de ususarioController
-    @GetMapping("/editUser/{idUsuario}")
-    public String enrutar() {
-        return "redirect:/api/user/editUser/{idUsuario}";
-    }
-
-    @GetMapping("/deleteUser/{idUsuario}")
-    public String postMethodName() {
-        return "redirect:/api/user/deleteUser/{idUsuario}";
-    }
-
-    @GetMapping("/nomina")
-    public String nomindaReturn() {
-        return "redirect:/api/user/nomina";
-    }
-
 }

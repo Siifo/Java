@@ -2,6 +2,7 @@ package com.cursoPA.t2r.controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,6 +23,12 @@ public class controllerGeneral {
     @Autowired
     private empleadoService EmpleadoService;
     // private viviendaService ViviendaService;
+
+    //async data
+    @GetMapping("/empleado/{idEmpleado}")
+    public CompletableFuture<Empleado> getEmpleadoById(@PathVariable Long idEmpleado){
+        return EmpleadoService.getEmpleadoByIdAsync(idEmpleado);
+    }
 
     // @GetMapping
     // public List<Vivienda> getAll(){
