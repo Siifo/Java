@@ -2,6 +2,7 @@ package com.cursoPA.t2r.controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -109,4 +110,19 @@ public class retoNextoController {
         
     }
 
+    //async
+    @GetMapping("/consultaAsync")
+    public String nuevaConsulta(ModelMap model){
+        model.addAttribute("empleado", new Empleado());
+        return "consultaAsync";
+    }
+
+    @GetMapping("/DempleadoD")
+    public String cargarConsulta(@RequestParam Long idEmpleado, ModelMap model){
+        CompletableFuture<Empleado> empleado = EmpleadoService.getEmpleadoByIdAsync(idEmpleado);//el objeto esperara a que se complete la acion para rellenar el objeto
+        Empleado empleadoC = empleado.join();// esperamos a que se llene
+        model.addAttribute("empleadoC", empleadoC);
+        //System.out.println(""+empleadoC); //error al tratar de mostrar un objeto sin esperar a quese complete
+        return "consultaAsync";
+    }
 }
