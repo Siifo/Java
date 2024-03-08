@@ -120,9 +120,14 @@ public class retoNextoController {
     @GetMapping("/DempleadoD")
     public String cargarConsulta(@RequestParam Long idEmpleado, ModelMap model){
         CompletableFuture<Empleado> empleado = EmpleadoService.getEmpleadoByIdAsync(idEmpleado);//el objeto esperara a que se complete la acion para rellenar el objeto
-        Empleado empleadoC = empleado.join();// esperamos a que se llene
-        model.addAttribute("empleadoC", empleadoC);
+        if(empleado!=null && idEmpleado!=0){
+            Empleado empleadoC = empleado.join();// esperamos a que se llene
+            model.addAttribute("empleadoC", empleadoC);
+            return "consultaAsync";
+        }else{
+            return "redirect:/";
+        }
         //System.out.println(""+empleadoC); //error al tratar de mostrar un objeto sin esperar a quese complete
-        return "consultaAsync";
+        
     }
 }

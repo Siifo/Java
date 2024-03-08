@@ -20,6 +20,10 @@
         </div>
         <button type="submit" class="btn btn-primary mb-2">Confirm</button>
       </form>
+
+      <div th:if="${empleadoC != null}" class="alert alert-primary w-10 h-25 d-inline-block" role="alert">
+        Se consulto el id:<a th:text="${empleadoC.idEmpleado}"></a>
+      </div>
       
       <!-- carga de datos -->
       <div th:if="${empleadoC != null}">
