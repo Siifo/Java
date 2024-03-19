@@ -52,9 +52,97 @@ const registrarOC = document.getElementById("registrarOC")
 const consultarOC = document.getElementById("consultarOC")
 //-------------------------- logistica -------------\
 const agregarEvento = document.getElementById("agregarEvento")
+const formularioConsultarVenta = document.getElementById("formularioConsultarVenta")
+const agregarFormEmpleado = document.getElementById("agregarFormEmpleado")
 
+//Registrar evento
+registrarEvento.addEventListener("click", function(){
+  hideDashboard.style.display = "none";
+  agregarProducto.style.display = "none";
+  agregarProveedor.style.display = "none";
+  formularioConsultarProducto.style.display = "none";
+  formularioConsultarProveedor.style.display = "none"; 
+  agregarOrdenVenta.style.display = "none";
+  formularioConsultarOV.style.display = "none";
+  agregarRegistroCompra.style.display = "none";
+  formularioConsultarOC.style.display = "none";
+  formularioConsultarVenta.style.display = "none";
+  formularioConsultarVenta.style.display = "none";
+  agregarFormEmpleado.style.display = "none";
 
+  agregarEvento.style.display = "block";
 
+  //agregar empleado boton
+  const contenedorCampos = document.getElementById("contenedorCampos");
+  const agregarEmpleado = document.getElementById("agregarEmpleado");
+  let contadorEmpleados = 1;
+  let datalistClon;
+  let nuevoCampo;
+  agregarEmpleado.addEventListener("click", () => {
+    contadorEmpleados++;
+
+    nuevoCampo = document.createElement("input");
+    nuevoCampo.list = "empleado";
+    nuevoCampo.classList = "form-control my-4 py-2 descartarEmpleados";
+    nuevoCampo.id = "agregarEmpleados" + contadorEmpleados;
+    nuevoCampo.name = "empleado No." + contadorEmpleados;
+    nuevoCampo.placeholder = "agrega al empleado " + contadorEmpleados;
+
+    const datalist = document.getElementById("empleado");
+    datalistClon = datalist.cloneNode(true);
+    datalistClon.setAttribute("class", "removeDatalist")
+    nuevoCampo.setAttribute("list", "empleado");
+
+    contenedorCampos.appendChild(nuevoCampo);
+    contenedorCampos.appendChild(datalistClon);
+  });
+
+  
+  //boton eliminar empleado
+  const descartarEmpleado = document.getElementById("descartarEmpleado") //este es el boton
+  descartarEmpleado.addEventListener("click", ()=> {
+    if(contadorEmpleados > 1){
+    const ultimoCampo = document.getElementById("agregarEmpleados" + contadorEmpleados);
+    contenedorCampos.removeChild(ultimoCampo)
+    contadorEmpleados--;
+    }
+    
+  });
+})
+
+//consulta evento
+consultarEvento.addEventListener("click", function() {
+  hideDashboard.style.display = "none";
+  agregarProducto.style.display = "none";
+  agregarProveedor.style.display = "none";
+  formularioConsultarProducto.style.display = "none";
+  formularioConsultarProveedor.style.display = "none"; 
+  agregarOrdenVenta.style.display = "none";
+  formularioConsultarOV.style.display = "none";
+  agregarRegistroCompra.style.display = "none";
+  formularioConsultarOC.style.display = "none";
+  agregarEvento.style.display = "none";
+  agregarFormEmpleado.style.display = "none";
+
+  formularioConsultarVenta.style.display = "block";
+})
+
+//Registrar empleado
+registarEmpleado.addEventListener("click", function(){
+  hideDashboard.style.display = "none"
+  agregarProducto.style.display = "none";
+  agregarProveedor.style.display = "none";
+  formularioConsultarProducto.style.display = "none";
+  formularioConsultarProveedor.style.display = "none"; 
+  agregarOrdenVenta.style.display = "none";
+  formularioConsultarOV.style.display = "none";
+  agregarRegistroCompra.style.display = "none";
+  formularioConsultarOC.style.display = "none";
+  agregarEvento.style.display = "none";
+  formularioConsultarVenta.style.display = "none";
+  
+  agregarFormEmpleado.style.display = "block"
+})
 
 //-------------------------- Inventario -------------\
 const agregarProducto = document.getElementById("agregarProducto");
@@ -72,10 +160,12 @@ registrarProducto.addEventListener("click", function(){
   agregarOrdenVenta.style.display = "none";
   formularioConsultarOV.style.display = "none";
   agregarRegistroCompra.style.display = "none";
-  formularioConsultarOC.style.display = "none";  
+  formularioConsultarOC.style.display = "none";
+  agregarEvento.style.display = "none";
+  formularioConsultarVenta.style.display = "none";  
+  agregarFormEmpleado.style.display = "none";
   
   agregarProducto.style.display = "block";
-
 })
 
 // consultar Producto
@@ -88,6 +178,9 @@ consultarProducto.addEventListener("click", function(){
   formularioConsultarOV.style.display = "none";
   agregarRegistroCompra.style.display = "none";
   formularioConsultarOC.style.display = "none";
+  agregarEvento.style.display = "none";
+  formularioConsultarVenta.style.display = "none";
+  agregarFormEmpleado.style.display = "none";
 
   formularioConsultarProducto.style.display = "block";
 })
@@ -104,6 +197,9 @@ registrarProveedor.addEventListener("click", function(){
   formularioConsultarOV.style.display = "none";
   agregarRegistroCompra.style.display = "none";
   formularioConsultarOC.style.display = "none";
+  agregarEvento.style.display = "none";
+  formularioConsultarVenta.style.display = "none";
+  agregarFormEmpleado.style.display = "none";
   
   agregarProveedor.style.display = "block";
 })
@@ -117,6 +213,9 @@ consultarProveedor.addEventListener("click", function(){
   formularioConsultarOV.style.display = "none";
   agregarRegistroCompra.style.display = "none";
   formularioConsultarOC.style.display = "none";
+  agregarEvento.style.display = "none";
+  formularioConsultarVenta.style.display = "none";
+  agregarFormEmpleado.style.display = "none";
 
   formularioConsultarProveedor.style.display = "block";  
 })
@@ -139,6 +238,9 @@ registrarOV.addEventListener("click", function(){
   formularioConsultarOV.style.display = "none";
   agregarRegistroCompra.style.display = "none";
   formularioConsultarOC.style.display = "none";
+  agregarEvento.style.display = "none";
+  formularioConsultarVenta.style.display = "none";
+  agregarFormEmpleado.style.display = "none";
 
   agregarOrdenVenta.style.display = "block";
 })
@@ -153,6 +255,9 @@ consultarOV.addEventListener("click", function(){
   agregarOrdenVenta.style.display = "none"; 
   agregarRegistroCompra.style.display = "none";
   formularioConsultarOC.style.display = "none";
+  agregarEvento.style.display = "none";
+  formularioConsultarVenta.style.display = "none";
+  agregarFormEmpleado.style.display = "none";
 
   formularioConsultarOV.style.display = "block";
 })
@@ -167,6 +272,9 @@ registrarOC.addEventListener("click", function(){
   agregarOrdenVenta.style.display = "none";
   formularioConsultarOV.style.display = "none";
   formularioConsultarOC.style.display = "none";
+  agregarEvento.style.display = "none";
+  formularioConsultarVenta.style.display = "none";
+  agregarFormEmpleado.style.display = "none";
 
   agregarRegistroCompra.style.display = "block";
 })
@@ -181,6 +289,9 @@ consultarOC.addEventListener("click", function() {
   agregarOrdenVenta.style.display = "none";
   formularioConsultarOV.style.display = "none";
   agregarRegistroCompra.style.display = "none";
+  agregarEvento.style.display = "none";
+  formularioConsultarVenta.style.display = "none";
+  agregarFormEmpleado.style.display = "none";
 
   formularioConsultarOC.style.display = "block";
 })
@@ -197,6 +308,9 @@ mostrarDashboard.addEventListener("click", function mostrarFormulario() {
   formularioConsultarOV.style.display = "none";
   agregarRegistroCompra.style.display = "none";
   formularioConsultarOC.style.display = "none";
+  agregarEvento.style.display = "none";
+  formularioConsultarVenta.style.display = "none";
+  agregarFormEmpleado.style.display = "none";
   
   
 })

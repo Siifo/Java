@@ -98,7 +98,6 @@ registrarEvento.addEventListener("click", function mostrarFormulario() {
 
   
   //boton eliminar empleado
-  
   const descartarEmpleado = document.getElementById("descartarEmpleado") //este es el boton
   descartarEmpleado.addEventListener("click", ()=> {
     if(contadorEmpleados > 1){
