@@ -64,8 +64,10 @@ registrarProducto.addEventListener("click", function(){
   agregarProveedor.style.display = "none";
   formularioConsultarProducto.style.display = "none";
   formularioConsultarProveedor.style.display = "none";
-
-  
+  agregarOrdenVenta.style.display = "none";
+  formularioConsultarOV.style.display = "none";
+  agregarRegistroCompra.style.display = "none";
+  formularioConsultarOC.style.display = "none";  
   
   agregarProducto.style.display = "block";
 
@@ -77,8 +79,12 @@ consultarProducto.addEventListener("click", function(){
   agregarProveedor.style.display = "none";
   agregarProducto.style.display = "none";
   formularioConsultarProveedor.style.display = "none";
+  agregarOrdenVenta.style.display = "none";
+  formularioConsultarOV.style.display = "none";
+  agregarRegistroCompra.style.display = "none";
+  formularioConsultarOC.style.display = "none";
 
-  formularioConsultarProducto.style.display = "block"
+  formularioConsultarProducto.style.display = "block";
 })
 
 // Registrar Proveedor
@@ -89,8 +95,12 @@ registrarProveedor.addEventListener("click", function(){
   hideDashboard.style.display = "none";
   formularioConsultarProducto.style.display = "none";
   formularioConsultarProveedor.style.display = "none";
+  agregarOrdenVenta.style.display = "none";
+  formularioConsultarOV.style.display = "none";
+  agregarRegistroCompra.style.display = "none";
+  formularioConsultarOC.style.display = "none";
   
-  agregarProveedor.style.display = "block"
+  agregarProveedor.style.display = "block";
 })
 
 consultarProveedor.addEventListener("click", function(){
@@ -98,13 +108,75 @@ consultarProveedor.addEventListener("click", function(){
   agregarProducto.style.display = "none";
   agregarProveedor.style.display = "none";
   formularioConsultarProducto.style.display = "none";
-  
+  agregarOrdenVenta.style.display = "none";
+  formularioConsultarOV.style.display = "none";
+  agregarRegistroCompra.style.display = "none";
+  formularioConsultarOC.style.display = "none";
 
   formularioConsultarProveedor.style.display = "block";  
 })
 
 //-------------------------- Ventas -------------\
+const agregarOrdenVenta = document.getElementById("agregarOrdenVenta")
+const formularioConsultarOV = document.getElementById("formularioConsultarOV")
+const agregarRegistroCompra = document.getElementById("agregarRegistroCompra")
+const formularioConsultarOC = document.getElementById("formularioConsultarOC")
 
+//Rregistrar orden de venta
+registrarOV.addEventListener("click", function(){
+  hideDashboard.style.display = "none";
+  agregarProducto.style.display = "none";
+  agregarProveedor.style.display = "none";
+  formularioConsultarProducto.style.display = "none";
+  formularioConsultarProveedor.style.display = "none";
+  formularioConsultarOV.style.display = "none";
+  agregarRegistroCompra.style.display = "none";
+  formularioConsultarOC.style.display = "none";
+
+  agregarOrdenVenta.style.display = "block";
+})
+
+//Consultar orden venta
+consultarOV.addEventListener("click", function(){
+  hideDashboard.style.display = "none";
+  agregarProducto.style.display = "none";
+  agregarProveedor.style.display = "none";
+  formularioConsultarProducto.style.display = "none";
+  formularioConsultarProveedor.style.display = "none"; 
+  agregarOrdenVenta.style.display = "none"; 
+  agregarRegistroCompra.style.display = "none";
+  formularioConsultarOC.style.display = "none";
+
+  formularioConsultarOV.style.display = "block";
+})
+
+//Orden compra
+registrarOC.addEventListener("click", function(){
+  hideDashboard.style.display = "none";
+  agregarProducto.style.display = "none";
+  agregarProveedor.style.display = "none";
+  formularioConsultarProducto.style.display = "none";
+  formularioConsultarProveedor.style.display = "none"; 
+  agregarOrdenVenta.style.display = "none";
+  formularioConsultarOV.style.display = "none";
+  formularioConsultarOC.style.display = "none";
+
+  agregarRegistroCompra.style.display = "block";
+})
+
+//Consultar Orden venta
+consultarOC.addEventListener("click", function() {
+  hideDashboard.style.display = "none";
+  agregarProducto.style.display = "none";
+  agregarProveedor.style.display = "none";
+  formularioConsultarProducto.style.display = "none";
+  formularioConsultarProveedor.style.display = "none"; 
+  agregarOrdenVenta.style.display = "none";
+  formularioConsultarOV.style.display = "none";
+  agregarRegistroCompra.style.display = "none";
+
+  formularioConsultarOC.style.display = "block";
+})
 
 
 //Dashboard
@@ -114,7 +186,10 @@ mostrarDashboard.addEventListener("click", function mostrarFormulario() {
   agregarProveedor.style.display = "none";
   formularioConsultarProducto.style.display = "none";
   formularioConsultarProveedor.style.display = "none"; 
-  
+  agregarOrdenVenta.style.display = "none";
+  formularioConsultarOV.style.display = "none";
+  agregarRegistroCompra.style.display = "none";
+  formularioConsultarOC.style.display = "none";
   
   
 })
