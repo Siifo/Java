@@ -560,6 +560,67 @@
       <!-- Formularios -->
       <!----------------------------------------------------------------------------------- Logistica --------------------------------------------------------->
 
+      <!-- Registrar Evento -->
+      <div class="container mt-5 pt-5" style="display: none;" id="agregarEvento">
+        <div class="row">
+          <div class="col-12 col-sm-7 col-md-6 m-auto">
+            <div class="card border-0 shadow">
+              <div class="card-body">
+                <form action="">
+                  <h2 class="text-center mb-5">Registrar Evento</h2>
+                  <!--Registrar activo-->
+                  <label for="codigoCliente">Codigo cliente</label>
+                  <input type="number" name="" id="codigoCliente" class="form-control my-4 py-2" placeholder="132141" required />
+      
+                  <label for="direccionEvento">Dirección del evento</label>
+                  <input type="text" name="direccionEvento" id="direccionEvento" class="form-control my-4 py-2" placeholder="La casa de Miguel Rozo" required/>
+      
+                  <label for="tipoEvento">Tipo de Evento: </label>
+                  <select id="tipoEvento" name="evento" required>
+                    <option value="Seleciona">seleciona</option>
+                    <option value="boda">Bodas</option>
+                    <option value="fiesta">Fiestas</option>
+                    <option value="conferencia">Conferencias</option>
+                    <option value="otro"></option>
+                  </select>
+                  <label for="tipoPaquete">Paquete:</label>
+                  <select id="tipoPaquete" name="evento" required>
+                    <option value="">Seleccione...</option>
+                    <option value="boda">Paquete1</option>
+                    <option value="fiesta">Paquete2</option>
+                    <option value="conferencia">Paquete3</option>
+                    <option value="otro">Paquete4</option>
+                  </select>
+                  <br>
+                  <br>
+                  <label>Empleados:</label>
+                  <div id="contenedorCampos">
+                    <input list="empleado" class="form-control my-4 py-2" id="agregarEmpleados" placeholder="agrega al empleado 1" required>
+                    <datalist id="empleado" name="empleado" required>
+                      <option value="">Seleccione...</option>
+                      <option>Kenny Felipe Mape</option>
+                      <option>Pedro Alexander Castañeda</option>
+                      <option>Miguel Angel amorso</option>
+                      <option>Pablo Andrés Ardila Machetá</option>
+                    </datalist> 
+                  </div>
+                  <button type="button" id="agregarEmpleado" class="btn btn-info">+</button>
+                  <button type="button" id="descartarEmpleado" class="btn btn-danger">-</button>
+                  <br>
+                  <br>            
+                  <label for="fecha">Fecha del evento</label>
+                  <input type="date" name="fecha" id="fecha" class="form-control my-4 py-2" required/>
+                  <label for="hora">Hora del Evento:</label>
+                  <input type="time" id="hora" name="hora" class="form-control my-4 py-2" required>
+                  <div class="text-center mt-3">
+                  <input class="btn btn-primary" type="submit" value="Registrar">
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <!----------------------------------------------------------------------------------- inventario --------------------------------------------------------->
 

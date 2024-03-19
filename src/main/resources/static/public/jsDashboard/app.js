@@ -50,6 +50,11 @@ const consultarOV = document.getElementById("consultarOV")
 
 const registrarOC = document.getElementById("registrarOC")
 const consultarOC = document.getElementById("consultarOC")
+//-------------------------- logistica -------------\
+const agregarEvento = document.getElementById("agregarEvento")
+
+
+
 
 //-------------------------- Inventario -------------\
 const agregarProducto = document.getElementById("agregarProducto");
@@ -115,6 +120,8 @@ consultarProveedor.addEventListener("click", function(){
 
   formularioConsultarProveedor.style.display = "block";  
 })
+
+
 
 //-------------------------- Ventas -------------\
 const agregarOrdenVenta = document.getElementById("agregarOrdenVenta")
