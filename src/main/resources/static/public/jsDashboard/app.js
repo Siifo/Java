@@ -45,6 +45,11 @@ const consultarProveedor = document.getElementById("consultarProveedor")
 const generarReporteInventario = document.getElementById("generarReporteInventario")
 
 //ventas
+const registrarOV = document.getElementById("registrarOV")
+const consultarOV = document.getElementById("consultarOV")
+
+const registrarOC = document.getElementById("registrarOC")
+const consultarOC = document.getElementById("consultarOC")
 
 //-------------------------- Inventario -------------\
 const agregarProducto = document.getElementById("agregarProducto");
@@ -97,6 +102,9 @@ consultarProveedor.addEventListener("click", function(){
 
   formularioConsultarProveedor.style.display = "block";  
 })
+
+//-------------------------- Ventas -------------\
+
 
 
 //Dashboard
