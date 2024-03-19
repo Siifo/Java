@@ -46,39 +46,56 @@ const generarReporteInventario = document.getElementById("generarReporteInventar
 
 //ventas
 
-//-------------------------- Inventario -------------\\
-
-
-
+//-------------------------- Inventario -------------\
 const agregarProducto = document.getElementById("agregarProducto");
+const formularioConsultarProducto = document.getElementById("formularioConsultarProducto")
 const agregarProveedor = document.getElementById("agregarProveedor");
+const formularioConsultarProveedor = document.getElementById("formularioConsultarProveedor")
 
 // registrar producto
 registrarProducto.addEventListener("click", function(){
   
   hideDashboard.style.display = "none";
-  agregarProveedor.style.display = "none"
+  agregarProveedor.style.display = "none";
+  formularioConsultarProducto.style.display = "none";
+  formularioConsultarProveedor.style.display = "none";
 
   
   
-  agregarProducto.style.display = "block"
+  agregarProducto.style.display = "block";
 
 })
 
 // consultar Producto
+consultarProducto.addEventListener("click", function(){
+  hideDashboard.style.display = "none";
+  agregarProveedor.style.display = "none";
+  agregarProducto.style.display = "none";
+  formularioConsultarProveedor.style.display = "none";
 
+  formularioConsultarProducto.style.display = "block"
+})
 
 // Registrar Proveedor
 
 registrarProveedor.addEventListener("click", function(){
   
-  agregarProducto.style.display = "none"
+  agregarProducto.style.display = "none";
   hideDashboard.style.display = "none";
-
-  
+  formularioConsultarProducto.style.display = "none";
+  formularioConsultarProveedor.style.display = "none";
   
   agregarProveedor.style.display = "block"
+})
 
+consultarProveedor.addEventListener("click", function(){
+  hideDashboard.style.display = "none";
+  agregarProducto.style.display = "none";
+  agregarProveedor.style.display = "none";
+  formularioConsultarProducto.style.display = "none";
+  
+
+  formularioConsultarProveedor.style.display = "block";  
 })
 
 
@@ -87,6 +104,8 @@ mostrarDashboard.addEventListener("click", function mostrarFormulario() {
   hideDashboard.style.display = "block";
   agregarProducto.style.display = "none";
   agregarProveedor.style.display = "none";
+  formularioConsultarProducto.style.display = "none";
+  formularioConsultarProveedor.style.display = "none"; 
   
   
   

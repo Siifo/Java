@@ -603,6 +603,30 @@
           </div>
         </div>
       </div>
+      <!-- Consultar Producto -->
+      <div class="container mt-5 pt-5" style="display: none;" id="formularioConsultarProducto">
+        <div class="row">
+          <div class="col-12 col-sm-7 col-md-6 m-auto">
+            <div class="card border-0 shadow">
+              <div class="card-body">
+                <form action="buscar" method="GET">
+                  <h2 class="text-center mb-5">Consultar Producto</h2>
+                  <!--Registrar activo-->
+                  <label for="idProducto">ID Producto</label>
+                  <input type="text" name="idProducto" id="idProducto" class="form-control my-4 py-2" placeholder="20" required/>
+                  <div class="text-center mt-3">
+                    <input class="btn btn-primary justify-content-center align-content-center" id="buscarProducto" type="submit" value="Buscar" />
+                  </div>
+                  <br>
+                  <br>
+                </form>
+                <br>
+                <br>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <!-- Registro proveedores -->
       <div class="container mt-5 pt-5" style="display: none;" id="agregarProveedor">
@@ -624,6 +648,29 @@
                   <div class="text-center mt-3">
                     <button class="btn btn-primary">Registrar</button>
                   </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!--  -->
+      <div class="container mt-5 pt-5" style="display: none;" id="formularioConsultarProveedor">
+        <div class="row">
+          <div class="col-12 col-sm-7 col-md-6 m-auto">
+            <div class="card border-0 shadow">
+              <div class="card-body">
+                <form action="consultarProvedor" methot="POST">
+                  <h2 class="text-center mb-5">Consultar Proveedor</h2>
+                  <!--Registrar proveedor-->
+                  <label for="idProveedor">ID Proveedor</label>
+                  <input type="number" name="idProveedor" id="idProveedor" class="form-control my-4 py-2" placeholder="1050458879" required/>
+                  <div class="text-center mt-3">
+                    <input class="btn btn-primary justify-content-center align-content-center" type="submit" value="Buscar" />
+                  </div>
+                  <br>
+                  <br>
                 </form>
               </div>
             </div>
