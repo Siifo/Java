@@ -37,7 +37,12 @@ const generarReporteLogistica = document.getElementById("generarReporteLogistica
 
 //inventario
 const registrarProducto = document.getElementById("registrarProducto")
+const consultarProducto = document.getElementById("consultarProducto")
+
 const registrarProveedor = document.getElementById("registrarProveedor")
+const consultarProveedor = document.getElementById("consultarProveedor")
+
+const generarReporteInventario = document.getElementById("generarReporteInventario")
 
 //ventas
 
@@ -59,6 +64,9 @@ registrarProducto.addEventListener("click", function(){
   agregarProducto.style.display = "block"
 
 })
+
+// consultar Producto
+
 
 // Registrar Proveedor
 
