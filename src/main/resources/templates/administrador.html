@@ -56,7 +56,7 @@
             <li><a class="link_name" href="#">Empleados</a></li>
             <li><a href="#" id="registarEmpleado">Registrar Empleado</a></li>
             <li><a href="#" id="consultarEmpleado">Constultar Empleados</a></li>
-            <li><a href="#">Generar Reporte</a></li>
+            <li><a href="#" id="generarReporteLogistica">Generar Reporte</a></li>
           </ul>
         </li>
         <!-- inventario -->
@@ -558,6 +558,8 @@
       </div>
     
       <!-- Formularios -->
+      <!----------------------------------------------------------------------------------- Logistica --------------------------------------------------------->
+
 
       <!----------------------------------------------------------------------------------- inventario --------------------------------------------------------->
 
@@ -636,18 +638,7 @@
     <script src="/resources/jsDashboard/app.js"></script>
     <script src="/resources/jsDashboard/inventario.js"></script>
     <!-- -->
-    <script >
-      const results = JSON.parse(document.querySelector("body").dataset.results);
-      for (const result of results){
-          const li = document.createElement("li");
-          li.innerHTML = `
-          
-          <h1> nombre Producto: ${result.nombreProducto} </h1>
-
-          `;
-          document.getElementById('buscarConsultaPro').appendChild(li)
-      }
-  </script>
+    
     <script src="../public/jsDashboard/app.js"></script>
     <!-- <script src="../public/jsDashboard/logistica.js"></script>
     <script src="../public/jsDashboard/inventario.js"></script>

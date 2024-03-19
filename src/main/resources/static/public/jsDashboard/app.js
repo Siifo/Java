@@ -24,13 +24,26 @@ const mostrarDashboard = document.getElementById("mostrarDashboard");
 
 const hideDashboard = document.getElementById("dashboard") //oculatar dashboard
 
+//-------------------------- sidebar-modulos -------------\\
+//logistica
+const registrarEvento = document.getElementById("registrarEvento")
+const consultarEvento = document.getElementById("consultarEvento")
+const listaEvento = document.getElementById("listaEvento")
 
+const registarEmpleado = document.getElementById("registarEmpleado")
+const consultarEmpleado = document.getElementById("consultarEmpleado")
 
+const generarReporteLogistica = document.getElementById("generarReporteLogistica")
+
+//inventario
+const registrarProducto = document.getElementById("registrarProducto")
+const registrarProveedor = document.getElementById("registrarProveedor")
+
+//ventas
 
 //-------------------------- Inventario -------------\\
 
-const registrarProducto = document.getElementById("registrarProducto")
-const registrarProveedor = document.getElementById("registrarProveedor")
+
 
 const agregarProducto = document.getElementById("agregarProducto");
 const agregarProveedor = document.getElementById("agregarProveedor");
