@@ -703,6 +703,37 @@
         </div>
       </div>
 
+      <!-- Consultar empleado -->
+      <div class="container mt-5 pt-5" style="display: none;" id="formularioConsultarEmpleado">
+        <div class="row">
+          <div class="col-12 col-sm-7 col-md-6 m-auto">
+            <div class="card border-0 shadow">
+              <div class="card-body">
+                <form action="">
+                  <h2 class="text-center mb-5">Consultar Empleado</h2>
+                  <!--Registrar activo-->
+                  <label for="numIdEmpleado">Num identificación Empleado</label>
+                  <input type="number" name="numIdEmpleado" id="numIdEmpleado" class="form-control my-4 py-2" placeholder="1004567890" required/>
+                  <div class="text-center mt-3">
+                    <input class="btn btn-primary justify-content-center align-content-center" type="submit" value="Buscar" />
+                  </div>
+                  <br />
+                  <br />
+                  <div class="d-flex justify-content-around">
+                    <button class="btn btn-primary" id="modificarProducto">
+                      <a href="#" class="text-white">Actualizar datos empleado</a>
+                    </button>
+                    <button class="btn btn-primary" id="eliminarProducto">
+                      <a href="#" class="text-white">Eliminar Empleado</a>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!----------------------------------------------------------------------------------- inventario --------------------------------------------------------->
 
       <!-- Registro productos -->
