@@ -657,17 +657,17 @@
           <div class="col-12 col-sm-7 col-md-6 m-auto">
             <div class="card border-0 shadow">
               <div class="card-body">
-                <form th:action="@{/registerEmpleado}" th:object="${empleado}" th:method="POST">
+                <form th:action="@{/registerUsuario}" th:object="${usuario}" th:method="POST">
                   <h2 class="text-center mb-5">Registrar Empleado</h2>
                   
                   <label for="identificacion">Tipo de identificación:</label>
-                  <select name="identificacion" id="identificacion" th:field="*{tipoIdentificacion}" class="form-control my-4 py-2" required>
-                  <option th:value="C.C" th:text="C.C"></option>
-                  <option th:value="T.I" th:text="T.I"></option>
+                  <select th:field="*{tipoIdentificacion}" name="identificacion" id="identificacion" class="form-control my-4 py-2" required>
+                  <option value="C.C">C.C</option>
+                  <option value="T.I">T.I</option>
                   </select>
       
                   <label for="numIdentificacion">Numero de identificación</label>
-                  <input th:field="numeroIdentificacion" type="number" name="numIdentificacion" id="numIdentificacion" class="form-control my-4 py-2" placeholder="1001456789" maxlength="10" min="10" required/>
+                  <input th:field="*{numeroIdentificacion}" type="text" name="numIdentificacion" id="numIdentificacion" class="form-control my-4 py-2" placeholder="1001456789" maxlength="10" min="10" required/>
       
                   <label for="nombres">Nombres: </label>
                   <input th:field="*{nombreUsuario}" type="text" max="45" id="nombres" class="form-control my-4 py-2"  placeholder="Gustavo Adrian" required>
@@ -684,11 +684,11 @@
                   <label for="contraseña">Contraseña: </label>
                   <input th:field="*{contraseñaUsuario}" type="text" id="contraseña" class="form-control my-4 py-2" placeholder="constraseña1234*" required>
       
-                  <label for="tipoRol">Tipo de rol:</label>
-                  <select th:field="*{rol}" name="rol" id="tipoRol" class="form-control my-4 py-2" required>
-                  <option th:value="1" th:text="Administrador"></option>
-                  <option th:value="2" th:text="Coordinador"></option>
-                  <option th:value="3" th:text="Empleado"></option>
+                  <label for="tipoRol">Tipo de identificación:</label>
+                  <select th:field="*{rol.idRol}" name="rol" id="tipoRol" class="form-control my-4 py-2" required>
+                  <option th:value="1" th:text="Administrador">Administrador</option>
+                  <option th:value="1" th:text="Coordinador">Coordinador</option>
+                  <option th:value="2" th:text="Empleado">Empleado</option>
                   </select>
       
                   <div class="text-center mt-3">
@@ -740,7 +740,7 @@
           <div class="col-12 col-sm-7 col-md-6 m-auto">
             <div class="card border-0 shadow">
               <div class="card-body">
-                <form th:action="@{/register}" th:object="${producto}"  th:method="POST">
+                <form th:action="@{/registerProducto}" th:object="${producto}"  th:method="POST">
                   <h2 class="text-center mb-5">Registrar Producto</h2>
                   <label for="nombreProducto">Nombre de tu producto</label>
                   <input type="text" th:field="*{nombreProductos}" name="nombreProducto" id="nombreProducto" class="form-control my-4 py-2" placeholder="Reflectores" required/>
@@ -805,7 +805,7 @@
           <div class="col-12 col-sm-7 col-md-6 m-auto">
             <div class="card border-0 shadow">
               <div class="card-body">
-                <form th:action="@{/save}" th:object="${proveedor}" th:method="POST">
+                <form th:action="@{/registerProveedor}" th:object="${proveedor}" th:method="POST">
                   <h2 class="text-center mb-5">Registrar Proovedor</h2>
                   <label for="ciudad">Nombre de tu ciudad</label>
                   <input type="text" name="ciudad" th:field="*{ciudad}" id="ciudad" class="form-control my-4 py-2" placeholder="bogota" required/>

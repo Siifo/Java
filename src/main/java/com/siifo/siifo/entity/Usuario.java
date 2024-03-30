@@ -21,16 +21,17 @@ public class Usuario {
     @Column(name = "tipoIdentificacion", nullable = true, columnDefinition = "ENUM('C.C','T.I', 'C.E', 'Pasaporte')")
     private String tipoIdentificacion;
 
-    @Column(name = "numeroIdentificacion", nullable = true, columnDefinition = "INT(10)")
-    private int numeroIdentificacion;
+    @Column(name = "numeroIdentificacion", nullable = true, columnDefinition = "VARCHAR(10)")
+    private String numeroIdentificacion;
 
     @Column(name = "nombreUsario", nullable = true, columnDefinition = "VARCHAR(45)")
     private String nombreUsuario;
+    
     @Column(name = "apellidoUsuario", nullable = true, columnDefinition = "VARCHAR(45)")
     private String apellidoUsuario;
 
-    @Column(name = "numeroUsuario", nullable = true, columnDefinition = "INT(15)")
-    private int numeroUsuario;
+    @Column(name = "numeroUsuario", nullable = true, columnDefinition = "VARCHAR(15)")
+    private String numeroUsuario;
 
     @Column(name = "correoUsuario", nullable = true, columnDefinition = "VARCHAR(200)")
     private String correoUsuario;

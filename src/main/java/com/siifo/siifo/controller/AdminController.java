@@ -10,13 +10,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.siifo.siifo.entity.Producto;
 import com.siifo.siifo.entity.Proveedor;
+import com.siifo.siifo.entity.Usuario;
 import com.siifo.siifo.service.ProductoService;
 import com.siifo.siifo.service.ProveedorService;
+import com.siifo.siifo.service.UsuarioService;
 
 
 
 @Controller
-public class InventarioController {
+public class AdminController {
+	//logistica
+	@Autowired
+	public UsuarioService serviceUsuario;
+
+	//inventario
     @Autowired
     public ProductoService serviceProducto;
 
@@ -25,19 +32,33 @@ public class InventarioController {
 
     @GetMapping("/admin")
 	public String admin(Model model) {
+		//logistica
+		model.addAttribute("usuario", new Usuario());
+
+		//inventario
         model.addAttribute("producto", new Producto());
 		model.addAttribute("proveedor", new Proveedor());
+
 
 		return "administrador";
 	}
 
-    @PostMapping("/register")
+	//logistica
+	@PostMapping("/registerUsuario")
+	public String registroUsuarios(@Validated Usuario usuario, Model model){
+		serviceUsuario.saveOrUpdate(usuario);
+		return "redirect:/admin";
+	}
+
+
+	//Inventario
+    @PostMapping("/registerProducto")
 	public String registroProducto(@Validated Producto producto,Model model) {
 		serviceProducto.saveOrUpdate(producto);
 		return "redirect:/admin";
 	}
 
-	@PostMapping("/save")
+	@PostMapping("/registerProveedor")
 	public String registroProveedor(@Validated Proveedor proveedor,Model model) {
 		serviceProoovedor.saveOrUpdate(proveedor);
 		return "redirect:/admin";
