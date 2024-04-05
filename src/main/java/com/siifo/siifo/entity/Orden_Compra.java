@@ -27,12 +27,8 @@ public class Orden_Compra {
     @Column(name = "estadoOrden", nullable = true, columnDefinition = "ENUM('Pagado', 'Vencido')")
     private String estadoOrden;
 
-    @ManyToOne
-    @JoinColumn(name="cliente_idCliente)")
-    private Cliente cliente;
-
     @OneToMany
-    @JoinColumn(name="pago_idPagos)")
+    @JoinColumn(name="pago_idPagos")
     private List<Pago> pago;
 
     @OneToOne

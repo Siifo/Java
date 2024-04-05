@@ -566,34 +566,49 @@
           <div class="col-12 col-sm-7 col-md-6 m-auto">
             <div class="card border-0 shadow">
               <div class="card-body">
-                <form action="">
+                <form action="registroEvento" method="post">
                   <h2 class="text-center mb-5">Registrar Evento</h2>
                   <!--Registrar activo-->
-                  <label for="codigoCliente">Codigo cliente</label>
-                  <input type="number" name="" id="codigoCliente" class="form-control my-4 py-2" placeholder="132141" required />
-      
+                  <label for="nombreCliente">Nombre y apellidos del cliente</label>
+                  <input type="text" name="nombreCliente" id="nombreCliente" class="form-control my-4 py-2" placeholder="Alejo" required />
+                  
+                  <label for="cedulaCliente">Cedula</label>
+                  <input type="number" name="cedulaCliente" id="cedulaCliente" class="form-control my-4 py-2" placeholder="3424234" required />
+                  
                   <label for="direccionEvento">Dirección del evento</label>
                   <input type="text" name="direccionEvento" id="direccionEvento" class="form-control my-4 py-2" placeholder="La casa de Miguel Rozo" required/>
-      
-                  <label for="tipoEvento">Tipo de Evento: </label>
-                  <select id="tipoEvento" name="evento" required>
-                    <option value="Seleciona">seleciona</option>
-                    <option value="boda">Bodas</option>
-                    <option value="fiesta">Fiestas</option>
-                    <option value="conferencia">Conferencias</option>
-                    <option value="otro"></option>
+                  
+                  <label for="aforoEvento">Aforo del evento</label>
+                  <input type="number" name="aforoEvento" id="aforoEvento" class="form-control my-4 py-2" required/>
+
+                  <label for="fecha">Fecha del evento</label>
+                  <input type="date" name="fechaMovimiento" id="fechaMovimiento" class="form-control my-4 py-2" required/>
+
+                  <label for="observacion">Observaciones</label>
+                  <input type="text" name="observacion" id="observacion" class="form-control my-4 py-2" placeholder="ingrese la hora del evento" required/>
+                  
+                  <label for="valorEvento">Valor del evento</label>
+                  <input type="number" name="valorEvento" id="valorEvento" class="form-control my-4 py-2" required/>
+
+                  <!-- <label for="">Empleados: </label>
+                  <select th:field="*{detalleEvento.usuarios_idUsuarios}" name="usuarios_idUsuarios" required>
+                    <option th:each="usuarios : ${usuario}" th:value="usuarios.idUsuario" th:text="usuarios.nombreUsuario"></option>
                   </select>
+                  
+                  <label for="evento">Evento:</label>
+                  <select th:field="*{detalleEvento.evento_id_evento}" name="evento_id_evento" required>
+                    <option th:each="eventos : ${evento}" th:value="eventos.idEvento" th:text="eventos.nombreEvento"></option>
+                    
+                  </select> -->
+
                   <label for="tipoPaquete">Paquete:</label>
-                  <select id="tipoPaquete" name="evento" required>
+                  <select id="paqueteEvento" name="paqueteEvento" required>
                     <option value="">Seleccione...</option>
-                    <option value="boda">Paquete1</option>
-                    <option value="fiesta">Paquete2</option>
-                    <option value="conferencia">Paquete3</option>
-                    <option value="otro">Paquete4</option>
+                    <option value="Orange">Orange</option>
+                    <option value="Blue">Blue</option>
+                    <option value="Platinum">Platinum</option>
                   </select>
-                  <br>
-                  <br>
-                  <label>Empleados:</label>
+                  <!-- <label>Empleados:</label>
                   <div id="contenedorCampos">
                     <input list="empleado" class="form-control my-4 py-2" id="agregarEmpleados" placeholder="agrega al empleado 1" required>
                     <datalist id="empleado" name="empleado" required>
@@ -602,16 +617,13 @@
                       <option>Pedro Alexander Castañeda</option>
                       <option>Miguel Angel amorso</option>
                       <option>Pablo Andrés Ardila Machetá</option>
-                    </datalist> 
-                  </div>
-                  <button type="button" id="agregarEmpleado" class="btn btn-info">+</button>
+                  </datalist>  
+                  </div>-->
+                  <!-- <button type="button" id="agregarEmpleado" class="btn btn-info">+</button>
                   <button type="button" id="descartarEmpleado" class="btn btn-danger">-</button>
-                  <br>
-                  <br>            
-                  <label for="fecha">Fecha del evento</label>
-                  <input type="date" name="fecha" id="fecha" class="form-control my-4 py-2" required/>
-                  <label for="hora">Hora del Evento:</label>
-                  <input type="time" id="hora" name="hora" class="form-control my-4 py-2" required>
+                  <br> -->
+                  <!-- <label for="hora">Hora del Evento:</label>
+                  <input type="time" id="hora" name="hora" class="form-control my-4 py-2" required> -->
                   <div class="text-center mt-3">
                   <input class="btn btn-primary" type="submit" value="Registrar">
                   </div>
@@ -634,7 +646,7 @@
                   <label for="idEvento">ID Evento</label>
                   <input type="text" name="idEvento" id="idEvento" class="form-control my-4 py-2" placeholder="20" required/>
                   <div class="text-center mt-3">
-                    <input class="btn btn-primary justify-content-center align-content-center" type="submit" value="Buscar" />
+                    <a class="btn btn-primary justify-content-center align-content-center" onclick="guardarValor()" id="buscarEvento">Buscar</a>
                   </div>
                   <br>
                   <br>
@@ -650,6 +662,49 @@
           </div>
         </div>
       </div>
+      <!-- post consulta evento -->
+      <div class="container mt-5 pt-5" style="display: none;" id="formConsultaEvento">
+        <div class="row">
+          <div class="col-12 col-sm-7 col-md-6 m-auto">
+            <div class="card border-0 shadow">
+              <div class="card-body">
+                <form action="editDetalleEvento" th:object="${detalleEvento}" method="post">
+
+                  <label for="idEvento">Evento numero</label>
+                  <input type="number" name="idDetalleEvento" id="idDetalleEvento" class="form-control my-4 py-2" th:field="${detalleEvento.idDetalleEvento}" readonly/>
+                   
+                  <label for="nombreCliente">Nombre del cliente</label>
+                  <input type="text" name="nombreCliente" id="nombreCliente" class="form-control my-4 py-2" th:field="${detalleEvento.nombreCliente}"/>
+                  
+                  <label for="cedulaCliente">Cedula del cliente</label>
+                  <input type="number" name="cedulaCliente" id="cedulaCliente" class="form-control my-4 py-2" th:field="${detalleEvento.cedulaCliente}"/>
+                  
+                  <label for="paqueteEvento">Paquete del evento</label>
+                  <input type="text" name="paqueteEvento" id="paqueteEvento" class="form-control my-4 py-2" th:field="${detalleEvento.paqueteEvento}"/>
+                  
+                  <label for="direccionEvento">Direccion destino</label>
+                  <input type="text" name="direccionEvento" id="direccionEvento" class="form-control my-4 py-2" th:field="${detalleEvento.direccionEvento}"/>
+  
+                  <label for="fechaMovimiento">Fecha del Evento</label>
+                  <input type="date" name="fechaMovimiento" id="fechaMovimiento" class="form-control my-4 py-2" th:field="${detalleEvento.fechaMovimiento}"/>
+                  
+                  <label for="aforoEvento">Aforo de personas</label>
+                  <input type="number" name="aforoEvento" id="aforoEvento" class="form-control my-4 py-2" th:field="${detalleEvento.aforoEvento}"/>
+                  
+                  <label for="valorEvento">Valor que pagas</label>
+                  <input type="number" name="valorEvento" id="valorEvento" class="form-control my-4 py-2" th:field="${detalleEvento.valorEvento}"/>
+                  
+                  <label for="observacion">Observaciones</label>
+                  <input type="text" name="observacion" id="observacion" class="form-control my-4 py-2" th:field="${detalleEvento.observacion}"/>
+                  
+                  <button type="submit" class="btn btn-primary">Subir Cambios</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
 
       <!-- Registrar empleado -->
       <div class="container mt-5 pt-5" style="display: none;" id="agregarFormEmpleado">

@@ -14,8 +14,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.siifo.siifo.entity.Detalle_evento;
+import com.siifo.siifo.entity.Evento;
 import com.siifo.siifo.entity.Producto;
 import com.siifo.siifo.entity.Proveedor;
+import com.siifo.siifo.entity.Rol;
+import com.siifo.siifo.entity.Usuario;
+import com.siifo.siifo.service.DetalleEventoService;
 import com.siifo.siifo.service.ProductoService;
 import com.siifo.siifo.service.ProveedorService;
 
@@ -24,20 +29,31 @@ import jakarta.servlet.http.HttpServletRequest;
 
 
 @Controller
-public class InventarioController {
+public class SiifoController {
+	//inventario
     @Autowired
     public ProductoService serviceProducto;
 
 	@Autowired
     public ProveedorService serviceProoovedor;
 
+	//logistica
+	@Autowired
+	public DetalleEventoService serviceDetalleEvento;
+	
+	//dashboard
     @GetMapping("/admin")
 	public String admin(Model model) {
         model.addAttribute("producto", new Producto());
 		model.addAttribute("proveedor", new Proveedor());
+		model.addAttribute("usuario", new Usuario());
+		model.addAttribute("rol", new Rol());
+		model.addAttribute("detalleEvento", new Detalle_evento());
+		model.addAttribute("evento", new Evento());
 
 		return "administrador";
 	}
+	//--------------------------------------------inventario---------------------------------------
 	//registros
     @PostMapping("/register")
 	public String registroProducto(@Validated Producto producto,Model model) {
@@ -98,5 +114,22 @@ public class InventarioController {
         System.out.println("se elimino el id: " + idProductos);
         return "redirect:/admin";
     }
+
+	//--------------------------------------------logistica---------------------------------------
+	//guardar
+	@PostMapping("/registroEvento")
+	public String registroDetalleEvento(@Validated Detalle_evento detallevento,Model model){
+		serviceDetalleEvento.saveOrUpdate(detallevento);
+		System.out.println("aaa"+detallevento.toString());
+		return "redirect:/admin";
+	}
+	//editar
+	@PostMapping("/editDetalleEvento")
+	public String editarEvento(@ModelAttribute("detalleEvento") Detalle_evento detalleEvento, Model model){
+		model.addAttribute("detalleEvento", new Detalle_evento());
+		serviceDetalleEvento.saveOrUpdate(detalleEvento);
+		System.out.println("Se actulizo correctamnete el id: "+detalleEvento.getIdDetalleEvento().toString());
+		return "redirect:/admin";
+	}
 
 }

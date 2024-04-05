@@ -55,8 +55,9 @@ const consultarOC = document.getElementById("consultarOC")
 const agregarEvento = document.getElementById("agregarEvento")
 const formularioConsultarVenta = document.getElementById("formularioConsultarVenta")
 const agregarFormEmpleado = document.getElementById("agregarFormEmpleado")
-const formularioConsultarEmpleado = document.getElementById("formularioConsultarEmpleado")
-
+const formularioConsultarEmpleado = document.getElementById("formularioConsultarEmpleado");
+const formConsultaEvento = document.getElementById("formConsultaEvento");
+const buscarEvento = document.getElementById("buscarEvento");
 //Registrar evento
 registrarEvento.addEventListener("click", function(){
   hideDashboard.style.display = "none";
@@ -73,6 +74,7 @@ registrarEvento.addEventListener("click", function(){
   agregarFormEmpleado.style.display = "none";
   formularioConsultarEmpleado.style.display = "none";
   consultaAsync.style.display= "none";
+  formConsultaEvento.style.display='none';
 
   agregarEvento.style.display = "block";
 
@@ -129,10 +131,64 @@ consultarEvento.addEventListener("click", function() {
   agregarFormEmpleado.style.display = "none";
   formularioConsultarEmpleado.style.display = "none";
   consultaAsync.style.display= "none";
+  formConsultaEvento.style.display='none';
 
   formularioConsultarVenta.style.display = "block";
 })
+//formulario post consulta
+function guardarValor(){
+  const valor= document.getElementById("idEvento").value;
+  return valor;
+};
 
+buscarEvento.addEventListener("click", function(){
+  const id = guardarValor();
+  //falta leer el id del formulario actual
+  let url=`http://localhost:8081/siifo/logistica/evento/${id}`;
+  //Esta funcion nos permitira obtener los datos que necesitamos
+  function requestInventario(url){
+    return new Promise((resolve, reject)=>{
+      //aqui manejamos cualquier error en la url
+      fetch(url)
+      .then(response =>{ //promise chain
+        if(!response.ok){
+          throw new Error('error en la url')
+        }
+        return response.json();
+      })
+      //devolvemos datos
+      .then(data => {
+        resolve(data);
+      })
+      //devolvemos error
+      .catch(error=>{
+        reject(error);
+      });
+    });
+  }
+  //solicitamos los datos
+  requestInventario(url)
+    //resolve
+    .then(data=>{
+      console.log('Respuesta', data);
+      formConsultaEvento.style.display= "block";
+      //mostrar datos
+      document.getElementById("idDetalleEvento").value = data.idDetalleEvento;
+      document.getElementById("nombreCliente").value = data.nombreCliente;
+      document.getElementById("cedulaCliente").value = data.cedulaCliente;
+      document.getElementById("paqueteEvento").value = data.paqueteEvento;
+      document.getElementById("direccionEvento").value = data.direccionEvento;
+      document.getElementById("fechaMovimiento").value = data.fechaMovimiento;
+      document.getElementById("aforoEvento").value = data.aforoEvento;
+      document.getElementById("valorEvento").value = data.valorEvento;
+      document.getElementById("observacion").value = data.observacion;
+    
+    })
+    //reject
+    .catch(error=>{
+      console.log('Error', error);
+    });
+})
 //Registrar empleado
 registarEmpleado.addEventListener("click", function(){
   hideDashboard.style.display = "none"
@@ -148,6 +204,7 @@ registarEmpleado.addEventListener("click", function(){
   formularioConsultarVenta.style.display = "none";
   formularioConsultarEmpleado.style.display = "none";
   consultaAsync.style.display= "none";
+  formConsultaEvento.style.display='none';
   
   agregarFormEmpleado.style.display = "block"
 })
@@ -167,6 +224,7 @@ consultarEmpleado.addEventListener("click", function(){
   formularioConsultarVenta.style.display = "none";
   agregarFormEmpleado.style.display = "none";
   consultaAsync.style.display= "none";
+  formConsultaEvento.style.display='none';
 
   formularioConsultarEmpleado.style.display = "block";
 })
@@ -194,6 +252,7 @@ registrarProducto.addEventListener("click", function(){
   agregarFormEmpleado.style.display = "none";
   formularioConsultarEmpleado.style.display = "none";
   consultaAsync.style.display= "none";
+  formConsultaEvento.style.display='none';
   
   agregarProducto.style.display = "block";
 })
@@ -215,6 +274,7 @@ consultarProducto.addEventListener("click", function(){
   formularioConsultarEmpleado.style.display = "none";
   formularioConsultarProducto.style.display = "block";
   consultaAsync.style.display= "none";
+  formConsultaEvento.style.display='none';
 })
 //obtener valor del input
 function guardarInput(){
@@ -288,6 +348,7 @@ registrarProveedor.addEventListener("click", function(){
   agregarFormEmpleado.style.display = "none";
   formularioConsultarEmpleado.style.display = "none";
   consultaAsync.style.display= "none";
+  formConsultaEvento.style.display='none';
   
   agregarProveedor.style.display = "block";
 })
@@ -306,6 +367,7 @@ consultarProveedor.addEventListener("click", function(){
   agregarFormEmpleado.style.display = "none";
   formularioConsultarEmpleado.style.display = "none";
   consultaAsync.style.display= "none";
+  formConsultaEvento.style.display='none';
 
   formularioConsultarProveedor.style.display = "block";  
 })
@@ -333,6 +395,7 @@ registrarOV.addEventListener("click", function(){
   agregarFormEmpleado.style.display = "none";
   formularioConsultarEmpleado.style.display = "none";
   consultaAsync.style.display= "none";
+  formConsultaEvento.style.display='none';
 
   agregarOrdenVenta.style.display = "block";
 })
@@ -352,6 +415,7 @@ consultarOV.addEventListener("click", function(){
   agregarFormEmpleado.style.display = "none";
   formularioConsultarEmpleado.style.display = "none";
   consultaAsync.style.display= "none";
+  formConsultaEvento.style.display='none';
 
   formularioConsultarOV.style.display = "block";
 })
@@ -371,6 +435,7 @@ registrarOC.addEventListener("click", function(){
   agregarFormEmpleado.style.display = "none";
   formularioConsultarEmpleado.style.display = "none";
   consultaAsync.style.display= "none";
+  formConsultaEvento.style.display='none';
 
   agregarRegistroCompra.style.display = "block";
 })
@@ -390,6 +455,7 @@ consultarOC.addEventListener("click", function() {
   agregarFormEmpleado.style.display = "none";
   formularioConsultarEmpleado.style.display = "none";
   consultaAsync.style.display= "none";
+  formConsultaEvento.style.display='none';
 
   formularioConsultarOC.style.display = "block";
 })
@@ -411,6 +477,7 @@ mostrarDashboard.addEventListener("click", function mostrarFormulario() {
   agregarFormEmpleado.style.display = "none";
   formularioConsultarEmpleado.style.display = "none";
   consultaAsync.style.display= "none";
+  formConsultaEvento.style.display='none';
 })
 
 

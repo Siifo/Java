@@ -17,21 +17,18 @@ import lombok.Data;
 @Entity
 @Table(name = "detalleEvento")
 public class Detalle_evento {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idDetalleEvento;
 
     @ManyToOne
     @JoinColumn(name = "usuarios_idUsuarios")
-    private Usuario usario;
+    private Usuario usuario;
 
     @OneToOne
     @JoinColumn(name = "evento_idEvento")
     private Evento evento;
-
-    @ManyToOne
-    @JoinColumn(name = "cliente_idCliente")
-    private Cliente cliente;
 
     @Column(name = "fechaMovimiento", nullable = true)
     private Date fechaMovimiento;
@@ -45,10 +42,17 @@ public class Detalle_evento {
     @Column(name = "observacion", nullable = true, columnDefinition = "VARCHAR(200)")
     private String observacion;
 
+    @Column(name = "nombreCliente", nullable = true, columnDefinition = "VARCHAR(45)")
+    private String nombreCliente;
+
+    @Column(name = "cedulaCliente", nullable = true)
+    private int cedulaCliente;
+
     @Column(name = "paqueteEvento", nullable = true, columnDefinition = "ENUM('Orange', 'Blue', 'Platinum')")
     private String paqueteEvento;
 
     @Column(name = "direccionEvento", nullable = true, columnDefinition = "VARCHAR(200)")
     private String direccionEvento;
+
 }
 

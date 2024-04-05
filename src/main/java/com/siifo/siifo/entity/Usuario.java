@@ -24,8 +24,9 @@ public class Usuario {
     @Column(name = "numeroIdentificacion", nullable = true, columnDefinition = "INT(10)")
     private int numeroIdentificacion;
 
-    @Column(name = "nombreUsario", nullable = true, columnDefinition = "VARCHAR(45)")
+    @Column(name = "nombreUsuario", nullable = true, columnDefinition = "VARCHAR(45)")
     private String nombreUsuario;
+
     @Column(name = "apellidoUsuario", nullable = true, columnDefinition = "VARCHAR(45)")
     private String apellidoUsuario;
 
