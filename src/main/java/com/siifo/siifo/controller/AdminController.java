@@ -1,7 +1,7 @@
 package com.siifo.siifo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
@@ -86,6 +86,7 @@ public class AdminController {
 	}
 	
 
+
 	//logistica
 	@PostMapping("/registerUsuario")
 	public String registroUsuarios(@Validated Usuario usuario, Model model){
@@ -106,4 +107,15 @@ public class AdminController {
 		serviceProoovedor.saveOrUpdate(proveedor);
 		return "redirect:/admin";
 	}
+
+
+	//deslogueo
+	@GetMapping("/salir")
+	public String salir(){
+
+		autenticador.setUserAuth(false);
+		return "redirect:/";
+	}
+
+
 }
