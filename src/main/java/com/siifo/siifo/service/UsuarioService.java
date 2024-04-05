@@ -23,6 +23,10 @@ public class UsuarioService {
         return (Optional<Usuario>) usuarioRepository.findById(id);
     }
 
+    // public Optional<Usuario> getUsuario(String email) {
+    //     return (Optional<Usuario>) usuarioRepository
+    // }
+
     public int saveOrUpdate(Usuario u){
         int res =0;
         Usuario usuario = usuarioRepository.save(u); 

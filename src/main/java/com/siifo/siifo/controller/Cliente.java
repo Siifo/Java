@@ -30,11 +30,7 @@ public class Cliente {
 		return "index";
 	}
 
-	@RequestMapping("/login")
-	public String login() {
-		return "login";
-	}
-
+	
 	@RequestMapping("/contacto")
 	public String contacto() {
 		return "contacto";

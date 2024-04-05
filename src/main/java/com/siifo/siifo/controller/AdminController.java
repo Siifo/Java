@@ -6,11 +6,14 @@ import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 import com.siifo.siifo.entity.Producto;
 import com.siifo.siifo.entity.Proveedor;
 import com.siifo.siifo.entity.Usuario;
+import com.siifo.siifo.repository.UsuarioRepository;
+import com.siifo.siifo.service.AuthenticationService;
 import com.siifo.siifo.service.ProductoService;
 import com.siifo.siifo.service.ProveedorService;
 import com.siifo.siifo.service.UsuarioService;
@@ -19,6 +22,15 @@ import com.siifo.siifo.service.UsuarioService;
 
 @Controller
 public class AdminController {
+	//login
+	@Autowired
+	public AuthenticationService autenticador;
+
+	
+
+	@Autowired
+	public UsuarioRepository repositoryUsuario;
+
 	//logistica
 	@Autowired
 	public UsuarioService serviceUsuario;
@@ -30,6 +42,8 @@ public class AdminController {
 	@Autowired
     public ProveedorService serviceProoovedor;
 
+	
+
     @GetMapping("/admin")
 	public String admin(Model model) {
 		//logistica
@@ -40,8 +54,35 @@ public class AdminController {
 		model.addAttribute("proveedor", new Proveedor());
 
 
-		return "administrador";
+		if(autenticador.isUserAuthenticaded(false)){
+			return "administrador";
+			
+		} else {
+			return "redirect:/";
+		}
 	}
+
+	@GetMapping("/login")
+	public String login(Model model) {
+		model.addAttribute("usuario", new Usuario());
+		return "login";
+	}
+
+	@GetMapping("/validacionUser")
+	public String ingreso(@RequestParam String correoUsuario, @RequestParam String contraseñaUsuario, Model model){
+
+		if (correoUsuario != null && contraseñaUsuario != null ){
+			
+			Usuario usuario = repositoryUsuario.findByCorreo(correoUsuario, contraseñaUsuario);
+			
+			if(usuario != null) {
+				autenticador.isUserAuthenticaded(false); 
+				return "redirect:/admin";				
+			}
+		}
+		return "redirect:/login";
+	}
+	
 
 	//logistica
 	@PostMapping("/registerUsuario")

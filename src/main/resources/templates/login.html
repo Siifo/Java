@@ -30,15 +30,15 @@
       <i class="uil uil-times form_close"></i>
       <!-- Login From -->
       <div class="form login_form">
-        <form action="login" method="post">
+        <form th:action="@{/validacionUser}" th:object="${usuario}" th:method="GET">
           <h2>Iniciar sesion</h2>
 
           <div class="input_box">
-            <input type="email" placeholder="correo" name="correo" id="correo" required />
+            <input type="email" th:field="*{correoUsuario}" placeholder="correo" name="correo" id="correo" required />
             <i class="bi bi-envelope email"></i>
           </div>
           <div class="input_box">
-            <input type="password" placeholder="contraseña" name="pass" id="pass" required />
+            <input type="password" th:field="*{contraseñaUsuario}" placeholder="contraseña" name="pass" id="pass" required />
             <i class="bi bi-person-circle password"></i>
             <i class="bi bi-eye pw_hide"></i>
           </div>
