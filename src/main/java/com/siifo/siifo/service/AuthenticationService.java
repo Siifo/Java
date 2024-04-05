@@ -7,9 +7,16 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AuthenticationService {
-    public boolean isUserAuthenticaded(boolean t) {
 
-        return t;
+    private boolean isAuth = false;
+
+    public boolean isUserAuthenticaded() {
+
+        return isAuth;
+    }
+
+    public void setUserAuth(boolean isAuth) {
+        this.isAuth = isAuth;
     }
 
 }

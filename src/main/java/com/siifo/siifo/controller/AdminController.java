@@ -1,6 +1,7 @@
 package com.siifo.siifo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
@@ -26,6 +27,7 @@ public class AdminController {
 	@Autowired
 	public AuthenticationService autenticador;
 
+	
 	
 
 	@Autowired
@@ -54,7 +56,7 @@ public class AdminController {
 		model.addAttribute("proveedor", new Proveedor());
 
 
-		if(autenticador.isUserAuthenticaded(false)){
+		if(autenticador.isUserAuthenticaded()){
 			return "administrador";
 			
 		} else {
@@ -76,7 +78,7 @@ public class AdminController {
 			Usuario usuario = repositoryUsuario.findByCorreo(correoUsuario, contraseñaUsuario);
 			
 			if(usuario != null) {
-				autenticador.isUserAuthenticaded(false); 
+				autenticador.setUserAuth(true);				
 				return "redirect:/admin";				
 			}
 		}
