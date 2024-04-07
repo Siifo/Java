@@ -170,18 +170,31 @@ buscarEvento.addEventListener("click", function(){
   requestInventario(url)
     //resolve
     .then(data=>{
-      console.log('Respuesta', data);
+      for(const datas in data){
+        console.log(datas, data[datas]);
+      }
+      // console.log('Respuesta', data);
       formConsultaEvento.style.display= "block";
+      const myform = document.getElementById("formEditDetalleEvento");
+      myform.elements.idDetalleEvento.value= data.idDetalleEvento;
+      myform.elements.nombreCliente.value= data.nombreCliente;
+      myform.elements.cedulaCliente.value= data.cedulaCliente;
+      myform.elements.paqueteEvento.value= data.paqueteEvento;
+      myform.elements.direccionEvento.value=data.direccionEvento;
+      myform.elements.fechaMovimiento.value=data.fechaMovimiento;
+      myform.elements.aforoEvento.value= data.aforoEvento;
+      myform.elements.valorEvento.value= data.valorEvento;
+      myform.elements.observacion.value= data.observacion;
       //mostrar datos
-      document.getElementById("idDetalleEvento").value = data.idDetalleEvento;
-      document.getElementById("nombreCliente").value = data.nombreCliente;
-      document.getElementById("cedulaCliente").value = data.cedulaCliente;
-      document.getElementById("paqueteEvento").value = data.paqueteEvento;
-      document.getElementById("direccionEvento").value = data.direccionEvento;
-      document.getElementById("fechaMovimiento").value = data.fechaMovimiento;
-      document.getElementById("aforoEvento").value = data.aforoEvento;
-      document.getElementById("valorEvento").value = data.valorEvento;
-      document.getElementById("observacion").value = data.observacion;
+      // document.getElementById("idDetalleEvento").value = data.idDetalleEvento;
+      // document.getElementById("nombreCliente").value = data.nombreCliente;
+      // document.getElementById("cedulaCliente").value = data.cedulaCliente;
+      // document.getElementById("paqueteEvento").value = data.paqueteEvento;
+      // document.getElementById("direccionEvento").value = data.direccionEvento;
+      // document.getElementById("fechaMovimiento").value = data.fechaMovimiento;
+      // document.getElementById("fechaMovimiento, aforoEvento").value = data.aforoEvento;
+      // document.getElementById("fechaMovimiento, aforoEvento, valorEvento").value = data.valorEvento;
+      // document.getElementById("").value = data.observacion;
     
     })
     //reject
@@ -285,7 +298,6 @@ function guardarInput(){
 buscarProducto.addEventListener("click", function(){
   const id = guardarInput();
   console.log("hola prueba", id);
-  //falta leer el id del formulario actual
   let url=`http://localhost:8081/siifo/inventario/producto/${id}`;
   //Esta funcion nos permitira obtener los datos que necesitamos
   function requestInventario(url){
@@ -315,7 +327,7 @@ buscarProducto.addEventListener("click", function(){
       console.log('Respuesta', data);
       consultaAsync.style.display= "block";
       //mostrar datos
-      document.getElementById("idProductosFormAsync").value = data.idProductos;
+      document.getElementById("idProductosFormAsync").value = id;
       document.getElementById("nombreProductos").value = data.nombreProductos;
       document.getElementById("cantidad").value = data.cantidad;
       document.getElementById("precioCompra").value = data.precioCompra;

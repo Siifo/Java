@@ -116,7 +116,7 @@
               <div class="profile_name">Alexander</div>
               <div class="job">Cordinador</div>
             </div>
-            <a href="/">
+            <a th:href="@{/salir}">
               <i class="bx bx-log-out"></i>
             </a>
           </div>
@@ -135,7 +135,7 @@
           ><span class="ms-1 d-none d-sm-inline">Usuario</span>
         </button>
         <ul class="dropdown-menu" aria-labelledby="triggerId">
-          <li><a class="dropdown-item" href="#">Cerrar sesion</a></li>
+          <li><a class="dropdown-item" >Cerrar sesion</a></li>
           <li><a class="dropdown-item" href="#">Perfil</a></li>
         </ul>
       </div>
@@ -668,7 +668,7 @@
           <div class="col-12 col-sm-7 col-md-6 m-auto">
             <div class="card border-0 shadow">
               <div class="card-body">
-                <form action="editDetalleEvento" th:object="${detalleEvento}" method="post">
+                <form action="editDetalleEvento" th:object="${detalleEvento}" method="post" id="formEditDetalleEvento">
 
                   <label for="idEvento">Evento numero</label>
                   <input type="number" name="idDetalleEvento" id="idDetalleEvento" class="form-control my-4 py-2" th:field="${detalleEvento.idDetalleEvento}" readonly/>
@@ -683,7 +683,7 @@
                   <input type="text" name="paqueteEvento" id="paqueteEvento" class="form-control my-4 py-2" th:field="${detalleEvento.paqueteEvento}"/>
                   
                   <label for="direccionEvento">Direccion destino</label>
-                  <input type="text" name="direccionEvento" id="direccionEvento" class="form-control my-4 py-2" th:field="${detalleEvento.direccionEvento}"/>
+                  <input type="text" name="direccionEvento" id="direccionEvento" class="form-control my-4 py-2" th:field="${detalleEvento.direccionEvento}" th:text="${detalleEvento.direccionEvento}" readonly/>
   
                   <label for="fechaMovimiento">Fecha del Evento</label>
                   <input type="date" name="fechaMovimiento" id="fechaMovimiento" class="form-control my-4 py-2" th:field="${detalleEvento.fechaMovimiento}"/>
@@ -698,6 +698,7 @@
                   <input type="text" name="observacion" id="observacion" class="form-control my-4 py-2" th:field="${detalleEvento.observacion}"/>
                   
                   <button type="submit" class="btn btn-primary">Subir Cambios</button>
+                  <a th:href="@{/deleteEvento/{idDetalleEvento}(idDetalleEvento=${detalleEvento.idDetalleEvento})}" class="btn btn-danger">Eliminar</a>
                 </form>
               </div>
             </div>
@@ -772,8 +773,8 @@
                   <div class="text-center mt-3">
                     <input class="btn btn-primary justify-content-center align-content-center" type="submit" value="Buscar" />
                   </div>
-                  <br />
-                  <br />
+                  <br/>
+                  <br/>
                   <div class="d-flex justify-content-around">
                     <button class="btn btn-primary" id="modificarProducto">
                       <a href="#" class="text-white">Actualizar datos empleado</a>
@@ -879,7 +880,8 @@
                     
                     <div class="text-center mt-3">
                       <button type="submit" class="btn btn-primary">Subir Cambios</button>
-                      <a href="/deleteProducto" class="btn btn-danger">Eliminar</a>
+                      
+                      <a th:href="@{/deleteProducto}" class="btn btn-danger">Eliminar</a>
                       <!-- th:href="@{/deleteProducto}" -->
                     </div>
                   </form>

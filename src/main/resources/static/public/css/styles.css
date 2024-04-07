@@ -14,7 +14,8 @@ body{
     /* background-image: url(/public/img/background-opcion.jpg); */
     /* background-image: url(/public/img/b2original.jpg); */
     /* background-image: url(/public/img/plantilla-fondo-celebracion-confeti-cintas-colores_29865-3962.avif); */
-    background-image: url(../img/b4.png);
+    /* background-image: url(../img/b4.png); */
+    background-color:beige;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;

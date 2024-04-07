@@ -20,9 +20,12 @@ import com.siifo.siifo.entity.Producto;
 import com.siifo.siifo.entity.Proveedor;
 import com.siifo.siifo.entity.Rol;
 import com.siifo.siifo.entity.Usuario;
+import com.siifo.siifo.repository.UsuarioRepository;
+import com.siifo.siifo.service.AuthenticationService;
 import com.siifo.siifo.service.DetalleEventoService;
 import com.siifo.siifo.service.ProductoService;
 import com.siifo.siifo.service.ProveedorService;
+import com.siifo.siifo.service.UsuarioService;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -30,6 +33,21 @@ import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class SiifoController {
+
+	//login
+	@Autowired
+	public AuthenticationService autenticador;
+
+	
+	
+
+	@Autowired
+	public UsuarioRepository repositoryUsuario;
+
+	//logistica
+	@Autowired
+	public UsuarioService serviceUsuario;
+
 	//inventario
     @Autowired
     public ProductoService serviceProducto;
@@ -46,13 +64,51 @@ public class SiifoController {
 	public String admin(Model model) {
         model.addAttribute("producto", new Producto());
 		model.addAttribute("proveedor", new Proveedor());
-		model.addAttribute("usuario", new Usuario());
 		model.addAttribute("rol", new Rol());
 		model.addAttribute("detalleEvento", new Detalle_evento());
 		model.addAttribute("evento", new Evento());
 
-		return "administrador";
+		if(autenticador.isUserAuthenticaded()){
+			return "administrador";
+			
+		} else {
+			return "redirect:/";
+		}
+
 	}
+
+	//-------------------------------------------- Login ---------------------------------------
+
+	@GetMapping("/login")
+	public String login(Model model) {
+		model.addAttribute("usuario", new Usuario());
+		return "login";
+	}
+	
+	@GetMapping("/validacionUser")
+	public String ingreso(@RequestParam String correoUsuario, @RequestParam String contraseñaUsuario, Model model){
+
+		if (correoUsuario != null && contraseñaUsuario != null ){
+			
+			Usuario usuario = repositoryUsuario.findByCorreo(correoUsuario, contraseñaUsuario);
+			
+			if(usuario != null) {
+				autenticador.setUserAuth(true);
+				model.addAttribute("usuario", usuario);
+				return "redirect:/admin";				
+			}
+		}
+		return "redirect:/login";
+	}
+
+	//deslogueo
+	@GetMapping("/salir")
+	public String salir(){
+
+		autenticador.setUserAuth(false);
+		return "redirect:/";
+	}
+
 	//--------------------------------------------inventario---------------------------------------
 	//registros
     @PostMapping("/register")
@@ -107,10 +163,9 @@ public class SiifoController {
     }
 	// delete empleado
     @RequestMapping("/deleteProducto")
-    public String deletePro(HttpServletRequest request, Model model) {
-		String id = request.getParameter("idProductos");
-		Long idProductos = Long.parseLong(id);
-        serviceProducto.delete(idProductos);
+    public String deletePro(Model model) {
+        long idProductos = 1;
+		serviceProducto.delete(idProductos);
         System.out.println("se elimino el id: " + idProductos);
         return "redirect:/admin";
     }
@@ -131,5 +186,12 @@ public class SiifoController {
 		System.out.println("Se actulizo correctamnete el id: "+detalleEvento.getIdDetalleEvento().toString());
 		return "redirect:/admin";
 	}
+	@RequestMapping("/deleteEvento/{idDetalleEvento}")
+	public String deleteEvento(@PathVariable Long idDetalleEvento, Model model){
+		serviceProoovedor.delete(idDetalleEvento);
+		System.out.println("se elimino el id: " + idDetalleEvento);
+		return "redirect:/admin";
+	}
+
 
 }
