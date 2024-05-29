@@ -20,7 +20,7 @@ public class Proveedor {
     @Column(name = "ciudad", nullable = true, columnDefinition = "VARCHAR(45)")
     private String ciudad;
 
-    @Column(name = "nit", nullable = true, columnDefinition = "INT(10)")
+    @Column(name = "nit", nullable = true, columnDefinition = "INT(11)")
     private int nit;
 
     @Column(name = "nombreProveedor", nullable = true, columnDefinition = "VARCHAR(100)")

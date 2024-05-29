@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.siifo.siifo.entity.Detalle_evento;
 import com.siifo.siifo.entity.Evento;
+import com.siifo.siifo.entity.Lista_elementos_por_evento;
 import com.siifo.siifo.entity.Producto;
 import com.siifo.siifo.entity.Proveedor;
 import com.siifo.siifo.entity.Rol;
@@ -27,12 +28,8 @@ import com.siifo.siifo.service.ProductoService;
 import com.siifo.siifo.service.ProveedorService;
 import com.siifo.siifo.service.UsuarioService;
 
-import jakarta.servlet.http.HttpServletRequest;
-
-
-
 @Controller
-public class SiifoController {
+public class AdminController {
 
 	//login
 	@Autowired
@@ -67,6 +64,7 @@ public class SiifoController {
 		model.addAttribute("rol", new Rol());
 		model.addAttribute("detalleEvento", new Detalle_evento());
 		model.addAttribute("evento", new Evento());
+		model.addAttribute("listaElementosEvento", new Lista_elementos_por_evento());
 
 		if(autenticador.isUserAuthenticaded()){
 			return "administrador";

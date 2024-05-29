@@ -58,6 +58,7 @@ const agregarFormEmpleado = document.getElementById("agregarFormEmpleado")
 const formularioConsultarEmpleado = document.getElementById("formularioConsultarEmpleado");
 const formConsultaEvento = document.getElementById("formConsultaEvento");
 const buscarEvento = document.getElementById("buscarEvento");
+const agregarListaEvento = document.getElementById("agregarListaEvento");
 //Registrar evento
 registrarEvento.addEventListener("click", function(){
   hideDashboard.style.display = "none";
@@ -202,6 +203,28 @@ buscarEvento.addEventListener("click", function(){
       console.log('Error', error);
     });
 })
+
+//agregar lista de evento
+
+listaEvento.addEventListener("click", function(){
+  hideDashboard.style.display = "none";
+  agregarProveedor.style.display = "none";
+  agregarProducto.style.display = "none";
+  formularioConsultarProveedor.style.display = "none";
+  agregarOrdenVenta.style.display = "none";
+  formularioConsultarOV.style.display = "none";
+  agregarRegistroCompra.style.display = "none";
+  formularioConsultarOC.style.display = "none";
+  agregarEvento.style.display = "none";
+  formularioConsultarVenta.style.display = "none";
+  agregarFormEmpleado.style.display = "none";
+  formularioConsultarEmpleado.style.display = "none";
+  formularioConsultarProducto.style.display = "block";
+  consultaAsync.style.display= "none";
+  formConsultaEvento.style.display='none';
+  agregarListaEvento.style.display = "block";
+})
+
 //Registrar empleado
 registarEmpleado.addEventListener("click", function(){
   hideDashboard.style.display = "none"

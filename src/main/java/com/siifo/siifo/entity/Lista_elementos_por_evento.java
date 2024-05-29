@@ -24,8 +24,8 @@ public class Lista_elementos_por_evento {
     private Long idListaDeElementosPorEvento;
 
     @OneToMany
-    @JoinColumn(name = "productos_idProductos")
-    private List<Producto> producto;
+    @JoinColumn(name = "producto_idProductos")
+    private Producto producto;
 
     @OneToOne
     @JoinColumn(name = "detalleEvento_idDetalleEvento")

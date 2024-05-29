@@ -22,9 +22,9 @@ import lombok.Data;
 public class Orden_Compra {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idPagos;
+    private Long idOrdenCompra;
 
-    @Column(name = "estadoOrden", nullable = true, columnDefinition = "ENUM('Pagado', 'Vencido')")
+    @Column(name = "estadoOrden", nullable = true, columnDefinition = "ENUM('Pagado', 'Pendiente', 'Vencido')")
     private String estadoOrden;
 
     @OneToMany
@@ -32,6 +32,6 @@ public class Orden_Compra {
     private List<Pago> pago;
 
     @OneToOne
-    @JoinColumn(name="detalleEvento_idDetalleEvento)")
+    @JoinColumn(name="detalleEvento_idDetalleEvento")
     private Detalle_evento detalleEvento;
 }

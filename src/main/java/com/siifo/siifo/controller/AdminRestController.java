@@ -15,7 +15,7 @@ import com.siifo.siifo.service.ProductoService;
 
 @RestController
 @RequestMapping(path = "/siifo")
-public class SiifoRestController {
+public class AdminRestController {
     
     @Autowired
     ProductoService serviceProducto;

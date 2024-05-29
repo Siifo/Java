@@ -21,13 +21,13 @@ public class Encuesta_satisfaccion {
     private Long idEncuestaSatisfaccion;
 
     @Column(name = "fechaEncuesta", nullable = true)
-    private Date fechaMovimiento;
+    private Date fechaEncuesta;
 
     @Column(name = "calificacion", nullable = true)
     private int calificacion;
 
-    @Column(name = "comentario", nullable = true, columnDefinition = "ENUM('Orange', 'Blue', 'Platinum')")
-    private String paqueteEvento;
+    @Column(name = "comentario", nullable = true)
+    private String comentario;
 
     @OneToOne
     @JoinColumn(name = "detalle_idDetalleEvento")

@@ -21,14 +21,14 @@ public class Productos_por_proveedor {
     private Long idProductosPorProveedor;
 
     @ManyToOne
-    @JoinColumn(name = "prodcutos_idProdcutos")
+    @JoinColumn(name = "productos_idProdcutos")
     private Producto producto;
 
     @ManyToOne
     @JoinColumn(name = "proveedor_idProveedor")
     private Proveedor proveedor;
 
-    @Column(name = "fechaCompra", nullable = true)
+    @Column(name = "fechaEntrega", nullable = true)
     private Date fechaEntrega;
 
     @Column(name = "cantidad", nullable = true)

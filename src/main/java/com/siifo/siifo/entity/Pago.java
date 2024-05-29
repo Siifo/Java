@@ -20,9 +20,8 @@ public class Pago {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPagos;
 
-    @ManyToOne
-    @JoinColumn(name = "metodoDePagoPrincipal_idMetodoDePagoPrincipal")
-    private Metodo_de_pago metodoDePagoPrincipal;
+    @Column(name = "metodoDePago", nullable = true, columnDefinition = "ENUM('Efectivo', 'Medio_Mano')")
+    private String metodoDePago;
 
     @Column(name = "fechaPago", nullable = true)
     private Date fechaPago;
@@ -30,9 +29,6 @@ public class Pago {
     @ManyToOne
     @JoinColumn(name = "detalleEvento_idDetalleEvento")
     private Detalle_evento detalleEvento;
-
-    @Column(name = "numeroTarjeta", nullable = true, columnDefinition = "INT(11)")
-    private int numeroTarjeta;
 
     @Column(name = "valor", nullable = true, columnDefinition = ("FLOAT"))
     private double valor;

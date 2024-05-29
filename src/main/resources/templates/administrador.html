@@ -87,13 +87,10 @@
             <i class="bx bxs-chevron-down arrow esconder" id="display"></i>
           </div>
           <ul class="sub-menu">
-            <li><a class="link_name" href="#">Orden venta</a></li>
-            <li><a href="#" id="registrarOV">Registrar Orden de Venta</a></li>
-            <li><a href="#" id="consultarOV">Consultar Orden de Venta</a></li>
-
-            <li><a class="link_name" href="#">Orden Compra</a></li>
+            <li><a class="link_name" href="#">Ventas</a></li>
             <li><a href="#" id="registrarOC">Registrar Orden de Compra</a></li>
             <li><a href="#" id="consultarOC">Consultar Orden de Compra</a></li>
+            <li><a href="#" id="consultarOV">Consultar Orden de Venta</a></li>
           </ul>
         </li>
         <!-- clientes -->
@@ -706,6 +703,39 @@
         </div>
       </div>
 
+      <!-- Agregar lista de evento -->
+      <div class="container mt-5 pt-5" style="display: none;" id="agregarListaEvento">
+        <div class="row">
+          <div class="col-12 col-sm-7 col-md-6 m-auto">
+            <div class="card border-0 shadow">
+              <div class="card-body">
+                <form action="agregarListaEvento" method="Post">
+                  <h2 class="text-center mb-5">Elementos por evento</h2>
+                  <!--Registrar activo-->
+                  <!-- llave fornaea detalleEvento -->
+                  <label for="">Evento seleccionado:</label>
+                  <input type="text" name="idEvento" id="idEvento" class="form-control my-4 py-2" placeholder="20" required/>
+                  
+                  <!-- llave foranea productos -->
+                  <label for="">Productos a llevar:</label>
+                  
+                  <!-- Cantidad -->
+                  <label for="">Cantidad:</label>
+                  <input type="text" name="idEvento" id="idEvento" class="form-control my-4 py-2" placeholder="20" required/>
+                  
+                  <!-- Empleado a cargo -->
+                  <label for="">Empleado a cargo:</label>
+                  <input type="text" name="idEvento" id="idEvento" class="form-control my-4 py-2" placeholder="20" required/>
+                  
+                  
+                  <div class="text-center mt-3">
+                    <a class="btn btn-primary justify-content-center align-content-center" type="submit" id="agregarListaE">Agregar</a>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <!-- Registrar empleado -->
       <div class="container mt-5 pt-5" style="display: none;" id="agregarFormEmpleado">
@@ -745,8 +775,9 @@
       
                   <label for="tipoRol">Tipo de identificación:</label>
                   <select name="rol" id="tipoRol" class="form-control my-4 py-2" required>
-                  <option value="C.C">Administrador</option>
-                  <option value="T.I">Empleado</option>
+                  <option value="1">Administrador</option>
+                  <option value="2">Cordinador</option>
+                  <option value="3">Empleado</option>
                   </select>
       
                   <div class="text-center mt-3">
