@@ -711,11 +711,13 @@
               <div class="card-body">
                 <form action="agregarListaEvento" method="Post">
                   <h2 class="text-center mb-5">Elementos por evento</h2>
-                  <!--Registrar activo-->
                   <!-- llave fornaea detalleEvento -->
-                  <label for="">Evento seleccionado:</label>
-                  <input type="text" name="idEvento" id="idEvento" class="form-control my-4 py-2" placeholder="20" required/>
                   
+                  <label for="">Evento seleccionado:</label>
+                  <select th:field="*{listaElementosEvento.detalleEvento_idDetalleEvento}" name="detalleEvento_idDetalleEvento">
+                    <option th:each="detalleEventos : ${detalleEvento}" th:value="${detalleEventos.idDetalleEvento}" th:text="${detalleEventos.nombreCliente}"></option>
+                  </select>
+
                   <!-- llave foranea productos -->
                   <label for="">Productos a llevar:</label>
                   
