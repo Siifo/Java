@@ -709,17 +709,25 @@
           <div class="col-12 col-sm-7 col-md-6 m-auto">
             <div class="card border-0 shadow">
               <div class="card-body">
-                <form action="agregarListaEvento" method="Post">
+                <form action="agregarListaEvento" th:object="${listaElementosEvento}" method="post">
                   <h2 class="text-center mb-5">Elementos por evento</h2>
                   <!-- llave fornaea detalleEvento -->
                   
-                  <label for="">Evento seleccionado:</label>
-                  <select th:field="*{listaElementosEvento.detalleEvento_idDetalleEvento}" name="detalleEvento_idDetalleEvento">
-                    <option th:each="detalleEventos : ${detalleEvento}" th:value="${detalleEventos.idDetalleEvento}" th:text="${detalleEventos.nombreCliente}"></option>
-                  </select>
+                  <!-- <label for="">Evento seleccionado:</label>
+                  <select th:field="*{listaElementosEvento.detalleEvento_idDetalleEvento}" name="detalleEvento_idDetalleEvento" id="detalleEvento_idDetalleEvento">
+                    <option th:each="item : ${detalleEventos}" th:value="${item.idDetalleEvento}" th:text="${item.nombreCliente}"></option>
+                  </select> -->
 
                   <!-- llave foranea productos -->
                   <label for="">Productos a llevar:</label>
+                  <select>
+                    <option value="1">Luces</option>
+                    <option value="3">Globos</option>
+                    <option value="2">Cabina</option>
+                    <option value="4">Confetti</option>
+                  </select>
+
+                  <input type="hidden" name="productosLista" id="productosLista">
                   
                   <!-- Cantidad -->
                   <label for="">Cantidad:</label>
@@ -727,8 +735,7 @@
                   
                   <!-- Empleado a cargo -->
                   <label for="">Empleado a cargo:</label>
-                  <input type="text" name="idEvento" id="idEvento" class="form-control my-4 py-2" placeholder="20" required/>
-                  
+                  <input type="number" name="usuarios_idUsuarios" id="usuarios_idUsuarios" class="form-control my-4 py-2" placeholder="20" required/>
                   
                   <div class="text-center mt-3">
                     <a class="btn btn-primary justify-content-center align-content-center" type="submit" id="agregarListaE">Agregar</a>
@@ -1105,7 +1112,10 @@
     <!-- modulos -->
     <script src="/resources/jsDashboard/app.js"></script>
     <script src="/resources/jsDashboard/inventario.js"></script>
-    <!-- -->
+    <!-- logistica agregar lista de productos en su campo predeteminado BD-->
+    <script>
+
+    </script>    
     
     <script src="../public/jsDashboard/app.js"></script>
     <!-- <script src="../public/jsDashboard/logistica.js"></script>

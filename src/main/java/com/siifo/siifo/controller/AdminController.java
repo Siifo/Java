@@ -1,5 +1,6 @@
 package com.siifo.siifo.controller;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import com.siifo.siifo.entity.Producto;
 import com.siifo.siifo.entity.Proveedor;
 import com.siifo.siifo.entity.Rol;
 import com.siifo.siifo.entity.Usuario;
+import com.siifo.siifo.repository.DetalleEventoRepository;
 import com.siifo.siifo.repository.UsuarioRepository;
 import com.siifo.siifo.service.AuthenticationService;
 import com.siifo.siifo.service.DetalleEventoService;
@@ -64,6 +66,10 @@ public class AdminController {
 		model.addAttribute("rol", new Rol());
 		model.addAttribute("detalleEvento", new Detalle_evento());
 		model.addAttribute("evento", new Evento());
+		//lista unica para la lista de elemtnos por E
+		List<Detalle_evento> detalleventos = serviceDetalleEvento.getDetalleEventoList();
+		model.addAttribute("detalleventos", detalleventos);
+	
 		model.addAttribute("listaElementosEvento", new Lista_elementos_por_evento());
 
 		if(autenticador.isUserAuthenticaded()){
@@ -173,7 +179,7 @@ public class AdminController {
 	@PostMapping("/registroEvento")
 	public String registroDetalleEvento(@Validated Detalle_evento detallevento,Model model){
 		serviceDetalleEvento.saveOrUpdate(detallevento);
-		System.out.println("aaa"+detallevento.toString());
+		System.out.println("Registro: "+detallevento.toString());
 		return "redirect:/admin";
 	}
 	//editar
@@ -181,7 +187,7 @@ public class AdminController {
 	public String editarEvento(@ModelAttribute("detalleEvento") Detalle_evento detalleEvento, Model model){
 		model.addAttribute("detalleEvento", new Detalle_evento());
 		serviceDetalleEvento.saveOrUpdate(detalleEvento);
-		System.out.println("Se actulizo correctamnete el id: "+detalleEvento.getIdDetalleEvento().toString());
+		System.out.println("Se actualizo correctamnete el id: "+detalleEvento.getIdDetalleEvento().toString());
 		return "redirect:/admin";
 	}
 	@RequestMapping("/deleteEvento/{idDetalleEvento}")

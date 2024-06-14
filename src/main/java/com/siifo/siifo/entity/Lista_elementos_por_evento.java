@@ -4,6 +4,8 @@ package com.siifo.siifo.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.databind.JsonNode;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,14 +27,14 @@ public class Lista_elementos_por_evento {
 
     @OneToMany
     @JoinColumn(name = "producto_idProductos")
-    private Producto producto;
+    private List<Producto> producto;
 
     @OneToOne
     @JoinColumn(name = "detalleEvento_idDetalleEvento")
     private Detalle_evento detalleEvento;
 
-    @Column(name = "cantidad", nullable = true)
-    private int cantidad;
+    @Column(name = "productosLista", nullable = true)
+    private String productosLista;
 
     @OneToOne
     @JoinColumn(name = "usuarios_idUsuarios")
