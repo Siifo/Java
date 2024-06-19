@@ -23,11 +23,14 @@ import com.siifo.siifo.entity.Proveedor;
 import com.siifo.siifo.entity.Rol;
 import com.siifo.siifo.entity.Usuario;
 import com.siifo.siifo.repository.DetalleEventoRepository;
+import com.siifo.siifo.repository.RolRepository;
 import com.siifo.siifo.repository.UsuarioRepository;
 import com.siifo.siifo.service.AuthenticationService;
 import com.siifo.siifo.service.DetalleEventoService;
+import com.siifo.siifo.service.ListaElementosService;
 import com.siifo.siifo.service.ProductoService;
 import com.siifo.siifo.service.ProveedorService;
+import com.siifo.siifo.service.RolService;
 import com.siifo.siifo.service.UsuarioService;
 
 @Controller
@@ -37,15 +40,21 @@ public class AdminController {
 	@Autowired
 	public AuthenticationService autenticador;
 
-	
-	
+	//logistica
+	@Autowired
+	public UsuarioService serviceUsuario;
 
 	@Autowired
 	public UsuarioRepository repositoryUsuario;
 
-	//logistica
 	@Autowired
-	public UsuarioService serviceUsuario;
+	public DetalleEventoService serviceDetalleEvento;
+
+	@Autowired
+	public ListaElementosService serviceListaElementos;
+
+	@Autowired
+	public RolService serviceRol;
 
 	//inventario
     @Autowired
@@ -54,23 +63,25 @@ public class AdminController {
 	@Autowired
     public ProveedorService serviceProoovedor;
 
-	//logistica
-	@Autowired
-	public DetalleEventoService serviceDetalleEvento;
 	
 	//dashboard
     @GetMapping("/admin")
-	public String admin(Model model) {
+	public String admin(ModelMap model) {
         model.addAttribute("producto", new Producto());
 		model.addAttribute("proveedor", new Proveedor());
 		model.addAttribute("rol", new Rol());
 		model.addAttribute("detalleEvento", new Detalle_evento());
 		model.addAttribute("evento", new Evento());
+		model.addAttribute("usuarios", new Usuario());
+
+		model.addAttribute("listaElementosEvento", new Lista_elementos_por_evento());
 		//lista unica para la lista de elemtnos por E
 		List<Detalle_evento> detalleventos = serviceDetalleEvento.getDetalleEventoList();
+		System.out.println("debio cargar detalle evento: "+detalleventos);
 		model.addAttribute("detalleventos", detalleventos);
-	
-		model.addAttribute("listaElementosEvento", new Lista_elementos_por_evento());
+		//Empleados
+		List<Rol> tipoRol = serviceRol.getRolList();
+		model.addAttribute("Rol", tipoRol);
 
 		if(autenticador.isUserAuthenticaded()){
 			return "administrador";
@@ -99,6 +110,7 @@ public class AdminController {
 			if(usuario != null) {
 				autenticador.setUserAuth(true);
 				model.addAttribute("usuario", usuario);
+
 				return "redirect:/admin";				
 			}
 		}
@@ -197,5 +209,19 @@ public class AdminController {
 		return "redirect:/admin";
 	}
 
+	//lista elementos por evento
+	@PostMapping("/agregarListaEvento")
+	public String agregarLista(@Validated Lista_elementos_por_evento lista, Model model){
+		serviceListaElementos.saveOrUpdate(lista);
+		System.out.println("Se agrego la lista: "+ lista);
+		return "redirect:/admin";
+	}
 
+	//registro empleado
+	@PostMapping("/registroEmpleado")
+	public String agregarEmleado(@Validated Usuario usuario, Model model){
+		serviceUsuario.saveOrUpdate(usuario);
+		System.out.println("Se agrego el usuario: "+usuario+"con rol: "+usuario.getRol());
+		return "redirect:/admin";
+	}
 }

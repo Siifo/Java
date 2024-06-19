@@ -15,11 +15,11 @@ public class UsuarioService {
     UsuarioRepository usuarioRepository;
 
 
-    public List<Usuario> getProductoList(){
+    public List<Usuario> getUsuarioList(){
         return (List<Usuario>) usuarioRepository.findAll();
     }
 
-    public Optional<Usuario> getProducto(Long id){
+    public Optional<Usuario> getUsuario(Long id){
         return (Optional<Usuario>) usuarioRepository.findById(id);
     }
 

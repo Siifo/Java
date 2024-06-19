@@ -30,8 +30,8 @@ public class Detalle_evento {
     @JoinColumn(name = "evento_idEvento")
     private Evento evento;
 
-    @Column(name = "fechaMovimiento", nullable = true)
-    private Date fechaMovimiento;
+    @Column(name = "fechaEvento", nullable = true)
+    private Date fechaEvento;
 
     @Column(name = "aforoEvento", nullable = true)
     private int aforoEvento;
