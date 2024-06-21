@@ -84,6 +84,7 @@ public class AdminController {
 		model.addAttribute("Rol", tipoRol);
 
 		if(autenticador.isUserAuthenticaded()){
+			autenticador.setUserAuthCoor(false);
 			return "administrador";
 			
 		} else {
@@ -93,29 +94,6 @@ public class AdminController {
 	}
 
 	//-------------------------------------------- Login ---------------------------------------
-
-	@GetMapping("/login")
-	public String login(Model model) {
-		model.addAttribute("usuario", new Usuario());
-		return "login";
-	}
-	
-	@GetMapping("/validacionUser")
-	public String ingreso(@RequestParam String correoUsuario, @RequestParam String contraseñaUsuario, Model model){
-
-		if (correoUsuario != null && contraseñaUsuario != null ){
-			
-			Usuario usuario = repositoryUsuario.findByCorreo(correoUsuario, contraseñaUsuario);
-			
-			if(usuario != null) {
-				autenticador.setUserAuth(true);
-				model.addAttribute("usuario", usuario);
-
-				return "redirect:/admin";				
-			}
-		}
-		return "redirect:/login";
-	}
 
 	//deslogueo
 	@GetMapping("/salir")

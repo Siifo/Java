@@ -15,7 +15,7 @@ import lombok.Data;
 public class Rol {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idRol;
+    private int idRol;
 
     @Column(name = "nombreRol", nullable = true, columnDefinition = "VARCHAR(45)")
     private String nombreRol;

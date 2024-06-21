@@ -19,4 +19,16 @@ public class AuthenticationService {
         this.isAuth = isAuth;
     }
 
+    
+    private boolean isAuthCoor = false;
+
+    public boolean isUserAuthenticadedCoor() {
+
+        return isAuthCoor;
+    }
+
+    public void setUserAuthCoor(boolean isAuthCoor) {
+        this.isAuthCoor = isAuthCoor;
+    }
+
 }
