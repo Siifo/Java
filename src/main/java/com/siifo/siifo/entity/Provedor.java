@@ -11,8 +11,8 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "proveedor")
-public class Proveedor {
+@Table(name = "provedor")
+public class Provedor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idProveedor;
@@ -23,6 +23,6 @@ public class Proveedor {
     @Column(name = "nit", nullable = true, columnDefinition = "INT(11)")
     private int nit;
 
-    @Column(name = "nombreProveedor", nullable = true, columnDefinition = "VARCHAR(100)")
-    private String nombreProveedor;
+    @Column(name = "nombreProvedor", nullable = true, columnDefinition = "VARCHAR(100)")
+    private String nombreProvedor;
 }

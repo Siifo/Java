@@ -1,8 +1,6 @@
 package com.siifo.siifo.controller;
 
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,20 +11,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.siifo.siifo.entity.Detalle_evento;
 import com.siifo.siifo.entity.Evento;
 import com.siifo.siifo.entity.Lista_elementos_por_evento;
 import com.siifo.siifo.entity.Producto;
-import com.siifo.siifo.entity.Proveedor;
+import com.siifo.siifo.entity.Provedor;
 import com.siifo.siifo.entity.Rol;
 import com.siifo.siifo.entity.Usuario;
-import com.siifo.siifo.repository.DetalleEventoRepository;
-import com.siifo.siifo.repository.RolRepository;
 import com.siifo.siifo.repository.UsuarioRepository;
 import com.siifo.siifo.service.AuthenticationService;
 import com.siifo.siifo.service.DetalleEventoService;
+import com.siifo.siifo.service.EventoService;
 import com.siifo.siifo.service.ListaElementosService;
 import com.siifo.siifo.service.ProductoService;
 import com.siifo.siifo.service.ProveedorService;
@@ -41,6 +37,10 @@ public class AdminController {
 	public AuthenticationService autenticador;
 
 	//logistica
+
+	@Autowired
+	public EventoService serviceEvento;
+
 	@Autowired
 	public UsuarioService serviceUsuario;
 
@@ -49,6 +49,7 @@ public class AdminController {
 
 	@Autowired
 	public DetalleEventoService serviceDetalleEvento;
+
 
 	@Autowired
 	public ListaElementosService serviceListaElementos;
@@ -67,17 +68,21 @@ public class AdminController {
 	//dashboard
     @GetMapping("/admin")
 	public String admin(ModelMap model) {
-        model.addAttribute("producto", new Producto());
-		model.addAttribute("proveedor", new Proveedor());
+        //invetario
+		model.addAttribute("producto", new Producto());
+		model.addAttribute("proveedor", new Provedor());
+		//Logistica
 		model.addAttribute("rol", new Rol());
 		model.addAttribute("detalleEvento", new Detalle_evento());
-		model.addAttribute("evento", new Evento());
-		model.addAttribute("usuarios", new Usuario());
+		List<Evento> evento = serviceEvento.getEventosList();
+		model.addAttribute("evento", evento);
+		List<Usuario> empleados = repositoryUsuario.findByClerk();
+		model.addAttribute("empleados", empleados);
 
+		model.addAttribute("usuarios", new Usuario());
 		model.addAttribute("listaElementosEvento", new Lista_elementos_por_evento());
 		//lista unica para la lista de elemtnos por E
 		List<Detalle_evento> detalleventos = serviceDetalleEvento.getDetalleEventoList();
-		System.out.println("debio cargar detalle evento: "+detalleventos);
 		model.addAttribute("detalleventos", detalleventos);
 		//Empleados
 		List<Rol> tipoRol = serviceRol.getRolList();
@@ -104,50 +109,14 @@ public class AdminController {
 	}
 
 	//--------------------------------------------inventario---------------------------------------
-	//registros
+	//registro producto 
     @PostMapping("/register")
 	public String registroProducto(@Validated Producto producto,Model model) {
 		serviceProducto.saveOrUpdate(producto);
 		return "redirect:/admin";
 	}
 
-	@PostMapping("/save")
-	public String registroProveedor(@Validated Proveedor proveedor,Model model) {
-		serviceProoovedor.saveOrUpdate(proveedor);
-		return "redirect:/admin";
-	}
-
-	//Consultas
-	// el proceso debe hacerse desde el rest controller solo para buscar los datos
-	// llenar los campos del formulario y mostrarlo mediante eventos en js
-		//async
-		//prueba
-	// @GetMapping("/buscar/{id}")
-	// public Integer cosnultaProAsync(@PathVariable Long id){
-	// 	CompletableFuture<Producto> productoA = serviceProducto.getProductoByIdAsync(id);
-	// 	while (id!=0) {
-	// 		Producto producto = productoA.join();
-	// 		System.out.println("debes ver esto: "+producto);
-	// 		return 1;
-	// 	}
-	// 	return 0;
-	// }
-		//proceso dinamico
-	// @GetMapping("/buscar")
-	// public String consultaAsyncProd(@RequestParam Long idProductos, Model model){
-	// 	CompletableFuture<Producto> producto = serviceProducto.getProductoByIdAsync(idProductos);
-	// 	if(idProductos!=0 && producto!=null){
-	// 		Producto productoA = producto.join();
-	// 		model.addAttribute("productoA", productoA);
-	// 		System.out.println("hola hola"+productoA);
-	// 		return "administrador";
-	// 	}else{
-	// 		System.out.println("Comprueba la existencia del id o revisa el proceso del service");
-	// 		return "redirect:/";
-	// 	}
-		
-	// }
-	 // guardar cambios
+	// guardar cambios
     @PostMapping("/editProducto")
     public String productoEdit(@ModelAttribute("producto") Producto producto, Model model) {
 		model.addAttribute("producto", new Producto());
@@ -155,7 +124,7 @@ public class AdminController {
         System.out.println("Se actualizo correctamente" + producto.getIdProductos().toString());
         return "redirect:/admin";
     }
-	// delete empleado
+	// delete producto
     @RequestMapping("/deleteProducto")
     public String deletePro(Model model) {
         long idProductos = 1;
@@ -163,16 +132,22 @@ public class AdminController {
         System.out.println("se elimino el id: " + idProductos);
         return "redirect:/admin";
     }
+	//provedor
+	@PostMapping("/save")
+	public String registroProveedor(@Validated Provedor proveedor,Model model) {
+		serviceProoovedor.saveOrUpdate(proveedor);
+		return "redirect:/admin";
+	}
 
 	//--------------------------------------------logistica---------------------------------------
-	//guardar
+	//guardar evento
 	@PostMapping("/registroEvento")
 	public String registroDetalleEvento(@Validated Detalle_evento detallevento,Model model){
 		serviceDetalleEvento.saveOrUpdate(detallevento);
 		System.out.println("Registro: "+detallevento.toString());
 		return "redirect:/admin";
 	}
-	//editar
+	//editar evento
 	@PostMapping("/editDetalleEvento")
 	public String editarEvento(@ModelAttribute("detalleEvento") Detalle_evento detalleEvento, Model model){
 		model.addAttribute("detalleEvento", new Detalle_evento());
@@ -180,12 +155,13 @@ public class AdminController {
 		System.out.println("Se actualizo correctamnete el id: "+detalleEvento.getIdDetalleEvento().toString());
 		return "redirect:/admin";
 	}
-	@RequestMapping("/deleteEvento/{idDetalleEvento}")
-	public String deleteEvento(@PathVariable Long idDetalleEvento, Model model){
-		serviceProoovedor.delete(idDetalleEvento);
-		System.out.println("se elimino el id: " + idDetalleEvento);
+
+	//eliminar evento
+	@RequestMapping("/logistica/deleteEvento/{num}")
+    public String deleteEvento(@PathVariable Long num, Model model){
+        serviceDetalleEvento.delete(num);
 		return "redirect:/admin";
-	}
+    }
 
 	//lista elementos por evento
 	@PostMapping("/agregarListaEvento")
@@ -200,6 +176,15 @@ public class AdminController {
 	public String agregarEmleado(@Validated Usuario usuario, Model model){
 		serviceUsuario.saveOrUpdate(usuario);
 		System.out.println("Se agrego el usuario: "+usuario+"con rol: "+usuario.getRol());
+		return "redirect:/admin";
+	}
+	
+	//edit empleado
+	@PostMapping("/editEmpleado")
+	public String editarEmpleado(@ModelAttribute("usuarios") Usuario usuarios, Model model){
+		model.addAttribute("usuarios", new Usuario());
+		serviceUsuario.saveOrUpdate(usuarios);
+		System.out.println("Se actualizo el usuario con CC"+usuarios.getNumeroIdentificacion());
 		return "redirect:/admin";
 	}
 }

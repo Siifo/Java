@@ -11,11 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.siifo.siifo.entity.Detalle_evento;
 import com.siifo.siifo.entity.Producto;
 import com.siifo.siifo.entity.Usuario;
+import com.siifo.siifo.repository.ProductoRepository;
 import com.siifo.siifo.repository.UsuarioRepository;
 import com.siifo.siifo.service.DetalleEventoService;
 import com.siifo.siifo.service.ProductoService;
-import org.springframework.web.bind.annotation.RequestParam;
-
 
 @RestController
 @RequestMapping(path = "/siifo")
@@ -30,7 +29,8 @@ public class AdminRestController {
     @Autowired
     UsuarioRepository repositoryUsuario;
 
-
+    @Autowired
+    ProductoRepository repositoryProducto;
 
     //consutla de producto  //  Inventario
     @GetMapping("/inventario/producto/{idProductos}")
@@ -38,6 +38,14 @@ public class AdminRestController {
         Optional<Producto> producto= serviceProducto.getProducto(idProductos);
         return producto;
     }
+
+    //consulta general de productos // Inventario
+    @GetMapping("/inventario/productos")
+    public Producto getProductosList(){
+        Producto productos = repositoryProducto.productosDisponibles();
+        return productos;
+    }
+
     //consulta detalleEvento  //  Logistica
     @GetMapping("/logistica/evento/{idEvento}")
     public Optional getDetalleEventobyId(@PathVariable Long idEvento){

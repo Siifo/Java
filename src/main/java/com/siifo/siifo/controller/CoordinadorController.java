@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 
 import com.siifo.siifo.entity.Producto;
-import com.siifo.siifo.entity.Proveedor;
+import com.siifo.siifo.entity.Provedor;
 import com.siifo.siifo.entity.Usuario;
 import com.siifo.siifo.repository.UsuarioRepository;
 import com.siifo.siifo.service.AuthenticationService;
@@ -50,7 +50,7 @@ public class CoordinadorController {
 
 		//inventario
         model.addAttribute("producto", new Producto());
-		model.addAttribute("proveedor", new Proveedor());
+		model.addAttribute("proveedor", new Provedor());
 
 
 		if(autenticador.isUserAuthenticadedCoor()){

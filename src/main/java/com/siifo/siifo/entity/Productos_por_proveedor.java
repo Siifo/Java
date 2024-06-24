@@ -26,7 +26,7 @@ public class Productos_por_proveedor {
 
     @ManyToOne
     @JoinColumn(name = "proveedor_idProveedor")
-    private Proveedor proveedor;
+    private Provedor provedor;
 
     @Column(name = "fechaEntrega", nullable = true)
     private Date fechaEntrega;

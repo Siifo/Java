@@ -3,10 +3,8 @@ package com.siifo.siifo.service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.CompletableFuture;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import com.siifo.siifo.repository.ProductoRepository;
 import com.siifo.siifo.entity.Producto;
@@ -21,10 +19,10 @@ public class ProductoService {
     }
 
     //cocnsulta asincrona para fomruarios dinamicos 
-    @Async
-    public CompletableFuture<Producto> getProductoByIdAsync(Long id){
-        return CompletableFuture.completedFuture(productoRepository.findById(id).orElse(null));
-    }
+    // @Async
+    // public CompletableFuture<Producto> getProductoByIdAsync(Long id){
+    //     return CompletableFuture.completedFuture(productoRepository.findById(id).orElse(null));
+    // }
 
     public Optional<Producto> getProducto(Long id){
         return (Optional<Producto>) productoRepository.findById(id);

@@ -194,23 +194,46 @@ buscarEvento.addEventListener("click", function(){
       myform.elements.aforoEvento.value= data.aforoEvento;
       myform.elements.valorEvento.value= data.valorEvento;
       myform.elements.observacion.value= data.observacion;
-      //mostrar datos
-      // document.getElementById("idDetalleEvento").value = data.idDetalleEvento;
-      // document.getElementById("nombreCliente").value = data.nombreCliente;
-      // document.getElementById("cedulaCliente").value = data.cedulaCliente;
-      // document.getElementById("paqueteEvento").value = data.paqueteEvento;
-      // document.getElementById("direccionEvento").value = data.direccionEvento;
-      // document.getElementById("fechaMovimiento").value = data.fechaMovimiento;
-      // document.getElementById("fechaMovimiento, aforoEvento").value = data.aforoEvento;
-      // document.getElementById("fechaMovimiento, aforoEvento, valorEvento").value = data.valorEvento;
-      // document.getElementById("").value = data.observacion;
-    
+      //llaves foraneas
+      myform.elements.usuario.value= data.usuario.idUsuario;
+      myform.elements.evento.value= data.evento.idEvento;
+
     })
     //reject
     .catch(error=>{
       console.log('Error', error);
     });
 })
+
+//eliminar evento
+
+//peticion al servidor
+function requestDelete(url){
+  return new Promise((resolve, reject)=>{
+    fetch(url)
+    .then(response =>{
+      if(!response.ok){
+        throw new Error('error en la url')
+      }
+      return response.json();
+    })
+    .catch(error=>{
+      reject(error);
+    })
+  })
+}
+//
+function eliminarEvento(){
+
+  idEvento=document.getElementById("idDetalleEvento").value;
+  let url = `http://localhost:8081/logistica/deleteEvento/${idEvento}`;
+  
+  //llamamos al servidor
+  requestDelete(url);
+  formConsultaEvento.style.display= "none";
+  formularioConsultarVenta.style.display = "none";
+  hideDashboard.style.display = "block";
+}
 
 //agregar lista de evento
 
@@ -234,6 +257,8 @@ listaEvento.addEventListener("click", function(){
 
   agregarListaEvento.style.display = "block";
 })
+
+//consultar Lista de Evento
 
 //Registrar empleado
 registarEmpleado.addEventListener("click", function(){
@@ -315,15 +340,16 @@ buscarEmpleado.addEventListener("click", function(){
       console.log('Respuesta', data);
       consultarFormEmpleado.style.display= "block"; //formulario post consulta
       //mostrar datos
-      document.getElementById("idUsuario").value = data.idUsuario;
-      document.getElementById("tipoIdentificacion").value = data.tipoIdentificacion;
-      document.getElementById("numeroIdentificacion").value = data.numeroIdentificacion;
-      document.getElementById("nombreUsuario").value = data.nombreUsuario;
-      document.getElementById("apellidoUsuario").value = data.apellidoUsuario;
-      document.getElementById("numeroUsuario").value = data.numeroUsuario;
-      document.getElementById("correoUsuario").value = data.correoUsuario;
-      document.getElementById("contraseñaUsuario").value = data.contraseñaUsuario;
-      document.getElementById("tipoRol").value = data.tipoRol;
+      const myForm = document.getElementById("formEditEmpleado"); //insertamos dentro de las propiedades del form
+      myForm.elements.idUsuario.value = data.idUsuario;
+      myForm.elements.tipoIdentificacion.value = data.tipoIdentificacion;
+      myForm.elements.numeroIdentificacion.value = data.numeroIdentificacion;
+      myForm.elements.nombreUsuario.value = data.nombreUsuario;
+      myForm.elements.apellidoUsuario.value = data.apellidoUsuario;
+      myForm.elements.numeroUsuario.value = data.numeroUsuario;
+      myForm.elements.correoUsuario.value = data.correoUsuario;
+      myForm.elements.contraseñaUsuario.value = data.contraseñaUsuario;
+      myForm.elements.rol.value = data.rol.idRol;
        
     })
     //reject
@@ -331,8 +357,6 @@ buscarEmpleado.addEventListener("click", function(){
       console.log('Error', error);
     });
 })
-
-
 
 //-------------------------- Inventario -------------\
 const agregarProducto = document.getElementById("agregarProducto");

@@ -590,19 +590,18 @@
                   <label for="valorEvento">Valor del evento</label>
                   <input type="number" name="valorEvento" id="valorEvento" class="form-control my-4 py-2" placeholder="1000" required/>
 
-                  <!-- <label for="">Empleados: </label>
-                  <select th:field="*{detalleEvento.usuarios_idUsuarios}" name="usuarios_idUsuarios" required>
-                    <option th:each="usuarios : ${usuario}" th:value="usuarios.idUsuario" th:text="usuarios.nombreUsuario"></option>
-                  </select>
+                  <label for="">Empleados: </label>
+                  <select th:field="*{detalleEvento.usuario}" name="usuario" class="form-control my-4 py-2" required>
+                    <option th:each="empleado : ${empleados}" th:value="${empleado.idUsuario}" th:text="${empleado.nombreUsuario}"></option>
+                  </select> 
                   
                   <label for="evento">Evento:</label>
-                  <select th:field="*{detalleEvento.evento_id_evento}" name="evento_id_evento" required>
-                    <option th:each="eventos : ${evento}" th:value="eventos.idEvento" th:text="eventos.nombreEvento"></option>
-                    
-                  </select> -->
+                  <select th:field="*{detalleEvento.evento}" name="evento" class="form-control my-4 py-2" required>
+                    <option th:each="eventos : ${evento}" th:value="${eventos.idEvento}" th:text="${eventos.nombreEvento}"></option>
+                  </select>
 
                   <label for="tipoPaquete">Paquete:</label>
-                  <select id="paqueteEvento" name="paqueteEvento" required>
+                  <select id="paqueteEvento" name="paqueteEvento" class="form-control my-4 py-2" required>
                     <option value="">Seleccione...</option>
                     <option value="Orange">Orange</option>
                     <option value="Blue">Blue</option>
@@ -671,7 +670,7 @@
                 <form action="editDetalleEvento" th:object="${detalleEvento}" method="post" id="formEditDetalleEvento">
 
                   <label for="idEvento">Evento numero</label>
-                  <input type="number" name="idDetalleEvento" id="idDetalleEvento" class="form-control my-4 py-2" th:field="${detalleEvento.idDetalleEvento}" readonly/>
+                  <input type="hidden" name="idDetalleEvento" id="idDetalleEvento" class="form-control my-4 py-2" th:field="${detalleEvento.idDetalleEvento}" readonly/>
 
                   <label for="nombreCliente">Nombre del cliente</label>
                   <input type="text" name="nombreCliente" id="nombreCliente" class="form-control my-4 py-2" th:field="${detalleEvento.nombreCliente}"/>
@@ -697,8 +696,19 @@
                   <label for="observacion">Observaciones</label>
                   <input type="text" name="observacion" id="observacion" class="form-control my-4 py-2" th:field="${detalleEvento.observacion}"/>
                   
+                  <label for="usuario">Empleados: </label>
+                  <select th:field="${detalleEvento.usuario}" name="usuario" class="form-control my-4 py-2"> 
+                    <option th:each="empleado : ${empleados}" th:value="${empleado.idUsuario}" th:text="${empleado.nombreUsuario}" selected></option>
+                  </select> 
+                  
+                  <label for="evento">Evento:</label>
+                  <select th:field="${detalleEvento.evento}" name="evento" class="form-control my-4 py-2">
+                    <option th:each="eventos : ${evento}" th:value="${eventos.idEvento}" th:text="${eventos.nombreEvento}" selected></option>
+                  </select>
+
                   <button type="submit" class="btn btn-primary">Subir Cambios</button>
-                  <a th:href="@{/deleteEvento/{idDetalleEvento}(idDetalleEvento=${detalleEvento.idDetalleEvento})}" class="btn btn-danger">Eliminar</a>
+                  <a class="btn btn-danger justify-content-center align-content-center" onclick="eliminarEvento()">Eliminar</a>
+                  
                 </form>
               </div>
             </div>
@@ -716,24 +726,21 @@
                   <h2 class="text-center mb-5">Elementos por evento</h2>
                   <!-- llave fornaea detalleEvento -->
                   <label for="">Evento seleccionado:</label>
-                  <!-- <input type="number" id="detalleEvento_idDetalleEvento" name="detalleEvento_idDetalleEvento" class="form-control my-4 py-2" placeholder="1" th:field="${lista_elementos_por_evento.detalleEvento_idDetalleEvento}">
-                  -->
-                  <select th:field="*{listaElementosEvento.detalleEvento}" name="detalleEvento" id="detalleEvento"> 
-                    <option th:each="detalleEvento : ${detalleEventos}" th:value="${detalleEvento.idDetalleEvento}" th:text="${detalleEvento.nombreCliente}" class="form-control my-4 py-2"></option>
+                  
+                  <select th:field="*{listaElementosEvento.detalleEvento}" name="detalleEvento" class="form-control my-4 py-2" required> 
+                    <option th:each="detalleEvento : ${detalleventos}" th:value="${detalleEvento.idDetalleEvento}" th:text="${detalleEvento.nombreCliente}"></option>
                   </select> 
-
+                  <small class="form-text text-muted my-4 py-2">Selecciona el cliente el cual se registro el evento</small>
+                  <br>
                   <!-- llave foranea productos -->
                   <label for="">Productos a llevar:</label>
                   <input type="text" name="productosLista" id="productosLista" class="form-control my-4 py-2">
 
                   <!-- Empleado a cargo -->
                   <label for="">Empleado a cargo:</label>
-                  <!-- <select th:field="*{usuario}" name="usuario">
-                    <option value=""> </option>
-                    <option th:each="item : ${usuario}" th:value="${item.idUsuario}" th:text="${item.nombreUsuario}" class="form-control my-4 py-2"></option>
-                  </select> -->
-
-                  <!-- <input type="number" name="usuarios_idUsuarios" id="usuarios_idUsuarios" class="form-control my-4 py-2" placeholder="1" required/> -->
+                  <select th:field="*{listaElementosEvento.usuario}" name="usuario" class="form-control my-4 py-2" required>
+                    <option th:each="empleado : ${empleados}" th:value="${empleado.idUsuario}" th:text="${empleado.nombreUsuario}"></option>
+                  </select> 
 
                   <button type="submit" class="btn btn-primary text-center mt-3">Agregar</button>
                 </form>
@@ -775,11 +782,9 @@
                   <label for="contraseñaUsuario">Contraseña: </label>
                   <input type="text" id="contraseñaUsuario" name="contraseñaUsuario" class="form-control my-4 py-2" placeholder="constraseña1234*" required>
 
-                  <label for="tipoRol">Tipo de cargo:</label>
-                  <select name="rol" id="rol" class="form-control my-4 py-2" required>
-                    <option value="1">Administrador</option>
-                    <option value="2">Cordinador</option>
-                    <option value="3">Empleado</option>
+                  <label for="rol">Tipo de cargo:</label>
+                  <select th:field="*{usuarios.rol}" name="rol" class="form-control my-4 py-2" required>
+                    <option th:each="rol : ${Rol}" th:value="${rol.idRol}" th:text="${rol.nombreRol}"></option>
                   </select>
       
                   <div class="text-center mt-3">
@@ -804,7 +809,7 @@
                   <label for="identificacion">Num identificación Empleado</label>
                   <input type="number" name="identificacion" id="identificacion" class="form-control my-4 py-2" placeholder="1004567890" required/>
                   <div class="text-center mt-3">
-                    <input class="btn btn-primary justify-content-center align-content-center" type="submit" value="Buscar" onclick="guardarVal()" id="buscarEmpleado"/>
+                    <a class="btn btn-primary justify-content-center align-content-center" onclick="guardarVal()" id="buscarEmpleado">Buscar</a>
                   </div>
                 </form>
               </div>
@@ -819,13 +824,13 @@
           <div class="col-12 col-sm-7 col-md-6 m-auto">
             <div class="card border-0 shadow">
               <div class="card-body">
-                <form action="editEmpleado" th:object="${usuarios}" method="post">
+                <form action="editEmpleado" th:object="${usuarios}" method="post" id="formEditEmpleado">
                   <h2 class="text-center mb-5">Registrar Empleado</h2>
                   
                   <input type="hidden" name="idUsuario" id="idUsuario" th:field="${usuarios.idUsuario}" class="form-control my-4 py-2" required/>
                   
                   <label for="tipoIdentificacion">Tipo de identificación:</label>
-                  <input class="form-control my-4 py-2" id="tipoIdentificacion" name="tipoIdentificacion" type="number" th:field="${usuarios.tipoIdentificacion}">
+                  <input class="form-control my-4 py-2" id="tipoIdentificacion" name="tipoIdentificacion" type="text" th:field="${usuarios.tipoIdentificacion}">
     
 
                   <label for="numeroIdentificacion">Numero de identificación</label>
@@ -844,15 +849,16 @@
                   <input type="text" id="correoUsuario" name="correoUsuario" class="form-control my-4 py-2" th:field="${usuarios.correoUsuario}" required>
       
                   <label for="contraseñaUsuario">Contraseña: </label>
-                  <input type="text" id="contraseñaUsuario" name="contraseñaUsuario" class="form-control my-4 py-2" th:field="${usuarios.contraseñaUsuario}" required>
+                  <input type="password" id="contraseñaUsuario" name="contraseñaUsuario" class="form-control my-4 py-2" th:field="${usuarios.contraseñaUsuario}" required>
 
                   <label for="tipoRol">Tipo de cargo:</label>
-                  <!-- <select th:field="*{usuarios.tipoRol}" name="tipoRol"> 
-                    <option th:each="rol : ${Rol}" th:value="${rol.idRol}" th:text="${rol.nombreRol}" class="form-control my-4 py-2"></option>
-                  </select>  -->
+                  <select th:field="${usuarios.rol}" name="rol" class="form-control my-4 py-2" required> 
+                    <option th:each="rol : ${Rol}" th:value="${rol.idRol}" th:text="${rol.nombreRol}" selected></option>
+                  </select>
                   
                   <div class="text-center mt-3">
                     <input class="btn btn-primary" type="submit" value="Subir cambios"/>
+                    <a class="btn btn-danger justify-content-center align-content-center" onclick="eliminarEmpleado()">Eliminar</a>
                   </div>
                 </form>
               </div>
@@ -879,7 +885,7 @@
                   <input type="number"  th:field="*{precioCompra}" name="precioProducto" id="precioProducto" class="form-control my-4 py-2" placeholder="000075" required/>
 
                   <label for="categoria">Selecciona la categoria</label>
-                  <select id="categoria" name="categoria" required>
+                  <select id="categoria" name="categoria" class="form-control my-4 py-2" required>
                     <option value="" disabled >seleccione</option>
                     <option value="Luces">Luces</option>
                     <option value="Sonido">Sonido</option>
@@ -915,19 +921,13 @@
                   <div class="text-center mt-3">
                     <a href="#" class="btn btn-primary justify-content-center align-content-center" onclick="guardarInput()" id="buscarProducto">Buscar</a>
                   </div>
-                  <br>
-                  <br>
                 </form>
-                <br>
-                <br>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <!-- Formulario de carga post consulta 
-       th:if="${productoA != null}" 
-       th:text="${productoA.idProductos}" -->
+      <!-- Formulario de carga post consulta  -->
       <div class="container mt-7 pt-7" style="display: none;" id="productoConsultaAsync">
         
         <div class="container mt-5 pt-5">
@@ -979,7 +979,7 @@
                   <input type="number" name="nit" th:field="*{nit}" id="nit" class="form-control my-4 py-2" placeholder="20" required />
 
                   <label for="nombreProvedor">Nombre provedor</label>
-                  <input type="text" name="nombreProvedor" th:field="*{nombreProveedor}" id="nombreProvedor" class="form-control my-4 py-2" placeholder="..." required/>
+                  <input type="text" name="nombreProvedor" th:field="*{nombreProvedor}" id="nombreProvedor" class="form-control my-4 py-2" placeholder="..." required/>
 
                   <div class="text-center mt-3">
                     <button class="btn btn-primary">Registrar</button>
