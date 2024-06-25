@@ -45,11 +45,10 @@ const consultarProveedor = document.getElementById("consultarProveedor")
 const generarReporteInventario = document.getElementById("generarReporteInventario")
 
 //ventas
-const registrarOV = document.getElementById("registrarOV")
 const consultarOV = document.getElementById("consultarOV")
 
-const registrarOC = document.getElementById("registrarOC")
-const consultarOC = document.getElementById("consultarOC")
+const registrarOC = document.getElementById("registrarOC");
+const consultarOC = document.getElementById("consultarOC");
 
 //-------------------------- logistica -------------\
 const agregarEvento = document.getElementById("agregarEvento")
@@ -155,7 +154,7 @@ buscarEvento.addEventListener("click", function(){
   //falta leer el id del formulario actual
   let url=`http://localhost:8081/siifo/logistica/evento/${id}`;
   //Esta funcion nos permitira obtener los datos que necesitamos
-  function requestInventario(url){
+  function requestEventos(url){
     return new Promise((resolve, reject)=>{
       //aqui manejamos cualquier error en la url
       fetch(url)
@@ -176,28 +175,34 @@ buscarEvento.addEventListener("click", function(){
     });
   }
   //solicitamos los datos
-  requestInventario(url)
+  requestEventos(url)
     //resolve
     .then(data=>{
-      for(const datas in data){
-        console.log(datas, data[datas]);
+      console.log(data);
+      if(data == null || data.length == 0){
+        console.log("No hay datos")
+        formConsultaEvento.style.display="none";
+        // document.getElementById("formEditDetalleEvento").style.display="none";
+      }else{
+        // for(const datas in data){
+        //   console.log(datas, data[datas]);
+        // }
+        // console.log('Respuesta', data);
+        formConsultaEvento.style.display= "block";
+        const myform = document.getElementById("formEditDetalleEvento");
+        myform.elements.idDetalleEvento.value= data.idDetalleEvento;
+        myform.elements.nombreCliente.value= data.nombreCliente;
+        myform.elements.cedulaCliente.value= data.cedulaCliente;
+        myform.elements.paqueteEvento.value= data.paqueteEvento;
+        myform.elements.direccionEvento.value=data.direccionEvento;
+        myform.elements.fechaEvento.value=data.fechaEvento;
+        myform.elements.aforoEvento.value= data.aforoEvento;
+        myform.elements.valorEvento.value= data.valorEvento;
+        myform.elements.observacion.value= data.observacion;
+        //llaves foraneas
+        myform.elements.usuario.value= data.usuario.idUsuario;
+        myform.elements.evento.value= data.evento.idEvento;
       }
-      // console.log('Respuesta', data);
-      formConsultaEvento.style.display= "block";
-      const myform = document.getElementById("formEditDetalleEvento");
-      myform.elements.idDetalleEvento.value= data.idDetalleEvento;
-      myform.elements.nombreCliente.value= data.nombreCliente;
-      myform.elements.cedulaCliente.value= data.cedulaCliente;
-      myform.elements.paqueteEvento.value= data.paqueteEvento;
-      myform.elements.direccionEvento.value=data.direccionEvento;
-      myform.elements.fechaEvento.value=data.fechaEvento;
-      myform.elements.aforoEvento.value= data.aforoEvento;
-      myform.elements.valorEvento.value= data.valorEvento;
-      myform.elements.observacion.value= data.observacion;
-      //llaves foraneas
-      myform.elements.usuario.value= data.usuario.idUsuario;
-      myform.elements.evento.value= data.evento.idEvento;
-
     })
     //reject
     .catch(error=>{
@@ -231,8 +236,6 @@ function eliminarEvento(){
   //llamamos al servidor
   requestDelete(url);
   formConsultaEvento.style.display= "none";
-  formularioConsultarVenta.style.display = "none";
-  hideDashboard.style.display = "block";
 }
 
 //agregar lista de evento
@@ -337,20 +340,26 @@ buscarEmpleado.addEventListener("click", function(){
   requestUsuarios(url)
     //resolve
     .then(data=>{
-      console.log('Respuesta', data);
-      consultarFormEmpleado.style.display= "block"; //formulario post consulta
-      //mostrar datos
-      const myForm = document.getElementById("formEditEmpleado"); //insertamos dentro de las propiedades del form
-      myForm.elements.idUsuario.value = data.idUsuario;
-      myForm.elements.tipoIdentificacion.value = data.tipoIdentificacion;
-      myForm.elements.numeroIdentificacion.value = data.numeroIdentificacion;
-      myForm.elements.nombreUsuario.value = data.nombreUsuario;
-      myForm.elements.apellidoUsuario.value = data.apellidoUsuario;
-      myForm.elements.numeroUsuario.value = data.numeroUsuario;
-      myForm.elements.correoUsuario.value = data.correoUsuario;
-      myForm.elements.contraseñaUsuario.value = data.contraseñaUsuario;
-      myForm.elements.rol.value = data.rol.idRol;
-       
+      console.log(data);
+      if(data == null || data.length == 0){
+        console.log("No hay datos")
+        consultarFormEmpleado.style.display="none"
+      }
+      else{
+        consultarFormEmpleado.style.display= "block"; //formulario post consulta
+        //mostrar datos
+        const myForm = document.getElementById("formEditEmpleado"); //insertamos dentro de las propiedades del form
+        myForm.elements.idUsuario.value = data.idUsuario;
+        myForm.elements.tipoIdentificacion.value = data.tipoIdentificacion;
+        myForm.elements.numeroIdentificacion.value = data.numeroIdentificacion;
+        myForm.elements.nombreUsuario.value = data.nombreUsuario;
+        myForm.elements.apellidoUsuario.value = data.apellidoUsuario;
+        myForm.elements.numeroUsuario.value = data.numeroUsuario;
+        myForm.elements.correoUsuario.value = data.correoUsuario;
+        myForm.elements.contraseñaUsuario.value = data.contraseñaUsuario;
+        myForm.elements.rol.value = data.rol.idRol;
+
+      }
     })
     //reject
     .catch(error=>{
@@ -418,7 +427,6 @@ function guardarInput(){
 //
 buscarProducto.addEventListener("click", function(){
   const id = guardarInput();
-  console.log("hola prueba", id);
   let url=`http://localhost:8081/siifo/inventario/producto/${id}`;
   //Esta funcion nos permitira obtener los datos que necesitamos
   function requestInventario(url){
@@ -445,21 +453,54 @@ buscarProducto.addEventListener("click", function(){
   requestInventario(url)
     //resolve
     .then(data=>{
-      console.log('Respuesta', data);
-      consultaAsync.style.display= "block";
-      //mostrar datos
-      document.getElementById("idProductosFormAsync").value = id;
-      document.getElementById("nombreProductos").value = data.nombreProductos;
-      document.getElementById("cantidad").value = data.cantidad;
-      document.getElementById("precioCompra").value = data.precioCompra;
-      document.getElementById("fechaEntrega").value = data.fechaEntrega;
-      document.getElementById("estado").value = data.estado;
-    })
+      console.log(data);
+      if(data == null || data.length == 0){
+        console.log("No hay datos")
+        consultaAsync.style.display="none"
+      }else{
+        console.log('Respuesta', data);
+        consultaAsync.style.display= "block";
+        //mostrar datos
+        document.getElementById("idProducto").value = id;
+        document.getElementById("nombreProductos").value = data.nombreProductos;
+        document.getElementById("cantidad").value = data.cantidad;
+        document.getElementById("precioCompra").value = data.precioCompra;
+        document.getElementById("fechaEntrega").value = data.fechaEntrega;
+        document.getElementById("estado").value = data.estado;
+    
+      }
+      })
     //reject
     .catch(error=>{
       console.log('Error', error);
     });
 })
+
+//eliminar Producto
+
+function request(url){
+  return new Promise((resolve, reject)=>{
+    fetch(url)
+    .then(response =>{
+      if(!response.ok){
+        throw new Error('error en la url')
+      }
+      return resolve.ok //
+      //url
+    })
+    .catch(error=>{
+      reject(error);
+    })
+  })
+}
+
+function eliminarProducto(){
+  const idProducto = document.getElementById("idProducto").value; 
+  let url = `http://localhost:8081/siifo/inventario/producto/${idProducto}/delete`;
+  //petición al servidor para intenttar borrar
+  requestDelete(url);
+  consultaAsync.style.display= "none";
+}
 
 
 
@@ -582,7 +623,7 @@ registrarOC.addEventListener("click", function(){
   agregarRegistroCompra.style.display = "block";
 })
 
-//Consultar Orden venta
+//Consultar Orden compra
 consultarOC.addEventListener("click", function() {
   hideDashboard.style.display = "none";
   agregarProducto.style.display = "none";
@@ -603,6 +644,34 @@ consultarOC.addEventListener("click", function() {
 
   formularioConsultarOC.style.display = "block";
 })
+//postConsulta orden compra
+function buscarIdOc(){
+  const id = document.getElementById("idOc").value;
+  let url = `http://localhost:8081/siifo/compras/ordencompra/${id}`;
+
+  requestDelete(url)
+    //resolve
+    .then(data=>{
+      console.log(data);
+      if(data == null || data.length == 0){
+        console.log("No hay datos");
+        ordenCompraConsulta.style.display="none";
+      }else{
+        console.log('Respuesta', data);
+        const ordenCompraConsulta = document.getElementById("ordenCompraConsulta");
+        ordenCompraConsulta.style.display= "block";
+        //mostrar datos
+        document.getElementById("idOrdenCompra").value = idOrdenCompra;
+        document.getElementById("detalleEvento").value = data.detalleEvento.idDetalleEvento;
+        document.getElementById("estadoOrden").value = data.estadoOrden;
+      }
+      })
+    //reject
+    .catch(error=>{
+      console.log('Error', error);
+    });
+
+}
 
 
 //Dashboard

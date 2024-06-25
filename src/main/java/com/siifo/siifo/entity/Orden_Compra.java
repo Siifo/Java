@@ -17,18 +17,19 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "OrdenCompra")
+@Table(name = "ordenCompra")
 public class Orden_Compra {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idOrdenCompra;
 
     @Column(name = "estadoOrden", nullable = true, columnDefinition = "ENUM('Pagado', 'Pendiente', 'Vencido')")
-    private String estadoOrden;
+    private String estadoOrden = "Pendiente";
 
-    @OneToMany
-    @JoinColumn(name="pago_idPagos")
-    private List<Pago> pago;
+    @OneToOne
+    @JoinColumn(name="pago_idPagos", nullable = true)
+    private Pago pago;
 
     @OneToOne
     @JoinColumn(name="detalleEvento_idDetalleEvento")

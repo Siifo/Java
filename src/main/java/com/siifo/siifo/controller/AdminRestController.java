@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.siifo.siifo.entity.Detalle_evento;
+import com.siifo.siifo.entity.Orden_Compra;
 import com.siifo.siifo.entity.Producto;
 import com.siifo.siifo.entity.Usuario;
 import com.siifo.siifo.repository.ProductoRepository;
 import com.siifo.siifo.repository.UsuarioRepository;
 import com.siifo.siifo.service.DetalleEventoService;
+import com.siifo.siifo.service.OrdenCompraService;
 import com.siifo.siifo.service.ProductoService;
 
 @RestController
@@ -32,6 +34,9 @@ public class AdminRestController {
     @Autowired
     ProductoRepository repositoryProducto;
 
+    @Autowired 
+    OrdenCompraService serviceOrdenCompra;
+
     //consutla de producto  //  Inventario
     @GetMapping("/inventario/producto/{idProductos}")
     public Optional getProdcutoById(@PathVariable Long idProductos){
@@ -44,6 +49,12 @@ public class AdminRestController {
     public Producto getProductosList(){
         Producto productos = repositoryProducto.productosDisponibles();
         return productos;
+    }
+
+    //eliminar un producto
+    @RequestMapping("/inventario/producto/{idProducto}/delete")
+    public void getDeleteProducto(@PathVariable Long idProducto){
+        serviceProducto.delete(idProducto);
     }
 
     //consulta detalleEvento  //  Logistica
@@ -59,6 +70,14 @@ public class AdminRestController {
         Optional<Usuario> usuarioByNum = repositoryUsuario.findByNumeroI(num);
         return usuarioByNum;
     }
+
+    //consultar Orden Compra // compras `http://localhost:8081/siifo/${id}`;
+    @GetMapping("/compras/ordencompra/{id}")
+    public Optional getMethodOrdenCompra(@PathVariable Long id){
+        Optional<Orden_Compra> ordenC = serviceOrdenCompra.getOrdenCompra(id);
+        return ordenC;
+    }
+
     
 
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.siifo.siifo.entity.Detalle_evento;
 import com.siifo.siifo.entity.Evento;
 import com.siifo.siifo.entity.Lista_elementos_por_evento;
+import com.siifo.siifo.entity.Orden_Compra;
 import com.siifo.siifo.entity.Producto;
 import com.siifo.siifo.entity.Provedor;
 import com.siifo.siifo.entity.Rol;
@@ -24,10 +25,13 @@ import com.siifo.siifo.service.AuthenticationService;
 import com.siifo.siifo.service.DetalleEventoService;
 import com.siifo.siifo.service.EventoService;
 import com.siifo.siifo.service.ListaElementosService;
+import com.siifo.siifo.service.OrdenCompraService;
 import com.siifo.siifo.service.ProductoService;
 import com.siifo.siifo.service.ProveedorService;
 import com.siifo.siifo.service.RolService;
 import com.siifo.siifo.service.UsuarioService;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @Controller
 public class AdminController {
@@ -64,6 +68,10 @@ public class AdminController {
 	@Autowired
     public ProveedorService serviceProoovedor;
 
+	//compras
+	@Autowired
+	public OrdenCompraService serviceOrdenCompra;
+
 	
 	//dashboard
     @GetMapping("/admin")
@@ -87,6 +95,12 @@ public class AdminController {
 		//Empleados
 		List<Rol> tipoRol = serviceRol.getRolList();
 		model.addAttribute("Rol", tipoRol);
+
+		//Compras
+		model.addAttribute("ordenCompra", new Orden_Compra());
+		//lista unica
+		List<Orden_Compra> ordenC = serviceOrdenCompra.getOcList(); 
+		model.addAttribute("ordenC", ordenC);
 
 		if(autenticador.isUserAuthenticaded()){
 			autenticador.setUserAuthCoor(false);
@@ -187,4 +201,15 @@ public class AdminController {
 		System.out.println("Se actualizo el usuario con CC"+usuarios.getNumeroIdentificacion());
 		return "redirect:/admin";
 	}
+
+	//--------------------------------------------Compras :D---------------------------------------
+
+	@PostMapping("/registroOrdenCompra")
+	public String postMethodOc(@Validated Orden_Compra oc, Model model) {
+		serviceOrdenCompra.saveOrUpdate(oc);
+		System.out.println("Se registro la orden de compra: "+oc.getIdOrdenCompra().toString());
+		return "redirect:/admin";
+	}
+	
+
 }

@@ -1,6 +1,7 @@
 package com.siifo.siifo.entity;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -16,6 +17,7 @@ import lombok.Data;
 @Entity
 @Table(name = "pagos")
 public class Pago {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPagos;
@@ -24,13 +26,10 @@ public class Pago {
     private String metodoDePago;
 
     @Column(name = "fechaPago", nullable = true)
-    private Date fechaPago;
-
-    @ManyToOne
-    @JoinColumn(name = "detalleEvento_idDetalleEvento")
-    private Detalle_evento detalleEvento;
+    private LocalDateTime fechaPago = LocalDateTime.now();
 
     @Column(name = "valor", nullable = true, columnDefinition = ("FLOAT"))
     private double valor;
+
 }
 
