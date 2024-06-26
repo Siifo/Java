@@ -11,7 +11,7 @@
 
 /*Cuerpo*/
 body{
-    /* background-image: url(/public/img/background-opcion.jpg); */
+    background-image: url(/public/img/fondosiifoo.png);
     /* background-image: url(/public/img/b2original.jpg); */
     /* background-image: url(/public/img/plantilla-fondo-celebracion-confeti-cintas-colores_29865-3962.avif); */
     /* background-image: url(../img/b4.png); */
@@ -29,7 +29,7 @@ h1,h2, h3, h4, h5
 }
 
 h2{
-    color: blue;
+    color: rgb(251,148,68);
 }
 
 /* palabras naranjas en los textos */
