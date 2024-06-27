@@ -191,8 +191,8 @@ buscarEvento.addEventListener("click", function(){
         myform.elements.nombreCliente.value= data.nombreCliente;
         myform.elements.cedulaCliente.value= data.cedulaCliente;
         myform.elements.paqueteEvento.value= data.paqueteEvento;
-        myform.elements.direccionEvento.value=data.direccionEvento;
-        myform.elements.fechaEvento.value=data.fechaEvento;
+        myform.elements.direccionEvento.value= data.direccionEvento;
+        myform.elements.fechaEvento.value= data.fechaEvento;
         myform.elements.aforoEvento.value= data.aforoEvento;
         myform.elements.valorEvento.value= data.valorEvento;
         myform.elements.observacion.value= data.observacion;
@@ -612,6 +612,10 @@ consultarOC.addEventListener("click", function() {
 //postConsulta orden compra
 function buscarIdOc(){
   const id = document.getElementById("idOc").value;
+  return id;
+}
+buscarOrdenCompra.addEventListener("click", function() {
+  const id = buscarIdOc();
   let url = `http://localhost:8081/siifo/compras/ordencompra/${id}`;
 
   requestDelete(url)
@@ -623,7 +627,6 @@ function buscarIdOc(){
         ordenCompraConsulta.style.display="none";
       }else{
         console.log('Respuesta', data);
-        const ordenCompraConsulta = document.getElementById("ordenCompraConsulta");
         ordenCompraConsulta.style.display= "block";
         //mostrar datos
         document.getElementById("idOrdenCompra").value = idOrdenCompra;
@@ -635,8 +638,7 @@ function buscarIdOc(){
     .catch(error=>{
       console.log('Error', error);
     });
-
-}
+})
 
 
 //Dashboard

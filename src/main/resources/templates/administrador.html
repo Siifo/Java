@@ -582,7 +582,7 @@
                   <input type="number" name="aforoEvento" id="aforoEvento" class="form-control my-4 py-2" required/>
 
                   <label for="fecha">Fecha del evento</label>
-                  <input type="date" name="fechaMovimiento" id="fechaMovimiento" class="form-control my-4 py-2" required/>
+                  <input type="date" name="fechaEvento" id="fechaEvento" class="form-control my-4 py-2" required/>
 
                   <label for="observacion">Observaciones</label>
                   <input type="text" name="observacion" id="observacion" class="form-control my-4 py-2" placeholder="ingrese la hora del evento" required/>
@@ -1009,7 +1009,7 @@
         </div>
       </div>
 
-      <!----------------------------------------------------------------------------------- ventas--------------------------------------------------------->      
+      <!----------------------------------------------------------------------------------- Compras --------------------------------------------------------->      
       <!-- Consultar Orden de venta -->
       <div class="container mt-5 pt-5" style="display: none;" id="formularioConsultarOV"> 
         <div class="row">
@@ -1077,7 +1077,7 @@
                   <label for="idOv">ID Orden de compra:</label>
                   <input type="number" name="idOc" id="idOc" class="form-control my-4 py-2" placeholder="9" required/>
                   <div class="text-center mt-3">
-                    <a class="btn btn-primary justify-content-center align-content-center" onclick="buscarIdOc()">buscar</a>
+                    <a onclick="buscarIdOc()" class="btn btn-primary justify-content-center align-content-center" id="buscarOrdenCompra">Buscar</a>
                   </div>
                   <div class="d-flex justify-content-around">
                     <!-- <button class="btn btn-primary" id="modificarEvento" class="text-white">Modificar Evento</button>
