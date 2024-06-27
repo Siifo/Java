@@ -88,7 +88,7 @@
           </div>
           <ul class="sub-menu">
             <li><a class="link_name" href="#">Ventas</a></li>
-            <li><a href="#" id="registrarOC">Registrar Orden de Compra</a></li>
+            <li><a href="#" id="registrarOrdenCompra">Registrar Orden de Compra</a></li>
             <li><a href="#" id="consultarOC">Consultar Orden de Compra</a></li>
             <li><a href="#" id="consultarOV">Consultar Orden de Venta</a></li>
           </ul>
@@ -113,7 +113,8 @@
               <img src="../public/img/profiles/alexander.webp" alt="profileImg" />
             </div>
             <div class="name-job">
-              
+              <div class="profile_name" th:text="${session.nombreUsuario}" ></div>
+              <div class="job" th:text="${session.rolUsuario}"></div>
             </div>
             <a th:href="@{/salirCoor}">
               <i class="bx bx-log-out"></i>
@@ -581,7 +582,7 @@
                   <input type="number" name="aforoEvento" id="aforoEvento" class="form-control my-4 py-2" required/>
 
                   <label for="fecha">Fecha del evento</label>
-                  <input type="date" name="fechaMovimiento" id="fechaMovimiento" class="form-control my-4 py-2" required/>
+                  <input type="date" name="fechaEvento" id="fechaEvento" class="form-control my-4 py-2" required/>
 
                   <label for="observacion">Observaciones</label>
                   <input type="text" name="observacion" id="observacion" class="form-control my-4 py-2" placeholder="ingrese la hora del evento" required/>
@@ -725,13 +726,13 @@
                   <h2 class="text-center mb-5">Elementos por evento</h2>
                   <!-- llave fornaea detalleEvento -->
                   <label for="">Evento seleccionado:</label>
-                  
                   <select th:field="*{listaElementosEvento.detalleEvento}" name="detalleEvento" class="form-control my-4 py-2" required> 
                     <option th:each="detalleEvento : ${detalleventos}" th:value="${detalleEvento.idDetalleEvento}" th:text="${detalleEvento.nombreCliente}"></option>
                   </select> 
-                  <small class="form-text text-muted my-4 py-2">Selecciona el cliente el cual se registro el evento</small>
+                  <small class="form-text text-muted my-4 py-2">Selecciona el cliente al cual se le registro el evento</small>
                   <br>
-                  <!-- llave foranea productos -->
+                  <br>
+                  <!-- Lista de productos -->
                   <label for="">Productos a llevar:</label>
                   <input type="text" name="productosLista" id="productosLista" class="form-control my-4 py-2">
 
@@ -891,9 +892,6 @@
                     <option value="decoracion">Decoraci&oacute;n</option>
                     <option value="otro">otro</option>
                   </select>
-                  <br>  
-                  <br>
-
                   <label for="fecha">fecha</label>
                   <input type="date" th:field="*{fechaEntrega}" name="fecha" id="fecha" class="form-control my-4 py-2" placeholder="" />
                   
@@ -915,7 +913,7 @@
                 <form action="" method="GET">
                   <h2 class="text-center mb-5">Consultar Producto</h2>
                   <!--Registrar activo-->
-                  <label for="idProducto">ID Producto</label>
+                  <label for="nombreProducto">ID Producto</label>
                   <input type="number" name="idProductos" id="idProductos" class="form-control my-4 py-2" placeholder="59" required/>
                   <div class="text-center mt-3">
                     <a href="#" class="btn btn-primary justify-content-center align-content-center" onclick="guardarInput()" id="buscarProducto">Buscar</a>
@@ -936,7 +934,7 @@
                 <div class="card-body">
                   <form action="editProducto" th:object="${producto}" method="POST">
                     <label for="idProductos">Producto numero:</label>
-                    <input type="number" name="idProductosFromAsync" id="idProductosFormAsync" class="form-control my-4 py-2" th:field="${producto.idProductos}" readonly>
+                    <input type="hidden" name="idProducto" id="idProducto" class="form-control my-4 py-2" th:field="${producto.idProductos}" readonly>
                     <label for="nombreProducto">Nombre de tu producto</label>
                     <input type="text" name="nombreProductos" id="nombreProductos" class="form-control my-4 py-2" th:field="${producto.nombreProductos}" />
                     <label for="cantidadProducto">Cantidad</label>
@@ -950,9 +948,7 @@
                     
                     <div class="text-center mt-3">
                       <button type="submit" class="btn btn-primary">Subir Cambios</button>
-                      
-                      <a th:href="@{/deleteProducto}" class="btn btn-danger">Eliminar</a>
-                      <!-- th:href="@{/deleteProducto}" -->
+                      <a onclick="eliminarProducto()" class="btn btn-danger">Eliminar</a>
                     </div>
                   </form>
                 </div>
@@ -1013,39 +1009,7 @@
         </div>
       </div>
 
-      <!----------------------------------------------------------------------------------- ventas--------------------------------------------------------->      
-
-      <!-- Registrar oroden de venta -->
-      <div class="container mt-5 pt-5" style="display: none;" id="agregarOrdenVenta">
-        <div class="row">
-          <div class="col-12 col-sm-7 col-md-6 m-auto">
-            <div class="card border-0 shadow">
-              <div class="card-body" >
-                <form action="">
-                  <h2 class="text-center mb-5">Ordenes</h2>
-                  <!--Registrar activo-->
-                  <label for="idOrdenV">Id orden venta</label>
-                  <input type="number" name="venta" id="idOrdenV" class="form-control my-4 py-2" placeholder="132141" required />
-                  <label for="fecha">Fecha de pago</label>
-                  <input type="datet" name="fecha" id="fecha" class="form-control my-4 py-2" required/>
-      
-                  <label for="aforo">Aforo</label>
-                  <input type="number" name="aforo" id="aforo" class="form-control my-4 py-2" required/>
-                  
-                  <label for="valorEvento">Valor evento</label>
-                  <input type="number" id="valorEvento" class="form-control my-4 py-2" required/>
-                  <label for="fecha">Fecha del evento</label>
-                  <input type="date" name="fecha" id="fecha" class="form-control my-4 py-2" required/>
-                  <label for="hora">Hora del Evento:</label>
-                  <input type="time" id="hora" name="hora" class="form-control my-4 py-2" required>
-                  <input class="btn btn-primary" type="submit" value="Registrar">
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
+      <!----------------------------------------------------------------------------------- Compras --------------------------------------------------------->      
       <!-- Consultar Orden de venta -->
       <div class="container mt-5 pt-5" style="display: none;" id="formularioConsultarOV"> 
         <div class="row">
@@ -1078,31 +1042,20 @@
           <div class="col-12 col-sm-7 col-md-6 m-auto">
             <div class="card border-0 shadow">
               <div class="card-body">
-                <form action="">
-                  <h2 class="text-center mb-5">Ordenes</h2>
-                  <!--Registrar activo-->
-                  <label for="identificacionCliente">Identificación Cliente:</label>
-                  <input type="number" name="identificacionCliente" id="identificacionCliente" class="form-control my-4 py-2" placeholder="1001301480" required />
-                  <label for="valorEvento">Valor</label>
-                  <input type="number" name="valorEvento" id="valorEvento" class="form-control my-4 py-2" placeholder="1.500.000" required/>
-      
-                  <label for="estadoOrden">Estado de la Orden: </label>
-                  <select id="estadoOrden" name="estadoOrden" required>
-                    <option value="Seleciona">Seleciona...</option>
-                    <option value="boda">Activa</option>
-                    <option value="fiesta">En tramite</option>
-                    <option value="conferencia">Finalizada</option>
+                <form action="/registroOrdenCompra" th:object="${ordenCompra}" method="post">
+                  <h2 class="text-center mb-5">Orden de compra:</h2>
+                  <!-- llave fornaea del evento-->
+                  <label for="">Evento seleccionado:</label>
+                  <select th:field="${ordenCompra.detalleEvento}" name="detalleEvento" class="form-control my-4 py-2" required> 
+                    <option th:each="detalleEvento : ${detalleventos}" th:value="${detalleEvento.idDetalleEvento}" th:text="${detalleEvento.nombreCliente}"></option>
                   </select>
-                  <br>
-                  <br>
-                  <label for="metodoPago">Metodo de Pago:</label>
+                  <small class="form-text text-muted my-4 py-2">Selecciona el cliente al cual se le registro el evento</small>
+                  <!-- <label for="metodoPago">Metodo de Pago:</label>
                   <select id="metodoPago" name="metodoPago" required>
                     <option value="">Seleccione...</option>
-                    <option value="nequi">Nequi</option>
-                    <option value="DaviPlata">Daviplata</option>
-                    <option value="tarjeta">Tarjeta</option>
-                    <option value="efectivo">Efectivo</option>
-                  </select>
+                    <option value="Medio_Mano">Medio a la Mano</option>
+                    <option value="Efectivo">Efectivo</option>
+                  </select> -->
                   <div class="text-center mt-3">
                     <input class="btn btn-primary" type="submit" value="Registrar" />
                   </div>
@@ -1121,13 +1074,11 @@
               <div class="card-body">
                 <form action="">
                   <h2 class="text-center mb-5">Consultar Orden de Compra</h2>
-                  <label for="idOv">ID Orden de venta</label>
-                  <input type="text" name="idOv" id="idOv" class="form-control my-4 py-2" placeholder="1342" required/>
+                  <label for="idOv">ID Orden de compra:</label>
+                  <input type="number" name="idOc" id="idOc" class="form-control my-4 py-2" placeholder="9" required/>
                   <div class="text-center mt-3">
-                    <input class="btn btn-primary justify-content-center align-content-center" type="submit" value="Buscar" />
+                    <a onclick="buscarIdOc()" class="btn btn-primary justify-content-center align-content-center" id="buscarOrdenCompra">Buscar</a>
                   </div>
-                  <br>
-                  <br>
                   <div class="d-flex justify-content-around">
                     <!-- <button class="btn btn-primary" id="modificarEvento" class="text-white">Modificar Evento</button>
                     <button class="btn btn-primary" id="eliminarOV" class="text-white">Eliminar Evento</button> -->
@@ -1139,15 +1090,47 @@
         </div>
       </div>
 
-    <!-- modulos -->
-    <script src="../public/jsDashboard/app.js"></script>
-    <script src="../public/jsDashboard/inventario.js"></script>
-    <!-- logistica agregar lista de productos en su campo predeteminado BD-->
-    <script>
+      <!-- Formulario post consulta orden compra -->
+      <div class="container mt-7 pt-7" style="display: none;" id="ordenCompraConsulta">
+        
+        <div class="container mt-5 pt-5">
+          <div class="row">
+            <div class="col-12 col-sm-7 col-md-6 m-auto">
+              <div class="card border-0 shadow">
+                <div class="card-body">
+                  <form action="" th:object="${ordenCompra}">
+                    <!-- clase de vento que sera -->
+                    <input type="hidden" name="idOrdenCompra" class="form-control my-4 py-2" th:field="${ordenCompra.idOrdenCompra}" readonly/>
+                    
+                    <label for="">Valor por pagar: </label>
+                    <input type="text" name="detalleEvento" th:field="${ordenCompra.detalleEvento.valorEvento}" class="form-control my-4 py-2" readonly/>
 
-    </script>    
+                    <label for="">Fecha del evento: </label>
+                    <input type="text" name="detalleEvento" th:field="${ordenCompra.detalleEvento.fechaEvento}" class="form-control my-4 py-2" readonly/>
+
+                    <label for="estadoOrden">Estado actual: </label>
+                    <input type="text" name="estadoOrden" id="estadoOrden" class="form-control my-4 py-2" th:field="${ordenCompra.estadoOrden}" readonly/>
+
+
+                    <div class="text-center mt-3">
+                      <a onclick="" class="btn btn-warning">Ir a pagar</a>
+                      <a onclick="" class="btn btn-danger">Eliminar</a>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+      </div>
+      
+
+      
+
+    <!-- modulos -->
     
-    <script src="../public/jsDashboard/app.js"></script>
+    <script src="../public/jsDashboard/appCoor.js"></script>
     <!-- <script src="../public/jsDashboard/logistica.js"></script>
     <script src="../public/jsDashboard/inventario.js"></script>
     <script src="../public/jsDashboard/ventas.js"></script> -->
@@ -1171,7 +1154,5 @@
 
     <!-- fontAwesome -->
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
-
-
   </body>
 </html>

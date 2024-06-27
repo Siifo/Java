@@ -122,7 +122,16 @@ public class AdminController {
     @PostMapping("/register")
 	public String registroProducto(@Validated Producto producto,Model model) {
 		serviceProducto.saveOrUpdate(producto);
-		return "redirect:/admin";
+		
+		// Manejo de roles
+		if (autenticador.isUserAuthenticaded() == true) {
+			return "redirect:/admin";
+		}
+		else {
+			return "redirect:/coor";
+		}
+		
+		
 	}
 
 	// guardar cambios
@@ -131,7 +140,14 @@ public class AdminController {
 		model.addAttribute("producto", new Producto());
         serviceProducto.saveOrUpdate(producto); // guardamos en la DB si estan todos los datos
         System.out.println("Se actualizo correctamente" + producto.getIdProductos().toString());
-        return "redirect:/admin";
+        
+		// Manejo de roles
+		if (autenticador.isUserAuthenticaded() == true) {
+			return "redirect:/admin";
+		}
+		else {
+			return "redirect:/coor";
+		}
     }
 	// delete producto
     @RequestMapping("/deleteProducto")
@@ -139,13 +155,27 @@ public class AdminController {
         long idProductos = 1;
 		serviceProducto.delete(idProductos);
         System.out.println("se elimino el id: " + idProductos);
-        return "redirect:/admin";
+        
+		// Manejo de roles
+		if (autenticador.isUserAuthenticaded() == true) {
+			return "redirect:/admin";
+		}
+		else {
+			return "redirect:/coor";
+		}
     }
 	//provedor
 	@PostMapping("/save")
 	public String registroProveedor(@Validated Provedor proveedor,Model model) {
 		serviceProoovedor.saveOrUpdate(proveedor);
-		return "redirect:/admin";
+		
+		// Manejo de roles
+		if (autenticador.isUserAuthenticaded() == true) {
+			return "redirect:/admin";
+		}
+		else {
+			return "redirect:/coor";
+		}
 	}
 
 	//--------------------------------------------logistica---------------------------------------
@@ -154,7 +184,15 @@ public class AdminController {
 	public String registroDetalleEvento(@Validated Detalle_evento detallevento,Model model){
 		serviceDetalleEvento.saveOrUpdate(detallevento);
 		System.out.println("Registro: "+detallevento.toString());
-		return "redirect:/admin";
+		
+		// Manejo de roles
+		if (autenticador.isUserAuthenticaded() == true) {
+			return "redirect:/admin";
+		}
+		else {
+			return "redirect:/coor";
+		}
+
 	}
 	//editar evento
 	@PostMapping("/editDetalleEvento")
@@ -162,14 +200,28 @@ public class AdminController {
 		model.addAttribute("detalleEvento", new Detalle_evento());
 		serviceDetalleEvento.saveOrUpdate(detalleEvento);
 		System.out.println("Se actualizo correctamnete el id: "+detalleEvento.getIdDetalleEvento().toString());
-		return "redirect:/admin";
+		
+		// Manejo de roles
+		if (autenticador.isUserAuthenticaded() == true) {
+			return "redirect:/admin";
+		}
+		else {
+			return "redirect:/coor";
+		}
 	}
 
 	//eliminar evento
 	@RequestMapping("/logistica/deleteEvento/{num}")
     public String deleteEvento(@PathVariable Long num, Model model){
         serviceDetalleEvento.delete(num);
-		return "redirect:/admin";
+		
+		// Manejo de roles
+		if (autenticador.isUserAuthenticaded() == true) {
+			return "redirect:/admin";
+		}
+		else {
+			return "redirect:/coor";
+		}
     }
 
 	//lista elementos por evento
@@ -177,7 +229,15 @@ public class AdminController {
 	public String agregarLista(@Validated Lista_elementos_por_evento lista, Model model){
 		serviceListaElementos.saveOrUpdate(lista);
 		System.out.println("Se agrego la lista: "+ lista);
-		return "redirect:/admin";
+		
+
+		// Manejo de roles
+		if (autenticador.isUserAuthenticaded() == true) {
+			return "redirect:/admin";
+		}
+		else {
+			return "redirect:/coor";
+		}
 	}
 
 	//registro empleado
@@ -185,7 +245,14 @@ public class AdminController {
 	public String agregarEmleado(@Validated Usuario usuario, Model model){
 		serviceUsuario.saveOrUpdate(usuario);
 		System.out.println("Se agrego el usuario: "+usuario+"con rol: "+usuario.getRol());
-		return "redirect:/admin";
+		
+		// Manejo de roles
+		if (autenticador.isUserAuthenticaded() == true) {
+			return "redirect:/admin";
+		}
+		else {
+			return "redirect:/coor";
+		}
 	}
 	
 	//edit empleado
@@ -194,7 +261,14 @@ public class AdminController {
 		model.addAttribute("usuarios", new Usuario());
 		serviceUsuario.saveOrUpdate(usuarios);
 		System.out.println("Se actualizo el usuario con CC"+usuarios.getNumeroIdentificacion());
-		return "redirect:/admin";
+		
+		// Manejo de roles
+		if (autenticador.isUserAuthenticaded() == true) {
+			return "redirect:/admin";
+		}
+		else {
+			return "redirect:/coor";
+		}
 	}
 
 	//--------------------------------------------Compras :D---------------------------------------
@@ -203,7 +277,14 @@ public class AdminController {
 	public String postMethodOc(@Validated Orden_Compra oc, Model model) {
 		serviceOrdenCompra.saveOrUpdate(oc);
 		System.out.println("Se registro la orden de compra: "+oc.getIdOrdenCompra().toString());
-		return "redirect:/admin";
+		
+		// Manejo de roles
+		if (autenticador.isUserAuthenticaded() == true) {
+			return "redirect:/admin";
+		}
+		else {
+			return "redirect:/coor";
+		}
 	}
 	
 
