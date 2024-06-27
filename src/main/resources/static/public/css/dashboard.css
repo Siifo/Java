@@ -135,7 +135,7 @@ h2 {
   pointer-events: none;
 }
 .sidebar .nav-links li .sub-menu {
-  padding: 6px 6px 14px 80px;
+  padding: 6px 10px;
   margin-top: -10px;
   background-image: linear-gradient(
     to right,
@@ -153,7 +153,8 @@ h2 {
 .sidebar .nav-links li .sub-menu a {
   color: #fff;
   font-size: 15px;
-  padding: 5px 0;
+  margin-left: 0px;
+  padding: 5px 10px 5px 20px;
   white-space: nowrap;
   opacity: 0.6;
   transition: all 0.3s ease;
