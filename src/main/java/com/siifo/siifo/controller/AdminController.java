@@ -95,11 +95,8 @@ public class AdminController {
 		List<Rol> tipoRol = serviceRol.getRolList();
 		model.addAttribute("Rol", tipoRol);
 
-		//Compras
+		//compras
 		model.addAttribute("ordenCompra", new Orden_Compra());
-		//lista unica
-		List<Orden_Compra> ordenC = serviceOrdenCompra.getOcList(); 
-		model.addAttribute("ordenC", ordenC);
 
 		if(autenticador.isUserAuthenticaded()){
 			autenticador.setUserAuthCoor(false);

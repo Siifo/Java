@@ -88,7 +88,7 @@
           </div>
           <ul class="sub-menu">
             <li><a class="link_name" href="#">Ventas</a></li>
-            <li><a href="#" id="registrarOC">Registrar Orden de Compra</a></li>
+            <li><a href="#" id="registrarOrdenCompra">Registrar Orden de Compra</a></li>
             <li><a href="#" id="consultarOC">Consultar Orden de Compra</a></li>
             <li><a href="#" id="consultarOV">Consultar Orden de Venta</a></li>
           </ul>
@@ -110,11 +110,11 @@
         <li>
           <div class="profile-details">
             <div class="profile-content">
-              <img src="/resources/img/profiles/alexander.webp" alt="profileImg" />
+              <img src="../public/img/profiles/alexander.webp" alt="profileImg" />
             </div>
             <div class="name-job">
-              <div class="profile_name">Alexander</div>
-              <div class="job">Cordinador</div>
+              <div class="profile_name" th:text="${session.nombreUsuario}" ></div>
+              <div class="job" th:text="${session.rolUsuario}"></div>
             </div>
             <a th:href="@{/salir}">
               <i class="bx bx-log-out"></i>
@@ -1157,7 +1157,5 @@
 
     <!-- fontAwesome -->
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
-
-
   </body>
 </html>

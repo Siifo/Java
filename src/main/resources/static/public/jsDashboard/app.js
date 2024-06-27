@@ -45,9 +45,8 @@ const consultarProveedor = document.getElementById("consultarProveedor")
 const generarReporteInventario = document.getElementById("generarReporteInventario")
 
 //ventas
-const consultarOV = document.getElementById("consultarOV")
-
-const registrarOC = document.getElementById("registrarOC");
+const registrarOrdenCompra = document.getElementById("registrarOrdenCompra")
+const consultarOV = document.getElementById("consultarOV");
 const consultarOC = document.getElementById("consultarOC");
 
 //-------------------------- logistica -------------\
@@ -87,8 +86,8 @@ registrarEvento.addEventListener("click", function(){
   const contenedorCampos = document.getElementById("contenedorCampos");
   const agregarEmpleado = document.getElementById("agregarEmpleado");
   let contadorEmpleados = 1;
-  let datalistClon;
-  let nuevoCampo;
+  // let datalistClon;
+  // let nuevoCampo;
   agregarEmpleado.addEventListener("click", () => {
     contadorEmpleados++;
 
@@ -544,31 +543,9 @@ consultarProveedor.addEventListener("click", function(){
 
 //-------------------------- Ventas -------------\
 
-const formularioConsultarOV = document.getElementById("formularioConsultarOV")
-const agregarRegistroCompra = document.getElementById("agregarRegistroCompra")
-const formularioConsultarOC = document.getElementById("formularioConsultarOC")
-
-//Rregistrar orden de venta
-registrarOV.addEventListener("click", function(){
-  hideDashboard.style.display = "none";
-  agregarProducto.style.display = "none";
-  agregarProveedor.style.display = "none";
-  formularioConsultarProducto.style.display = "none";
-  formularioConsultarProveedor.style.display = "none";
-  formularioConsultarOV.style.display = "none";
-  agregarRegistroCompra.style.display = "none";
-  formularioConsultarOC.style.display = "none";
-  agregarEvento.style.display = "none";
-  formularioConsultarVenta.style.display = "none";
-  agregarFormEmpleado.style.display = "none";
-  formularioConsultarEmpleado.style.display = "none";
-  consultaAsync.style.display= "none";
-  formConsultaEvento.style.display='none';
-  agregarListaEvento.style.display = "none";
-  consultarFormEmpleado.style.display='none';
-
-  agregarOrdenVenta.style.display = "block";
-})
+const formularioConsultarOV = document.getElementById("formularioConsultarOV");
+const agregarRegistroCompra = document.getElementById("agregarRegistroCompra");
+const formularioConsultarOC = document.getElementById("formularioConsultarOC");
 
 //Consultar orden venta
 consultarOV.addEventListener("click", function(){
@@ -576,8 +553,7 @@ consultarOV.addEventListener("click", function(){
   agregarProducto.style.display = "none";
   agregarProveedor.style.display = "none";
   formularioConsultarProducto.style.display = "none";
-  formularioConsultarProveedor.style.display = "none"; 
-  agregarOrdenVenta.style.display = "none"; 
+  formularioConsultarProveedor.style.display = "none";
   agregarRegistroCompra.style.display = "none";
   formularioConsultarOC.style.display = "none";
   agregarEvento.style.display = "none";
@@ -593,13 +569,12 @@ consultarOV.addEventListener("click", function(){
 })
 
 //Orden compra
-registrarOC.addEventListener("click", function(){
+registrarOrdenCompra.addEventListener("click", function(){
   hideDashboard.style.display = "none";
   agregarProducto.style.display = "none";
   agregarProveedor.style.display = "none";
   formularioConsultarProducto.style.display = "none";
   formularioConsultarProveedor.style.display = "none"; 
-  agregarOrdenVenta.style.display = "none";
   formularioConsultarOV.style.display = "none";
   formularioConsultarOC.style.display = "none";
   agregarEvento.style.display = "none";
@@ -621,7 +596,6 @@ consultarOC.addEventListener("click", function() {
   agregarProveedor.style.display = "none";
   formularioConsultarProducto.style.display = "none";
   formularioConsultarProveedor.style.display = "none"; 
-  agregarOrdenVenta.style.display = "none";
   formularioConsultarOV.style.display = "none";
   agregarRegistroCompra.style.display = "none";
   agregarEvento.style.display = "none";
@@ -671,8 +645,7 @@ mostrarDashboard.addEventListener("click", function mostrarFormulario() {
   agregarProducto.style.display = "none";
   agregarProveedor.style.display = "none";
   formularioConsultarProducto.style.display = "none";
-  formularioConsultarProveedor.style.display = "none"; 
-  agregarOrdenVenta.style.display = "none";
+  formularioConsultarProveedor.style.display = "none";
   formularioConsultarOV.style.display = "none";
   agregarRegistroCompra.style.display = "none";
   formularioConsultarOC.style.display = "none";
