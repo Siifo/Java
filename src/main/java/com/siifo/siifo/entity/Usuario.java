@@ -43,4 +43,6 @@ public class Usuario {
     @JoinColumn(name = "rol_idRol")
     private Rol rol;
 
+    
+
 }

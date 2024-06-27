@@ -16,6 +16,8 @@ import com.siifo.siifo.service.ProductoService;
 import com.siifo.siifo.service.ProveedorService;
 import com.siifo.siifo.service.UsuarioService;
 
+import jakarta.servlet.http.HttpSession;
+
 
 
 @Controller
@@ -45,11 +47,18 @@ public class LoginController {
 	}
 
     @GetMapping("/validacionUser")
-	public String ingreso(@RequestParam String correoUsuario, @RequestParam String contraseñaUsuario,  Model model){
+	public String ingreso(@RequestParam String correoUsuario, @RequestParam String contraseñaUsuario,  Model model, HttpSession session){
 
 		if (correoUsuario != null && contraseñaUsuario != null ){
 			
 			Usuario usuario = repositoryUsuario.findByCorreo(correoUsuario, contraseñaUsuario);
+
+			String nombreUsuario = usuario.getNombreUsuario();
+			String rolUsuario = usuario.getRol().getNombreRol();
+
+			session.setAttribute("rolUsuario", rolUsuario);
+			session.setAttribute("nombreUsuario", nombreUsuario);
+
 			
 			if(usuario != null) {
 				switch (usuario.getRol().getIdRol()) {

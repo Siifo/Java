@@ -29,6 +29,7 @@ import com.siifo.siifo.service.ProveedorService;
 import com.siifo.siifo.service.RolService;
 import com.siifo.siifo.service.UsuarioService;
 
+
 @Controller
 public class AdminController {
 
@@ -87,6 +88,9 @@ public class AdminController {
 		//Empleados
 		List<Rol> tipoRol = serviceRol.getRolList();
 		model.addAttribute("Rol", tipoRol);
+
+		//usuario 
+		
 
 		if(autenticador.isUserAuthenticaded()){
 			autenticador.setUserAuthCoor(false);

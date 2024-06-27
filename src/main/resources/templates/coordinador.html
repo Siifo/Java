@@ -110,11 +110,11 @@
         <li>
           <div class="profile-details">
             <div class="profile-content">
-              <img src="/resources/img/profiles/alexander.webp" alt="profileImg" />
+              <img src="../public/img/profiles/alexander.webp" alt="profileImg" />
             </div>
             <div class="name-job">
-              <div class="profile_name">Alexander</div>
-              <div class="job">Cordinador</div>
+              <div class="profile_name" th:text="${session.nombreUsuario}" ></div>
+              <div class="job" th:text="${session.rolUsuario}"></div>
             </div>
             <a th:href="@{/salirCoor}">
               <i class="bx bx-log-out"></i>
@@ -989,8 +989,8 @@
 
     <!-- script chartJs -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="/resources/js/demo/chart-area-demo.js"></script>
-    <script src="/resources/js/demo/chart-pie-demo.js"></script>
+    <script src="../public/js/demo/chart-area-demo.js"></script>
+    <script src="../public/js/demo/chart-pie-demo.js"></script>
 
     <!-- bootstrap -->
     <script

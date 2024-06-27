@@ -110,11 +110,11 @@
         <li>
           <div class="profile-details">
             <div class="profile-content">
-              <img src="/resources/img/profiles/alexander.webp" alt="profileImg" />
+              <img src="../public/img/profiles/alexander.webp" alt="profileImg" />
             </div>
             <div class="name-job">
-              <div class="profile_name">Alexander</div>
-              <div class="job">Cordinador</div>
+              <div class="profile_name" th:text="${session.nombreUsuario}" ></div>
+              <div class="job" th:text="${session.rolUsuario}"></div>
             </div>
             <a th:href="@{/salir}">
               <i class="bx bx-log-out"></i>
@@ -1141,8 +1141,8 @@
       </div>
 
     <!-- modulos -->
-    <script src="/resources/jsDashboard/app.js"></script>
-    <script src="/resources/jsDashboard/inventario.js"></script>
+    <script src="../public/jsDashboard/app.js"></script>
+    <script src="../public/jsDashboard/inventario.js"></script>
     <!-- logistica agregar lista de productos en su campo predeteminado BD-->
     <script>
 
