@@ -71,7 +71,7 @@ public class AdminRestController {
         return usuarioByNum;
     }
 
-    //consultar Orden Compra // compras `http://localhost:8081/siifo/${id}`;
+    //consultar Orden Compra // compras
     @GetMapping("/compras/ordencompra/{id}")
     public Optional getMethodOrdenCompra(@PathVariable Long id){
         Optional<Orden_Compra> ordenC = serviceOrdenCompra.getOrdenCompra(id);

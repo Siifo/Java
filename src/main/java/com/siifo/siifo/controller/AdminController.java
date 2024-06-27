@@ -86,7 +86,6 @@ public class AdminController {
 		model.addAttribute("evento", evento);
 		List<Usuario> empleados = repositoryUsuario.findByClerk();
 		model.addAttribute("empleados", empleados);
-
 		model.addAttribute("usuarios", new Usuario());
 		model.addAttribute("listaElementosEvento", new Lista_elementos_por_evento());
 		//lista unica para la lista de elemtnos por E
@@ -105,7 +104,6 @@ public class AdminController {
 		if(autenticador.isUserAuthenticaded()){
 			autenticador.setUserAuthCoor(false);
 			return "administrador";
-			
 		} else {
 			return "redirect:/";
 		}
