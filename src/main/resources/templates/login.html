@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +17,6 @@
              <a href="/"><img class="log" src="./public/img/FosterLogo-removebg-preview.png" ></a><!--Cambiar la url del logo-->
             <ul>
                 <li><a href="/contacto" id="boton_contacto">Contacto</a></li>
-                <li><a href="./mas.html" id="boton_contacto">Mas</a></li>
                 <!-- <li><a href="#" class="activado" id="boton_login">Iniciar Sesion</a></li>Mirar el css sobre el "actvado"  -->
             </ul>
         </nav>
@@ -29,9 +28,12 @@
     <div class="form_container">
       <i class="uil uil-times form_close"></i>
       <!-- Login From -->
+      <div th:if="${loginError}" class="alert alert-danger" role="alert">
+        <span th:text="${loginError}"></span>
+      </div>
       <div class="form login_form">
         <form th:action="@{/validacionUser}" th:object="${usuario}" th:method="GET">
-          <h2>Iniciar sesion</h2>
+          <h2>Iniciar sesión</h2>
 
           <div class="input_box">
             <input type="email" th:field="*{correoUsuario}" placeholder="correo" name="correo" id="correo" required />
@@ -42,12 +44,7 @@
             <i class="bi bi-person-circle password"></i>
             <i class="bi bi-eye pw_hide"></i>
           </div>
-
           <div class="option_field">
-            <span class="checkbox">
-              <input type="checkbox" id="check" />
-              <label for="check">Recuerdame</label>
-            </span>
             <a href="#" class="forgot_pw">Olvido la contraseña?</a>
           </div>
 
@@ -88,7 +85,71 @@
       </div>
     </div>
   </section>
+    <footer class="page-footer center-on-small-only stylish-color-dark">
+        <!--Footer Links-->
+        <div class="container">
+            <div class="row text-white">
+                <!--First column-->
+                <div class="col-md-4">
+                    <h5 class="title mb-4 mt-3 font-bold">
+                        Foster Eventos y Recreación
+                    </h5>
+                    <p>
+                        Nos ubicamos en el barrio Santa Lucía de la localidad de Ciudad
+                        Bolivar. Nuestra dirección es: Dg. 48 Sur #13h - 42, Bogotá
+                    </p>
+                </div>
 
+                <hr class="clearfix w-100 d-md-none" />
+
+                <!--Second column-->
+                <div class="col-md-2 mx-auto">
+                    <h5 class="title mb-4 mt-3 font-bold">Navegación</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="link-light text-decoration-none">Contacto</a></li>
+                        <li><a href="/login" class="link-light text-decoration-none">Iniciar Sesion</a></li>
+                    </ul>
+                </div>
+
+                <hr class="clearfix w-100 d-md-none" />
+
+                <!--Third column-->
+                <div class="col-md-2 mx-auto">
+                    <h5 class="title mb-4 mt-3 font-bold">Redes Sociales</h5>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a
+                                    href="https://www.instagram.com/fostereventosyrecreacion/?hl=es"
+                                    class="link-light"
+                            ><i class="bi bi-instagram"></i> Instagram</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                    href="https://api.whatsapp.com/send/?phone=573125372204&text=Hola+%EF%BF%BD%0ADeseo+informaci%C3%B3n+sobre+las+fiestas+infantiles.+%EF%BF%BD&type=phone_number&app_absent=0"
+                                    class="link-light"
+                            ><i class="bi bi-whatsapp"></i> whatsapp</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                    href="https://web.facebook.com/groups/fosterproduccioness/?locale=es_LA&_rdc=1&_rdr"
+                                    class="link-light"
+                            ><i class="bi bi-facebook"></i> Facebook</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                    href="https://www.youtube.com/@fostereventosyrecreacion4226"
+                                    class="link-light"
+                            ><i class="bi bi-youtube"></i> Youtube</a
+                            >
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
   <script src="../static/public/js/login.js"></script>
 </body>
 </html>

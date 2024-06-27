@@ -1141,6 +1141,10 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../public/js/demo/chart-area-demo.js"></script>
     <script src="../public/js/demo/chart-pie-demo.js"></script>
+    <!-- se grafica lo que hay en el modelo del controller -->
+    <script th:inline="javascript">
+      var eventosMensuales = [[${eventosMensuales}]]
+    </script>
 
     <!-- bootstrap -->
     <script

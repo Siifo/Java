@@ -93,9 +93,19 @@ public class CoordinadorController {
 		//Empleados
 		List<Rol> tipoRol = serviceRol.getRolList();
 		model.addAttribute("Rol", tipoRol);
-
 		//compras
 		model.addAttribute("ordenCompra", new Orden_Compra());
+
+		// Obtener datos de eventos por mes
+		List<Object[]> eventosPorMes = serviceDetalleEvento.obtenerConteoEventosPorMes();
+
+		int[] eventosMensuales = new int[12];
+		for (Object[] result : eventosPorMes) {
+			int mes = ((Number) result[0]).intValue();
+			int conteo = ((Number) result[1]).intValue();
+			eventosMensuales[mes - 1] = conteo;
+		}
+		model.addAttribute("eventosMensuales", eventosMensuales);
 
 		if(autenticador.isUserAuthenticadedCoor()){
 			autenticador.setUserAuth(false);
@@ -104,8 +114,6 @@ public class CoordinadorController {
 		} else {
 			return "redirect:/";
 		}
-
-		
 	}
 
 	//-------------------------------------------- Login ---------------------------------------

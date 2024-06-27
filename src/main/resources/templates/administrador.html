@@ -150,6 +150,15 @@
       <div class="container-fluid" id="dashboard">
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-center mb-5">
+          <!-- aviso registroso exito o invalido (formularios) -->
+          <div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show" role="alert">
+            <span th:text="${successMessage}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+            <div th:if="${errorMessage}" class="alert alert-danger alert-dismissible fade show" role="alert">
+            <span th:text="${errorMessage}"></span>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
             <h1 class="mb-0">Dashboard</h1>
             <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                           class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
@@ -1144,6 +1153,10 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../public/js/demo/chart-area-demo.js"></script>
     <script src="../public/js/demo/chart-pie-demo.js"></script>
+
+    <script th:inline="javascript">
+      var eventosMensuales = [[${eventosMensuales}]]
+    </script>
 
     <!-- bootstrap -->
     <script

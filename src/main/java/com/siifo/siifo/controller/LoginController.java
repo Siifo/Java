@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.RequestParam;
 
-
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.siifo.siifo.entity.Usuario;
 import com.siifo.siifo.repository.UsuarioRepository;
 import com.siifo.siifo.service.AuthenticationService;
@@ -47,15 +47,12 @@ public class LoginController {
 	}
 
     @GetMapping("/validacionUser")
-	public String ingreso(@RequestParam String correoUsuario, @RequestParam String contraseñaUsuario,  Model model, HttpSession session){
+	public String ingreso(@RequestParam String correoUsuario, @RequestParam String contraseñaUsuario,  Model model, HttpSession session, RedirectAttributes redirectAttributes){
 
 		if (correoUsuario != null && contraseñaUsuario != null ){
 			
 			Usuario usuario = repositoryUsuario.findByCorreo(correoUsuario, contraseñaUsuario);
 
-			
-
-			
 			if(usuario != null) {
 				switch (usuario.getRol().getIdRol()) {
 					case 1:
@@ -65,7 +62,7 @@ public class LoginController {
 		
 						session.setAttribute("rolUsuario", rolUsuario);
 						session.setAttribute("nombreUsuario", nombreUsuario);
-
+						model.addAttribute("usuario", usuario);
 						autenticador.setUserAuth(true);
 						return "redirect:/admin";
 
@@ -76,16 +73,16 @@ public class LoginController {
 		
 						session.setAttribute("rolUsuario", rolUsuarioCoor);
 						session.setAttribute("nombreUsuario", nombreUsuarioCoor);
-
+						model.addAttribute("usuario", usuario);
 						autenticador.setUserAuthCoor(true);
 						return "redirect:/coor";
 					default:
-						break;
-				}
-
-									
+					model.addAttribute("usuario", usuario);
+					break;
+				}					
 			}
 		}
+		redirectAttributes.addFlashAttribute("loginError", "Usuario o contraseña incorrectos");
 		return "redirect:/login";
 	}
 

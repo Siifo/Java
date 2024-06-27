@@ -14,6 +14,10 @@ public class DetalleEventoService {
     
     @Autowired
     DetalleEventoRepository detalleEventoRepository;
+    //trae la busqueda que hace el repository para saber cuantos eventos se hace al mes
+    public List<Object[]> obtenerConteoEventosPorMes() {
+        return detalleEventoRepository.countEventosByMonth();
+    }
 
     public List<Detalle_evento> getDetalleEventoList(){
         return (List<Detalle_evento>) detalleEventoRepository.findAll();
