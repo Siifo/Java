@@ -53,22 +53,32 @@ public class LoginController {
 			
 			Usuario usuario = repositoryUsuario.findByCorreo(correoUsuario, contraseñaUsuario);
 
-			String nombreUsuario = usuario.getNombreUsuario();
-			String rolUsuario = usuario.getRol().getNombreRol();
-
-			session.setAttribute("rolUsuario", rolUsuario);
-			session.setAttribute("nombreUsuario", nombreUsuario);
+			
 
 			
 			if(usuario != null) {
 				switch (usuario.getRol().getIdRol()) {
 					case 1:
+
+						String nombreUsuario = usuario.getNombreUsuario();
+						String rolUsuario = usuario.getRol().getNombreRol();
+		
+						session.setAttribute("rolUsuario", rolUsuario);
+						session.setAttribute("nombreUsuario", nombreUsuario);
+
 						autenticador.setUserAuth(true);
 						return "redirect:/admin";
 
 					case 2:
-					autenticador.setUserAuthCoor(true);
-					return "redirect:/coor";
+
+						String nombreUsuarioCoor = usuario.getNombreUsuario();
+						String rolUsuarioCoor = usuario.getRol().getNombreRol();
+		
+						session.setAttribute("rolUsuario", rolUsuarioCoor);
+						session.setAttribute("nombreUsuario", nombreUsuarioCoor);
+
+						autenticador.setUserAuthCoor(true);
+						return "redirect:/coor";
 					default:
 						break;
 				}
