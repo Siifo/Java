@@ -12,11 +12,15 @@ import com.siifo.siifo.entity.Detalle_evento;
 import com.siifo.siifo.entity.Orden_Compra;
 import com.siifo.siifo.entity.Producto;
 import com.siifo.siifo.entity.Usuario;
+import com.siifo.siifo.repository.OrdenCompraRepository;
 import com.siifo.siifo.repository.ProductoRepository;
 import com.siifo.siifo.repository.UsuarioRepository;
 import com.siifo.siifo.service.DetalleEventoService;
 import com.siifo.siifo.service.OrdenCompraService;
 import com.siifo.siifo.service.ProductoService;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @RestController
 @RequestMapping(path = "/siifo")
@@ -36,6 +40,9 @@ public class AdminRestController {
 
     @Autowired 
     OrdenCompraService serviceOrdenCompra;
+
+    @Autowired
+    OrdenCompraRepository repositoryOrdenCompra;
 
     //consutla de producto  //  Inventario
     @GetMapping("/inventario/producto/{idProductos}")
@@ -63,6 +70,11 @@ public class AdminRestController {
         Optional<Detalle_evento> detalleEvento = serviceDetalleEvento.getDetalleById(idEvento);
         return detalleEvento;
     }
+    //eliminar detallevento // Logistica
+    @RequestMapping("/logistica/deleteEvento/{num}")
+    public void deleteMehtodDetalle(@PathVariable Long num){
+        serviceDetalleEvento.delete(num);
+    }
 
     //consulta empleado  //  Logistica
     @GetMapping("/logistica/empleados/{num}")
@@ -78,6 +90,16 @@ public class AdminRestController {
         return ordenC;
     }
 
-    
+    //eliminar orden compra // compras
+    @RequestMapping("/compras/ordencompra/{id}/delete")
+    public void getMethodDeleteOrdenCompra(@PathVariable Long id){
+        serviceOrdenCompra.delete(id);
+    }
+
+    @GetMapping("/compras/ordencompra/ordenventa/{id}")
+    public Orden_Compra postMethodName(@PathVariable Long id) {
+        Orden_Compra oc = repositoryOrdenCompra.postOrdenVenta(id);
+        return oc;
+    }
 
 }

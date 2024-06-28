@@ -9,7 +9,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -18,6 +17,7 @@ import com.siifo.siifo.entity.Detalle_evento;
 import com.siifo.siifo.entity.Evento;
 import com.siifo.siifo.entity.Lista_elementos_por_evento;
 import com.siifo.siifo.entity.Orden_Compra;
+import com.siifo.siifo.entity.Pago;
 import com.siifo.siifo.entity.Producto;
 import com.siifo.siifo.entity.Provedor;
 import com.siifo.siifo.entity.Rol;
@@ -28,12 +28,11 @@ import com.siifo.siifo.service.DetalleEventoService;
 import com.siifo.siifo.service.EventoService;
 import com.siifo.siifo.service.ListaElementosService;
 import com.siifo.siifo.service.OrdenCompraService;
+import com.siifo.siifo.service.PagoService;
 import com.siifo.siifo.service.ProductoService;
 import com.siifo.siifo.service.ProveedorService;
 import com.siifo.siifo.service.RolService;
 import com.siifo.siifo.service.UsuarioService;
-import org.springframework.web.bind.annotation.RequestBody;
-
 
 @Controller
 public class AdminController {
@@ -74,6 +73,9 @@ public class AdminController {
 	@Autowired
 	public OrdenCompraService serviceOrdenCompra;
 
+	@Autowired
+	public PagoService servicePago; 
+
 	
 	//dashboard
     @GetMapping("/admin")
@@ -98,6 +100,9 @@ public class AdminController {
 		model.addAttribute("Rol", tipoRol);
 		//compras
 		model.addAttribute("ordenCompra", new Orden_Compra());
+		model.addAttribute("pago", new Pago());
+		List<Pago> pagos = servicePago.getPagosList();
+		model.addAttribute("pagos", pagos);
 
         // Obtener datos de eventos por mes
 		List<Object[]> eventosPorMes = serviceDetalleEvento.obtenerConteoEventosPorMes();
@@ -257,24 +262,24 @@ public class AdminController {
 	}
 
 	//eliminar evento
-	@RequestMapping("/logistica/deleteEvento/{num}")
-    public String deleteEvento(@PathVariable Long num, Model model, BindingResult result, RedirectAttributes redirectAttributes){
-		if (result.hasErrors()) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Error al eliminar el evento. Verifique los campos e intente nuevamente.");
-            return "redirect:/admin";
-        }
+	// @RequestMapping("/logistica/deleteEvento/{num}")
+    // public String deleteEvento(@PathVariable Long num, Model model, BindingResult result, RedirectAttributes redirectAttributes){
+	// 	if (result.hasErrors()) {
+    //         redirectAttributes.addFlashAttribute("errorMessage", "Error al eliminar el evento. Verifique los campos e intente nuevamente.");
+    //         return "redirect:/admin";
+    //     }
 
-		//TODO: PENDIENTE!
-        serviceDetalleEvento.delete(num);
+	// 	//TODO: PENDIENTE!
+    //     serviceDetalleEvento.delete(num);
 		
-		// Manejo de roles
-		if (autenticador.isUserAuthenticaded() == true) {
-			return "redirect:/admin";
-		}
-		else {
-			return "redirect:/coor";
-		}
-    }
+	// 	// Manejo de roles
+	// 	if (autenticador.isUserAuthenticaded() == true) {
+	// 		return "redirect:/admin";
+	// 	}
+	// 	else {
+	// 		return "redirect:/coor";
+	// 	}
+    // }
 
 	//lista elementos por evento
 	@PostMapping("/agregarListaEvento")
@@ -361,6 +366,29 @@ public class AdminController {
 		else {
 			serviceOrdenCompra.saveOrUpdate(oc);
 			redirectAttributes.addFlashAttribute("successMessage", "Orden De Venta Registrada");
+			return "redirect:/coor";
+		}
+	}
+
+	//registro de pago
+	@PostMapping("/registroPago")
+	public String postMethod(@Validated Pago p, Model model, BindingResult result, RedirectAttributes redirectAttributes){
+		if (result.hasErrors()) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Error al modificar los cambios. Verifique los campos e intente nuevamente.");
+            return "redirect:/admin";
+        }
+		
+		
+		// Manejo de roles
+		if (autenticador.isUserAuthenticaded() == true) {
+			servicePago.saveOrUpdate(p);
+			serviceOrdenCompra.actualizarPago(p.getIdPagos(), p.getIdPagos());
+			redirectAttributes.addFlashAttribute("successMessage", "Pago Registrado");
+			return "redirect:/admin";
+		}
+		else {
+			servicePago.saveOrUpdate(p);
+			redirectAttributes.addFlashAttribute("successMessage", "Pago Registrado");
 			return "redirect:/coor";
 		}
 	}

@@ -79,6 +79,8 @@ registrarEvento.addEventListener("click", function(){
   formConsultaEvento.style.display='none';
   agregarListaEvento.style.display = "none";
   consultarFormEmpleado.style.display='none';
+  formularioPago.style.display='none';
+  formularioPostConsultarOC.style.display='none';
 
   agregarEvento.style.display = "block";
 
@@ -137,6 +139,8 @@ consultarEvento.addEventListener("click", function() {
   formConsultaEvento.style.display='none';
   agregarListaEvento.style.display = "none";
   consultarFormEmpleado.style.display='none';
+  formularioPago.style.display='none';
+  formularioPostConsultarOC.style.display='none';
 
   formularioConsultarVenta.style.display = "block";
 })
@@ -228,7 +232,7 @@ function requestDelete(url){
 function eliminarEvento(){
 
   idEvento=document.getElementById("idDetalleEvento").value;
-  let url = `http://localhost:8081/logistica/deleteEvento/${idEvento}`;
+  let url = `http://localhost:8081/siifo/logistica/deleteEvento/${idEvento}`;
   
   //llamamos al servidor
   requestDelete(url);
@@ -253,6 +257,8 @@ listaEvento.addEventListener("click", function(){
   consultaAsync.style.display= "none";
   formConsultaEvento.style.display='none';
   consultarFormEmpleado.style.display='none';
+  formularioPago.style.display='none';
+  formularioPostConsultarOC.style.display='none';
 
   agregarListaEvento.style.display = "block";
 })
@@ -276,6 +282,8 @@ registarEmpleado.addEventListener("click", function(){
   formConsultaEvento.style.display='none';
   agregarListaEvento.style.display = "none";
   consultarFormEmpleado.style.display='none';
+  formularioPago.style.display='none';
+  formularioPostConsultarOC.style.display='none';
   
   agregarFormEmpleado.style.display = "block"
 })
@@ -297,6 +305,8 @@ consultarEmpleado.addEventListener("click", function(){
   formConsultaEvento.style.display='none';
   agregarListaEvento.style.display = "none";
   consultarFormEmpleado.style.display='none';
+  formularioPago.style.display='none';
+  formularioPostConsultarOC.style.display='none';
 
   formularioConsultarEmpleado.style.display = "block";
 })
@@ -387,6 +397,8 @@ registrarProducto.addEventListener("click", function(){
   formConsultaEvento.style.display='none';
   agregarListaEvento.style.display = "none";
   consultarFormEmpleado.style.display='none';
+  formularioPago.style.display='none';
+  formularioPostConsultarOC.style.display='none';
   
   agregarProducto.style.display = "block";
 })
@@ -410,6 +422,8 @@ consultarProducto.addEventListener("click", function(){
   formConsultaEvento.style.display='none';
   agregarListaEvento.style.display = "none";
   consultarFormEmpleado.style.display='none';
+  formularioPago.style.display='none';
+  formularioPostConsultarOC.style.display='none';
 })
 //obtener valor del input
 function guardarInput(){
@@ -489,7 +503,7 @@ function request(url){
 function eliminarProducto(){
   const idProducto = document.getElementById("idProducto").value; 
   let url = `http://localhost:8081/siifo/inventario/producto/${idProducto}/delete`;
-  //petición al servidor para intenttar borrar
+  //petición al servidor para intentar borrar
   requestDelete(url);
   consultaAsync.style.display= "none";
 }
@@ -515,6 +529,8 @@ registrarProveedor.addEventListener("click", function(){
   formConsultaEvento.style.display='none';
   agregarListaEvento.style.display = "none";
   consultarFormEmpleado.style.display='none';
+  formularioPago.style.display='none';
+  formularioPostConsultarOC.style.display='none';
   
   agregarProveedor.style.display = "block";
 })
@@ -535,6 +551,7 @@ consultarProveedor.addEventListener("click", function(){
   formConsultaEvento.style.display='none';
   agregarListaEvento.style.display = "none";
   consultarFormEmpleado.style.display='none';
+  formularioPago.style.display='none';
 
   formularioConsultarProveedor.style.display = "block";  
 })
@@ -545,7 +562,12 @@ consultarProveedor.addEventListener("click", function(){
 
 const formularioConsultarOV = document.getElementById("formularioConsultarOV");
 const agregarRegistroCompra = document.getElementById("agregarRegistroCompra");
+//
+const buscarOrdenCompra = document.getElementById("buscarOrdenCompra");
+const formConsultaOv = document.getElementById("formConsultaOv");
+const postConsultaOv = document.getElementById("postConsultaOv");
 const formularioConsultarOC = document.getElementById("formularioConsultarOC");
+const formularioPostConsultarOC = document.getElementById("formularioPostConsultarOC");
 
 //Consultar orden venta
 consultarOV.addEventListener("click", function(){
@@ -564,6 +586,8 @@ consultarOV.addEventListener("click", function(){
   formConsultaEvento.style.display='none';
   agregarListaEvento.style.display = "none";
   consultarFormEmpleado.style.display='none';
+  formularioPago.style.display='none';
+  formularioPostConsultarOC.style.display='none';
 
   formularioConsultarOV.style.display = "block";
 })
@@ -585,6 +609,8 @@ registrarOrdenCompra.addEventListener("click", function(){
   formConsultaEvento.style.display='none';
   agregarListaEvento.style.display = "none";
   consultarFormEmpleado.style.display='none';
+  formularioPago.style.display='none';
+  formularioPostConsultarOC.style.display='none';
 
   agregarRegistroCompra.style.display = "block";
 })
@@ -606,9 +632,12 @@ consultarOC.addEventListener("click", function() {
   formConsultaEvento.style.display='none';
   agregarListaEvento.style.display = "none";
   consultarFormEmpleado.style.display='none';
+  formularioPago.style.display='none';
+  formularioPostConsultarOC.style.display='none';
 
   formularioConsultarOC.style.display = "block";
 })
+
 //postConsulta orden compra
 function buscarIdOc(){
   const id = document.getElementById("idOc").value;
@@ -618,20 +647,116 @@ buscarOrdenCompra.addEventListener("click", function() {
   const id = buscarIdOc();
   let url = `http://localhost:8081/siifo/compras/ordencompra/${id}`;
 
-  requestDelete(url)
+  //funcion para buscar datos
+  function requestComp(url){
+    return new Promise((resolve, reject)=>{
+      //aqui manejamos cualquier error en la url
+      fetch(url)
+      .then(response =>{ //promise chain
+        if(!response.ok){
+          throw new Error('error en la url')
+        }
+        return response.json();
+      })
+      //devolvemos datos
+      .then(data => {
+        resolve(data);
+      })
+      //devolvemos error
+      .catch(error=>{
+        reject(error);
+      });
+    });
+  }
+  //enviamos la url
+  requestComp(url)
     //resolve
     .then(data=>{
       console.log(data);
       if(data == null || data.length == 0){
         console.log("No hay datos");
-        ordenCompraConsulta.style.display="none";
+        formularioPostConsultarOC.style.display = "none";
+
       }else{
         console.log('Respuesta', data);
-        ordenCompraConsulta.style.display= "block";
+        formularioPostConsultarOC.style.display = "block";
         //mostrar datos
-        document.getElementById("idOrdenCompra").value = idOrdenCompra;
+        document.getElementById("idOrdenCompra").value = data.idOrdenCompra;
         document.getElementById("detalleEvento").value = data.detalleEvento.idDetalleEvento;
         document.getElementById("estadoOrden").value = data.estadoOrden;
+      }
+      })
+    //reject
+    .catch(error=>{
+      console.log('Error', error);
+    });
+})
+
+//registrar pago
+const formularioPago = document.getElementById("formularioPago");
+function Pago(){
+  //ocultar formulario de orden compra
+  formularioPostConsultarOC.style.display = "none";
+  //mostrar el formulario de pago
+  formularioPago.style.display = "block";
+}
+
+//eliminiar orden compra
+function deleteOrdenCompra(){
+  const idOc = document.getElementById("idOrdenCompra").value; 
+  let url = `http://localhost:8081/siifo/compras/ordencompra/${idOc}/delete`;
+  //petición al servidor para intentar borrar
+  requestDelete(url);
+  formularioPostConsultarOC.style.display = "none";
+}
+
+//consultar orden venta
+function buscarIdFormOV(){
+  const id = document.getElementById("idOv").value;
+  return id;
+}
+
+formConsultaOv.addEventListener("click", function(){
+  const id = buscarIdFormOV();
+  let url = `http://localhost:8081/siifo/compras/ordencompra/ordenventa/${id}`;
+
+  //funcion para buscar datos
+  function requestComp(url){
+    return new Promise((resolve, reject)=>{
+      //aqui manejamos cualquier error en la url
+      fetch(url)
+      .then(response =>{ //promise chain
+        if(!response.ok){
+          throw new Error('error en la url')
+        }
+        return response.json();
+      })
+      //devolvemos datos
+      .then(data => {
+        resolve(data);
+      })
+      //devolvemos error
+      .catch(error=>{
+        reject(error);
+      });
+    });
+  }
+  //enviamos la url
+  requestComp(url)
+    //resolve
+    .then(data=>{
+      console.log(data);
+      if(data == null || data.length == 0){
+        console.log("No hay datos");
+        postConsultaOv.style.display = "none";
+
+      }else{
+        console.log('Respuesta', data);
+        postConsultaOv.style.display = "block";
+        //mostrar datos
+        document.getElementById("idOrdenCompra").value = data.idOrdenCompra;
+        document.getElementById("detalleEvento").value = data.detalleEvento.idDetalleEvento;
+        document.getElementById("pago").value = data.pago.idPagos;
       }
       })
     //reject
@@ -658,7 +783,7 @@ mostrarDashboard.addEventListener("click", function mostrarFormulario() {
   consultaAsync.style.display= "none";
   formConsultaEvento.style.display='none';
   consultarFormEmpleado.style.display='none';
+  formularioPago.style.display='none';
+  formularioPostConsultarOC.style.display='none';
 })
-
-
 

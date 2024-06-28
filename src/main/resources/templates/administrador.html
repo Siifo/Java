@@ -1019,32 +1019,7 @@
       </div>
 
       <!----------------------------------------------------------------------------------- Compras --------------------------------------------------------->      
-      <!-- Consultar Orden de venta -->
-      <div class="container mt-5 pt-5" style="display: none;" id="formularioConsultarOV"> 
-        <div class="row">
-          <div class="col-12 col-sm-7 col-md-6 m-auto">
-            <div class="card border-0 shadow">
-              <div class="card-body">
-                <form action="">
-                  <h2 class="text-center mb-5">Consultar Orden de venta</h2>
-                  <label for="idOv">ID Orden de venta</label>
-                  <input type="text" name="idOv" id="idOv" class="form-control my-4 py-2" placeholder="1342" required/>
-                  <div class="text-center mt-3">
-                    <input class="btn btn-primary justify-content-center align-content-center" type="submit" value="Buscar" />
-                  </div>
-                  <br>
-                  <br>
-                  <div class="d-flex justify-content-around">
-                    <!-- <button class="btn btn-primary" id="modificarEvento" class="text-white">Modificar Evento</button>
-                    <button class="btn btn-primary" id="eliminarOV" class="text-white">Eliminar Evento</button> -->
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
+      
       <!-- Registrar Orden Compra -->
       <div class="container mt-5 pt-5" style="display: none;" id="agregarRegistroCompra">
         <div class="row">
@@ -1056,7 +1031,7 @@
                   <!-- llave fornaea del evento-->
                   <label for="">Evento seleccionado:</label>
                   <select th:field="${ordenCompra.detalleEvento}" name="detalleEvento" class="form-control my-4 py-2" required> 
-                    <option th:each="detalleEvento : ${detalleventos}" th:value="${detalleEvento.idDetalleEvento}" th:text="${detalleEvento.nombreCliente}"></option>
+                    <option th:each="detalleEvento : ${detalleventos}" th:value="${detalleEvento.idDetalleEvento}" th:text="${detalleEvento.nombreCliente}" ></option>
                   </select>
                   <small class="form-text text-muted my-4 py-2">Selecciona el cliente al cual se le registro el evento</small>
                   <!-- <label for="metodoPago">Metodo de Pago:</label>
@@ -1086,7 +1061,7 @@
                   <label for="idOv">ID Orden de compra:</label>
                   <input type="number" name="idOc" id="idOc" class="form-control my-4 py-2" placeholder="9" required/>
                   <div class="text-center mt-3">
-                    <a onclick="buscarIdOc()" class="btn btn-primary justify-content-center align-content-center" id="buscarOrdenCompra">Buscar</a>
+                    <a href="#" onclick="buscarIdOc()" class="btn btn-primary" id="buscarOrdenCompra">Buscar</a>
                   </div>
                   <div class="d-flex justify-content-around">
                     <!-- <button class="btn btn-primary" id="modificarEvento" class="text-white">Modificar Evento</button>
@@ -1100,39 +1075,181 @@
       </div>
 
       <!-- Formulario post consulta orden compra -->
-      <div class="container mt-7 pt-7" style="display: none;" id="ordenCompraConsulta">
+      <div class="container mt-5 pt-5" style="display: none;" id="formularioPostConsultarOC"> 
+        <div class="row">
+          <div class="col-12 col-sm-7 col-md-6 m-auto">
+            <div class="card border-0 shadow">
+              <div class="card-body">
+                <form action="" th:object="${ordenCompra}">
+                  <!-- clase de vento que sera -->
+                  <input type="hidden" name="idOrdenCompra" class="form-control my-4 py-2" th:field="*{idOrdenCompra}" readonly/>
+                  <h2 class="text-center mb-5">Consultar Orden de Compra</h2>
+                  <br>
+		              
+                  <label for="detalleEvento">Unido al Evento: </label>
+                  <select th:field="${ordenCompra.detalleEvento}" name="detalleEvento" class="form-control my-4 py-2" disabled> 
+                    <option th:each="detalleEvento : ${detalleventos}" th:value="${detalleEvento.idDetalleEvento}" th:text="${detalleEvento.idDetalleEvento}" selected></option>
+                  </select>
+
+                  <label for="detalleEvento">Reservado por: </label>
+                  <select th:field="${ordenCompra.detalleEvento}" name="detalleEvento" class="form-control my-4 py-2" readonly> 
+                    <option th:each="detalleEvento : ${detalleventos}" th:value="${detalleEvento.idDetalleEvento}" th:text="${detalleEvento.cedulaCliente}" selected></option>
+                  </select>
+
+                  <label for="detalleEvento">Fecha del evento: </label>
+                  <select th:field="${ordenCompra.detalleEvento}" name="detalleEvento" class="form-control my-4 py-2" readonly> 
+                    <option th:each="detalleEvento : ${detalleventos}" th:value="${detalleEvento.idDetalleEvento}" th:text="${detalleEvento.fechaEvento}" selected></option>
+                  </select>
+                  
+                  <label for="detalleEvento">Cantidad de asistentes: </label>
+                  <select th:field="${ordenCompra.detalleEvento}" name="detalleEvento" class="form-control my-4 py-2" readonly> 
+                    <option th:each="detalleEvento : ${detalleventos}" th:value="${detalleEvento.idDetalleEvento}" th:text="${detalleEvento.aforoEvento}" selected></option>
+                  </select>
+
+                  <label for="detalleEvento">Paquete seleccionado: </label>
+                  <select th:field="${ordenCompra.detalleEvento}" name="detalleEvento" class="form-control my-4 py-2" readonly> 
+                    <option th:each="detalleEvento : ${detalleventos}" th:value="${detalleEvento.idDetalleEvento}" th:text="${detalleEvento.paqueteEvento}" selected></option>
+                  </select>
+
+                  <label for="detalleEvento">Tipo de evento: </label>
+                  <select th:field="${ordenCompra.detalleEvento}" name="detalleEvento" class="form-control my-4 py-2" readonly> 
+                    <option th:each="detalleEvento : ${detalleventos}" th:value="${detalleEvento.idDetalleEvento}" th:text="${detalleEvento.evento.nombreEvento}" selected></option>
+                  </select>
+
+                  <label for="detalleEvento">Valor por pagar: </label>
+                  <select th:field="${ordenCompra.detalleEvento}" name="detalleEvento" class="form-control my-4 py-2" readonly> 
+                    <option th:each="detalleEvento : ${detalleventos}" th:value="${detalleEvento.idDetalleEvento}" th:text="${detalleEvento.valorEvento}" selected></option>
+                  </select>
+
+                  <label for="detalleEvento">Responsable del evento: </label>
+                  <select th:field="${ordenCompra.detalleEvento}" name="detalleEvento" class="form-control my-4 py-2" readonly> 
+                    <option th:each="detalleEvento : ${detalleventos}" th:value="${detalleEvento.idDetalleEvento}" th:text="${detalleEvento.usuario.nombreUsuario}" selected></option>
+                  </select>
+
+                  <small class="form-text text-muted my-4 py-2">Tenga en cuenta que estos datos no se puede modificar</small>
+                  <br>                  
+                  <label for="estadoOrden">Estado actual: </label>
+                  <input type="text" name="estadoOrden" id="estadoOrden" class="form-control my-4 py-2" th:field="*{estadoOrden}" readonly/>
         
-        <div class="container mt-5 pt-5">
-          <div class="row">
-            <div class="col-12 col-sm-7 col-md-6 m-auto">
-              <div class="card border-0 shadow">
-                <div class="card-body">
-                  <form action="" th:object="${ordenCompra}">
-                    <!-- clase de vento que sera -->
-                    <input type="hidden" name="idOrdenCompra" class="form-control my-4 py-2" th:field="${ordenCompra.idOrdenCompra}" readonly/>
-                    
-                    <label for="">Valor por pagar: </label>
-                    <input type="text" name="detalleEvento" th:field="${ordenCompra.detalleEvento.valorEvento}" class="form-control my-4 py-2" readonly/>
-
-                    <label for="">Fecha del evento: </label>
-                    <input type="text" name="detalleEvento" th:field="${ordenCompra.detalleEvento.fechaEvento}" class="form-control my-4 py-2" readonly/>
-
-                    <label for="estadoOrden">Estado actual: </label>
-                    <input type="text" name="estadoOrden" id="estadoOrden" class="form-control my-4 py-2" th:field="${ordenCompra.estadoOrden}" readonly/>
-
-
-                    <div class="text-center mt-3">
-                      <a onclick="" class="btn btn-warning">Ir a pagar</a>
-                      <a onclick="" class="btn btn-danger">Eliminar</a>
-                    </div>
-                  </form>
-                </div>
+                  <div class="text-center mt-3">
+                    <a onclick="Pago()" class="btn btn-warning">Ir a pagar</a>
+                    <a onclick="deleteOrdenCompra()" class="btn btn-danger">Eliminar</a>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
         </div>
-      
       </div>
+
+      <!-- registrar pago -->
+      <div class="container mt-5 pt-5" style="display: none;" id="formularioPago"> 
+        <div class="row">
+          <div class="col-12 col-sm-7 col-md-6 m-auto">
+            <div class="card border-0 shadow">
+              <div class="card-body">
+                <form action="/registroPago" method="post">
+                  <h2 class="text-center mb-5">Registros</h2>
+
+                  <label for="metodoDePago">Metodo de Pago: </label>
+                  <select name="metodoDePago" class="form-control my-4 py-2" required>
+                    <option value="Efectivo">Efectivo</option>
+                    <option value="Medio_Mano">Nequi</option>
+                    <option value="Medio_Mano">Daviplata</option>
+                  </select>
+                  
+                  <label for="metodoDePago">Valor del pago: </label>
+                  <input type="number" name="valor" class="form-control my-4 py-2"/>
+                  
+                  <div class="text-center mt-3">
+                    <button type="submit" class="btn btn-primary" id="registraPago">Registrar</button>
+                  </div>
+
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Consultar Orden de venta -->
+      <div class="container mt-5 pt-5" style="display: none;" id="formularioConsultarOV"> 
+        <div class="row">
+          <div class="col-12 col-sm-7 col-md-6 m-auto">
+            <div class="card border-0 shadow">
+              <div class="card-body">
+                <form action="">
+                  <h2 class="text-center mb-5">Consultar Orden de venta</h2>
+                  <label for="idOv">ID Orden de venta</label>
+                  <input type="text" name="idOv" id="idOv" class="form-control my-4 py-2" placeholder="1342" required/>
+                  <div class="text-center mt-3">
+                    <a href="#" onclick="buscarIdFormOV()" class="btn btn-primary justify-content-center align-content-center" id="formConsultaOv">Buscar</a>
+                  </div>
+                  <br>
+                  <br>
+                  <div class="d-flex justify-content-around">
+                    <!-- <button class="btn btn-primary" id="modificarEvento" class="text-white">Modificar Evento</button>
+                    <button class="btn btn-primary" id="eliminarOV" class="text-white">Eliminar Evento</button> -->
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- post consulta de orden de venta -->
+      <div class="container mt-5 pt-5" style="display: none;" id="postConsultaOv"> 
+        <div class="row">
+          <div class="col-12 col-sm-7 col-md-6 m-auto">
+            <div class="card border-0 shadow">
+              <div class="card-body">
+                <form action="" th:object="${ordenCompra}">
+                  <h2 class="text-center mb-5">Orden de venta</h2>
+                  <input type="hidden" name="idOrdenCompra" class="form-control my-4 py-2" th:field="*{idOrdenCompra}" readonly/>
+
+                  <label for="detalleEvento">Paquete seleccionado: </label>
+                  <select th:field="${ordenCompra.detalleEvento}" name="detalleEvento" class="form-control my-4 py-2" disabled> 
+                    <option th:each="detalleEvento : ${detalleventos}" th:value="${detalleEvento.idDetalleEvento}" th:text="${detalleEvento.paqueteEvento}" selected></option>
+                  </select>
+
+                  <label for="detalleEvento">Tipo de evento: </label>
+                  <select th:field="${ordenCompra.detalleEvento}" name="detalleEvento" class="form-control my-4 py-2" disabled> 
+                    <option th:each="detalleEvento : ${detalleventos}" th:value="${detalleEvento.idDetalleEvento}" th:text="${detalleEvento.evento.nombreEvento}" selected></option>
+                  </select>
+
+                  <label for="detalleEvento">Fecha del evento: </label>
+                  <select th:field="${ordenCompra.detalleEvento}" name="detalleEvento" class="form-control my-4 py-2" disabled> 
+                    <option th:each="detalleEvento : ${detalleventos}" th:value="${detalleEvento.idDetalleEvento}" th:text="${detalleEvento.fechaEvento}" selected></option>
+                  </select>
+
+                  <label for="detalleEvento">Metodo de pago: </label>
+                  <select th:field="${ordenCompra.pago}" name="pago" class="form-control my-4 py-2" disabled> 
+                    <option th:each="pago : ${pagos}" th:value="${pago.idPagos}" th:text="${pago.metodoDePago}" selected></option>
+                  </select>
+
+                  <label for="detalleEvento">Fecha de pago: </label>
+                  <select th:field="${ordenCompra.pago}" name="pago" class="form-control my-4 py-2" disabled> 
+                    <option th:each="pago : ${pagos}" th:value="${pago.idPagos}" th:text="${pago.fechaPago}" selected></option>
+                  </select>
+
+                  <label for="detalleEvento">Valor pagado: </label>
+                  <select th:field="${ordenCompra.pago}" name="pago" class="form-control my-4 py-2" disabled> 
+                    <option th:each="pago : ${pagos}" th:value="${pago.idPagos}" th:text="${pago.valor}" selected></option>
+                  </select>
+
+                  <label for="detalleEvento">Responsable del evento: </label>
+                  <select th:field="${ordenCompra.detalleEvento}" name="detalleEvento" class="form-control my-4 py-2" disabled> 
+                    <option th:each="detalleEvento : ${detalleventos}" th:value="${detalleEvento.idDetalleEvento}" th:text="${detalleEvento.usuario.nombreUsuario}" selected></option>
+                  </select>
+
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
 
     <!-- modulos -->
     <!-- <script src="/resources/jsDashboard/app.js"></script>
@@ -1154,8 +1271,14 @@
     <script src="../public/js/demo/chart-area-demo.js"></script>
     <script src="../public/js/demo/chart-pie-demo.js"></script>
 
+    <!-- <script th:inline="javascript">
+      var eventosMensuales = [[${eventosMensuales}]];
+    </script> -->
+
     <script th:inline="javascript">
-      var eventosMensuales = [[${eventosMensuales}]]
+      /*<![CDATA[*/
+      var eventosMensuales = /*[[${eventosMensuales}]]*/ [];
+      /*]]>*/
     </script>
 
     <!-- bootstrap -->

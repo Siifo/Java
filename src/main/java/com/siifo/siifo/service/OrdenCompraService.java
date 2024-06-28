@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.siifo.siifo.entity.Orden_Compra;
-import com.siifo.siifo.entity.Producto;
 import com.siifo.siifo.repository.OrdenCompraRepository;
 
 @Service
@@ -36,4 +35,11 @@ public class OrdenCompraService {
     public void delete(Long id){
         repositoryOrdenCompra.deleteById(id);
     }
+
+    //extra methods
+    public void actualizarPago(Long idPago, Long idOc){
+        repositoryOrdenCompra.actualizarPago(idPago, idOc);
+    }
+
+
 }
